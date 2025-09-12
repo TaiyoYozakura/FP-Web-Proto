@@ -1,0 +1,119 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import Navbar from '@/components/Navbar';
+
+export default function DashboardPage() {
+  const [user] = useState({ name: 'John Doe', profileCompletion: 75 });
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-64 space-y-4">
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h3 className="font-bold text-blue-900 mb-4">Quick Links</h3>
+              <div className="space-y-2">
+                {[
+                  { name: 'My Profile', href: '/profile' },
+                  { name: 'My Connections', href: '/connections' },
+                  { name: 'My Events', href: '/my-events' },
+                  { name: 'Job Applications', href: '/applications' },
+                  { name: 'Settings', href: '/settings' }
+                ].map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold text-blue-900 mb-2">Welcome back, {user.name}!</h1>
+              <p className="text-gray-600">Here's what's happening in your alumni network</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-600">Profile Completion</p>
+                    <p className="text-3xl font-bold text-blue-900">{user.profileCompletion}%</p>
+                    <Link href="/profile" className="text-red-600 hover:text-red-800 text-sm font-semibold">
+                      Complete profile →
+                    </Link>
+                  </div>
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                    <div className="text-blue-600 text-2xl">👤</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-600">Connections</p>
+                    <p className="text-3xl font-bold text-blue-900">234</p>
+                    <Link href="/directory" className="text-red-600 hover:text-red-800 text-sm font-semibold">
+                      View all →
+                    </Link>
+                  </div>
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                    <div className="text-blue-600 text-2xl">👥</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-600">Upcoming Events</p>
+                    <p className="text-3xl font-bold text-blue-900">3</p>
+                    <Link href="/events" className="text-red-600 hover:text-red-800 text-sm font-semibold">
+                      View calendar →
+                    </Link>
+                  </div>
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                    <div className="text-blue-600 text-2xl">📅</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-bold text-blue-900 mb-6">Recent Activity</h2>
+              <div className="space-y-4">
+                {[
+                  { type: 'event', title: 'New Event: Annual Alumni Meet 2024', time: '2 hours ago', icon: '🎉' },
+                  { type: 'job', title: 'Job Posted: Software Engineer at Tech Corp', time: '5 hours ago', icon: '💼' },
+                  { type: 'news', title: 'News: College ranks #1 in Innovation', time: '1 day ago', icon: '📰' },
+                  { type: 'connection', title: 'Sarah Johnson wants to connect', time: '2 days ago', icon: '👋' }
+                ].map((activity, index) => (
+                  <div key={index} className="flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl">
+                      {activity.icon}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-semibold text-blue-900">{activity.title}</p>
+                      <p className="text-sm text-gray-600">{activity.time}</p>
+                    </div>
+                    <button className="text-red-600 hover:text-red-800 font-semibold">View</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
