@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function EventsPage() {
-  const [activeTab, setActiveTab] = useState('upcoming');
 
   const events = [
     { id: 1, title: 'Annual Alumni Meet 2024', date: 'Dec 15, 2024', location: 'College Campus', type: 'Reunion', registered: false },
@@ -37,17 +35,9 @@ export default function EventsPage() {
         <h1 className="text-3xl font-bold text-black mb-8">Alumni Events</h1>
 
         <div className="flex space-x-1 mb-8 bg-white rounded-lg p-1 shadow-sm w-fit">
-          {['upcoming', 'past', 'my-events'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-md font-semibold transition-colors ${
-                activeTab === tab ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-black'
-              }`}
-            >
-              {tab === 'upcoming' ? 'Upcoming' : tab === 'past' ? 'Past Events' : 'My Events'}
-            </button>
-          ))}
+          <button className="px-6 py-2 rounded-md font-semibold bg-red-600 text-white">Upcoming</button>
+          <button className="px-6 py-2 rounded-md font-semibold text-gray-600 hover:text-black">Past Events</button>
+          <button className="px-6 py-2 rounded-md font-semibold text-gray-600 hover:text-black">My Events</button>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">

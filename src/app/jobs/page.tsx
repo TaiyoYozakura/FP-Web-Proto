@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function JobsPage() {
-  const [activeTab, setActiveTab] = useState('browse');
 
   const jobs = [
     { id: 1, title: 'Senior Software Engineer', company: 'Tech Solutions Inc.', location: 'Mumbai', type: 'Full Time', salary: '₹15-25 LPA', posted: '2 days ago' },
@@ -37,17 +35,9 @@ export default function JobsPage() {
         <h1 className="text-3xl font-bold text-black mb-8">Job Board</h1>
 
         <div className="flex space-x-1 mb-8 bg-white rounded-lg p-1 shadow-sm w-fit">
-          {['browse', 'post', 'applications'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-md font-semibold transition-colors ${
-                activeTab === tab ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-black'
-              }`}
-            >
-              {tab === 'browse' ? 'Browse Jobs' : tab === 'post' ? 'Post Job' : 'My Applications'}
-            </button>
-          ))}
+          <button className="px-6 py-2 rounded-md font-semibold bg-red-600 text-white">Browse Jobs</button>
+          <button className="px-6 py-2 rounded-md font-semibold text-gray-600 hover:text-black">Post Job</button>
+          <button className="px-6 py-2 rounded-md font-semibold text-gray-600 hover:text-black">My Applications</button>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
