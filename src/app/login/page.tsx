@@ -18,21 +18,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-3 mb-6">
-            <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={60} height={60} />
+        <div className="text-center mb-6 lg:mb-8">
+          <Link href="/" className="inline-flex items-center space-x-2 lg:space-x-3 mb-4 lg:mb-6">
+            <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={50} height={50} className="lg:w-15 lg:h-15" />
             <div className="text-left">
-              <span className="text-xl font-bold text-blue-900 block">ST. ANDREWS COLLEGE</span>
-              <span className="text-sm text-gray-600">Alumni Portal</span>
+              <span className="text-lg lg:text-xl font-bold text-blue-900 block">ST. ANDREWS COLLEGE</span>
+              <span className="text-xs lg:text-sm text-gray-600">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-3xl font-bold text-blue-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600">Sign in to your alumni account</p>
+          <h1 className="text-2xl lg:text-3xl font-bold text-blue-900 mb-2">Welcome Back</h1>
+          <p className="text-gray-600 text-sm lg:text-base">Sign in to your alumni account</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-gray-100">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-blue-900 mb-2">Email Address</label>
@@ -71,27 +71,27 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all disabled:opacity-50"
+              className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all disabled:opacity-50 text-sm lg:text-base"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Signing In...
+                  <div className="animate-spin rounded-full h-4 w-4 lg:h-5 lg:w-5 border-b-2 border-white mr-2"></div>
+                  <span className="text-sm lg:text-base">Signing In...</span>
                 </div>
               ) : 'Sign In'}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-gray-600">
+          <div className="mt-6 lg:mt-8 text-center">
+            <p className="text-gray-600 text-sm lg:text-base">
               Don't have an account?{' '}
               <Link href="/register" className="text-blue-600 hover:text-blue-800 font-semibold">Register here</Link>
             </p>
           </div>
         </div>
 
-        <div className="text-center mt-6">
-          <Link href="/" className="text-gray-600 hover:text-blue-900 transition-colors">← Back to Home</Link>
+        <div className="text-center mt-4 lg:mt-6">
+          <Link href="/" className="text-gray-600 hover:text-blue-900 transition-colors text-sm lg:text-base">← Back to Home</Link>
         </div>
       </div>
     </div>

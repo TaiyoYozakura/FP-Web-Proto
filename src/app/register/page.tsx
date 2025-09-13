@@ -20,31 +20,31 @@ export default function RegisterPage() {
   const handlePrev = () => setStep(step - 1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 py-12 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 py-8 lg:py-12 px-4 sm:px-6">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-3 mb-6">
-            <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={60} height={60} />
+        <div className="text-center mb-6 lg:mb-8">
+          <Link href="/" className="inline-flex items-center space-x-2 lg:space-x-3 mb-4 lg:mb-6">
+            <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={50} height={50} className="lg:w-15 lg:h-15" />
             <div className="text-left">
-              <span className="text-xl font-bold text-blue-900 block">ST. ANDREWS COLLEGE</span>
-              <span className="text-sm text-gray-600">Alumni Portal</span>
+              <span className="text-lg lg:text-xl font-bold text-blue-900 block">ST. ANDREWS COLLEGE</span>
+              <span className="text-xs lg:text-sm text-gray-600">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-3xl font-bold text-blue-900 mb-2">Join Our Alumni Network</h1>
-          <p className="text-gray-600">Create your account and connect with fellow alumni</p>
+          <h1 className="text-2xl lg:text-3xl font-bold text-blue-900 mb-2">Join Our Alumni Network</h1>
+          <p className="text-gray-600 text-sm lg:text-base">Create your account and connect with fellow alumni</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-gray-100">
           {/* Progress Steps */}
-          <div className="flex justify-between mb-8">
+          <div className="flex justify-between mb-6 lg:mb-8">
             {[1, 2, 3].map((num) => (
               <div key={num} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                <div className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center font-semibold text-sm lg:text-base ${
                   step >= num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                 } transition-colors`}>
                   {num}
                 </div>
-                {num < 3 && <div className={`w-20 h-1 mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
+                {num < 3 && <div className={`w-12 lg:w-20 h-1 mx-1 lg:mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
               </div>
             ))}
           </div>
@@ -52,8 +52,8 @@ export default function RegisterPage() {
           {/* Step 1: Basic Info */}
           {step === 1 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-blue-900 mb-6">Basic Information</h2>
-              <div className="grid md:grid-cols-2 gap-6">
+              <h2 className="text-lg lg:text-xl font-bold text-blue-900 mb-4 lg:mb-6">Basic Information</h2>
+              <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-blue-900 mb-2">First Name *</label>
                   <input
@@ -100,7 +100,7 @@ export default function RegisterPage() {
               </div>
               <button
                 onClick={handleNext}
-                className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all"
+                className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all text-sm lg:text-base"
               >
                 Next Step →
               </button>
@@ -186,8 +186,8 @@ export default function RegisterPage() {
           )}
         </div>
 
-        <div className="text-center mt-6">
-          <p className="text-gray-600">
+        <div className="text-center mt-4 lg:mt-6">
+          <p className="text-gray-600 text-sm lg:text-base">
             Already have an account?{' '}
             <Link href="/login" className="text-blue-600 hover:text-blue-800 font-semibold">Sign in here</Link>
           </p>

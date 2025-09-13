@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import Navbar from '@/components/Navbar';
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('about');
@@ -10,61 +9,45 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Image src="/SAC-header.png" alt="St Andrews College" width={40} height={40} className="rounded-full" />
-              <h1 className="text-xl font-bold text-black">St Andrews Alumni Portal</h1>
-            </div>
-            <div className="flex items-center space-x-6">
-              <Link href="/dashboard" className="text-gray-600 hover:text-black">Dashboard</Link>
-              <Link href="/directory" className="text-gray-600 hover:text-black">Directory</Link>
-              <Link href="/events" className="text-gray-600 hover:text-black">Events</Link>
-              <Link href="/jobs" className="text-gray-600 hover:text-black">Jobs</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <Navbar />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 lg:py-8">
         {/* Profile Header */}
-        <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-          <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+        <div className="bg-white rounded-lg shadow-sm p-4 lg:p-8 mb-6 lg:mb-8">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-4 lg:space-y-0 lg:space-x-8">
             <div className="relative">
-              <div className="w-32 h-32 bg-red-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+              <div className="w-24 h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl lg:text-4xl font-bold">
                 JD
               </div>
-              <button className="absolute bottom-0 right-0 bg-white border-2 border-gray-300 rounded-full p-2 hover:bg-gray-50">
+              <button className="absolute bottom-0 right-0 bg-white border-2 border-gray-300 rounded-full p-1 lg:p-2 hover:bg-gray-50 text-xs lg:text-base">
                 📷
               </button>
             </div>
-            <div className="flex-1 text-center md:text-left">
-              <h1 className="text-3xl font-bold text-black mb-2">John Doe</h1>
-              <p className="text-xl text-gray-600 mb-2">Software Engineer at Tech Corp</p>
-              <p className="text-gray-600 mb-4">Class of 2015 • Mumbai, Maharashtra</p>
-              <p className="text-gray-600 mb-6">john.doe@email.com</p>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex-1 text-center lg:text-left">
+              <h1 className="text-2xl lg:text-3xl font-bold text-black mb-2">John Doe</h1>
+              <p className="text-lg lg:text-xl text-gray-600 mb-2">Software Engineer at Tech Corp</p>
+              <p className="text-gray-600 mb-3 lg:mb-4 text-sm lg:text-base">Class of 2015 • Mumbai, Maharashtra</p>
+              <p className="text-gray-600 mb-4 lg:mb-6 text-sm lg:text-base">john.doe@email.com</p>
+              <div className="flex flex-col sm:flex-row gap-2 lg:gap-4">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
-                  className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                  className="bg-red-600 text-white px-4 lg:px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-sm lg:text-base"
                 >
                   {isEditing ? 'Save Profile' : 'Edit Profile'}
                 </button>
-                <button className="border border-gray-300 text-black px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                <button className="border border-gray-300 text-black px-4 lg:px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-sm lg:text-base">
                   Change Photo
                 </button>
               </div>
             </div>
             <div className="text-center">
-              <div className="space-y-2">
-                <div className="bg-gray-100 px-4 py-2 rounded-lg">
-                  <p className="text-sm text-gray-600">Profile Views</p>
-                  <p className="text-2xl font-bold text-black">234</p>
+              <div className="flex sm:flex-col gap-4 sm:gap-2">
+                <div className="bg-gray-100 px-3 lg:px-4 py-2 rounded-lg">
+                  <p className="text-xs lg:text-sm text-gray-600">Profile Views</p>
+                  <p className="text-xl lg:text-2xl font-bold text-black">234</p>
                 </div>
-                <div className="bg-gray-100 px-4 py-2 rounded-lg">
-                  <p className="text-sm text-gray-600">Connections</p>
-                  <p className="text-2xl font-bold text-black">567</p>
+                <div className="bg-gray-100 px-3 lg:px-4 py-2 rounded-lg">
+                  <p className="text-xs lg:text-sm text-gray-600">Connections</p>
+                  <p className="text-xl lg:text-2xl font-bold text-black">567</p>
                 </div>
               </div>
             </div>
@@ -72,12 +55,12 @@ export default function ProfilePage() {
         </div>
 
         {/* Profile Tabs */}
-        <div className="flex space-x-1 mb-8 bg-white rounded-lg p-1 shadow-sm w-fit">
+        <div className="flex flex-wrap gap-1 mb-6 lg:mb-8 bg-white rounded-lg p-1 shadow-sm w-fit">
           {['about', 'experience', 'education', 'skills'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-md font-semibold transition-colors capitalize ${
+              className={`px-4 lg:px-6 py-2 rounded-md font-semibold transition-colors capitalize text-sm lg:text-base ${
                 activeTab === tab ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-black'
               }`}
             >
@@ -86,19 +69,19 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-2">
             {activeTab === 'about' && (
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-xl font-bold text-black mb-4">About Me</h2>
+              <div className="bg-white rounded-lg shadow-sm p-4 lg:p-6">
+                <h2 className="text-lg lg:text-xl font-bold text-black mb-4">About Me</h2>
                 {isEditing ? (
                   <textarea
-                    className="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    className="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm lg:text-base"
                     placeholder="Tell us about yourself..."
                     defaultValue="Passionate software engineer with 8+ years of experience in developing scalable web applications. Love connecting with fellow alumni and sharing knowledge."
                   />
                 ) : (
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
                     Passionate software engineer with 8+ years of experience in developing scalable web applications. 
                     Love connecting with fellow alumni and sharing knowledge.
                   </p>
@@ -145,17 +128,17 @@ export default function ProfilePage() {
             )}
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="font-bold text-black mb-4">Quick Actions</h3>
+          <div className="space-y-4 lg:space-y-6">
+            <div className="bg-white rounded-lg shadow-sm p-4 lg:p-6">
+              <h3 className="font-bold text-black mb-4 text-sm lg:text-base">Quick Actions</h3>
               <div className="space-y-2">
-                <button className="w-full text-left p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">
+                <button className="w-full text-left p-2 lg:p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors text-sm lg:text-base">
                   Download Resume
                 </button>
-                <button className="w-full text-left p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">
+                <button className="w-full text-left p-2 lg:p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors text-sm lg:text-base">
                   Share Profile
                 </button>
-                <button className="w-full text-left p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">
+                <button className="w-full text-left p-2 lg:p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors text-sm lg:text-base">
                   Privacy Settings
                 </button>
               </div>
