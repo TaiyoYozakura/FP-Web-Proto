@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useApp } from '@/contexts/AppContext';
 
 export default function RegisterPage() {
   const [step, setStep] = useState(1);
@@ -15,9 +17,67 @@ export default function RegisterPage() {
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { state, dispatch } = useApp();
+  const router = useRouter();
 
-  const handleNext = () => setStep(step + 1);
-  const handlePrev = () => setStep(step - 1);
+  const handleNext = () => {
+    if (step === 1 && (!formData.firstName || !formData.lastName || !formData.email)) {
+      setError('Please fill in all required fields');
+      return;
+    }
+    if (step === 2 && !formData.graduationYear) {
+      setError('Please select your graduation year');
+      return;
+    }
+    setError('');
+    setStep(step + 1);
+  };
+  
+  const handlePrev = () => {
+    setError('');
+    setStep(step - 1);
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+    
+    setIsLoading(true);
+    setError('');
+    
+    // Check if email already exists
+    const existingUser = state.alumni.find(a => a.email === formData.email);
+    if (existingUser) {
+      setError('Email already registered');
+      setIsLoading(false);
+      return;
+    }
+    
+    setTimeout(() => {
+      dispatch({ 
+        type: 'REGISTER', 
+        payload: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          graduationYear: formData.graduationYear,
+          isLoggedIn: true,
+          id: ''
+        }
+      });
+      router.push('/dashboard');
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 py-8 lg:py-12 px-4 sm:px-6">
@@ -48,6 +108,12 @@ export default function RegisterPage() {
               </div>
             ))}
           </div>
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm mb-6">
+              {error}
+            </div>
+          )}
 
           {/* Step 1: Basic Info */}
           {step === 1 && (
@@ -170,16 +236,24 @@ export default function RegisterPage() {
               </div>
               <div className="flex space-x-4">
                 <button
+                  type="button"
                   onClick={handlePrev}
                   className="flex-1 border border-gray-300 text-blue-900 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                 >
                   ← Previous
                 </button>
                 <button
-                  type="submit"
-                  className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all"
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                  className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all disabled:opacity-50"
                 >
-                  Create Account
+                  {isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Creating...
+                    </div>
+                  ) : 'Create Account'}
                 </button>
               </div>
             </div>

@@ -3,10 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { useApp } from '@/contexts/AppContext';
 
 export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
+  const { state } = useApp();
+  const router = useRouter();
 
   useEffect(() => {
     setIsVisible(true);
@@ -50,12 +54,20 @@ export default function LandingPage() {
               Network with professionals across industries, mentor current students, and contribute to our legacy of excellence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-              <Link href="/register" className="bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-red-700 transform hover:scale-105 transition-all shadow-2xl">
-                Join Alumni Network
-              </Link>
-              <Link href="/login" className="border-2 border-white text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-white hover:text-blue-900 transform hover:scale-105 transition-all shadow-2xl">
-                Alumni Login
-              </Link>
+              {!state.user ? (
+                <>
+                  <Link href="/register" className="bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-red-700 transform hover:scale-105 transition-all shadow-2xl">
+                    Join Alumni Network
+                  </Link>
+                  <Link href="/login" className="border-2 border-white text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-white hover:text-blue-900 transform hover:scale-105 transition-all shadow-2xl">
+                    Alumni Login
+                  </Link>
+                </>
+              ) : (
+                <Link href="/dashboard" className="bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-red-700 transform hover:scale-105 transition-all shadow-2xl">
+                  Go to Dashboard
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -70,7 +82,7 @@ export default function LandingPage() {
               <p className="text-sm lg:text-lg">Years of Excellence</p>
             </div>
             <div className="bg-white/10 rounded-lg p-4 lg:p-6">
-              <h3 className="text-2xl lg:text-4xl font-bold text-yellow-300 mb-2">5000+</h3>
+              <h3 className="text-2xl lg:text-4xl font-bold text-yellow-300 mb-2">{state.alumni.length}+</h3>
               <p className="text-sm lg:text-lg">Alumni Worldwide</p>
             </div>
             <div className="bg-white/10 rounded-lg p-4 lg:p-6">

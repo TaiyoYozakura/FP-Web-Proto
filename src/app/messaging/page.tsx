@@ -1,24 +1,81 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useApp } from '@/contexts/AppContext';
 
 export default function MessagingPage() {
   const [selectedChat, setSelectedChat] = useState(1);
   const [message, setMessage] = useState('');
-
-  const conversations = [
+  const [conversations, setConversations] = useState([
     { id: 1, name: 'Sarah Johnson', lastMessage: 'Hey! Are you attending the...', time: '2m ago', unread: 2 },
     { id: 2, name: 'Michael Brown', lastMessage: 'Thanks for the connection!', time: '1h ago', unread: 0 },
     { id: 3, name: 'Emily Davis', lastMessage: 'Great meeting you at the event', time: '2h ago', unread: 1 }
-  ];
-
-  const messages = [
+  ]);
+  const [messages, setMessages] = useState([
     { id: 1, sender: 'Sarah Johnson', content: 'Hi! Would love to connect and share experiences!', time: '10:30 AM', isMe: false },
     { id: 2, sender: 'Me', content: 'Sure, would be great to connect!', time: '10:32 AM', isMe: true },
     { id: 3, sender: 'Sarah Johnson', content: 'Are you planning to attend the alumni meet?', time: '10:35 AM', isMe: false }
-  ];
+  ]);
+  const { state } = useApp();
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!state.user) {
+      router.push('/login');
+    }
+  }, [state.user, router]);
+  
+  if (!state.user) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+    </div>;
+  }
+  
+  const handleSendMessage = () => {
+    if (!message.trim()) return;
+    
+    const newMessage = {
+      id: messages.length + 1,
+      sender: 'Me',
+      content: message,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      isMe: true
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+    setMessage('');
+    
+    // Update conversation last message
+    setConversations(prev => prev.map(conv => 
+      conv.id === selectedChat 
+        ? { ...conv, lastMessage: message, time: 'now' }
+        : conv
+    ));
+    
+    // Simulate response after 2 seconds
+    setTimeout(() => {
+      const responses = [
+        'That sounds great!',
+        'Thanks for sharing!',
+        'I agree with you.',
+        'Let me think about it.',
+        'Absolutely!'
+      ];
+      
+      const responseMessage = {
+        id: messages.length + 2,
+        sender: conversations.find(c => c.id === selectedChat)?.name || 'Unknown',
+        content: responses[Math.floor(Math.random() * responses.length)],
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        isMe: false
+      };
+      
+      setMessages(prev => [...prev, responseMessage]);
+    }, 2000);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -26,7 +83,7 @@ export default function MessagingPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <Image src="/SAC-header.png" alt="St Andrews College" width={40} height={40} className="rounded-full" />
+              <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={40} height={40} className="rounded-full" />
               <h1 className="text-xl font-bold text-black">St Andrews Alumni Portal</h1>
             </div>
             <div className="flex items-center space-x-6">
@@ -127,8 +184,12 @@ export default function MessagingPage() {
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   />
-                  <button className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  <button 
+                    onClick={handleSendMessage}
+                    className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                  >
                     Send
                   </button>
                 </div>

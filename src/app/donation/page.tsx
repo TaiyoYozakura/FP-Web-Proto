@@ -3,10 +3,41 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useApp } from '@/contexts/AppContext';
 
 export default function DonationPage() {
   const [activeTab, setActiveTab] = useState('donate');
   const [amount, setAmount] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const { state, dispatch } = useApp();
+  
+  const handleDonate = async (category: string, donationAmount: string) => {
+    if (!donationAmount || parseFloat(donationAmount) <= 0) {
+      alert('Please enter a valid amount');
+      return;
+    }
+    
+    setIsProcessing(true);
+    
+    // Simulate payment processing
+    setTimeout(() => {
+      const donation = {
+        amount: parseFloat(donationAmount),
+        category,
+        date: new Date().toLocaleDateString(),
+        status: 'Completed'
+      };
+      
+      dispatch({ type: 'ADD_DONATION', payload: donation });
+      setIsProcessing(false);
+      setShowSuccess(true);
+      setAmount('');
+      
+      setTimeout(() => setShowSuccess(false), 3000);
+    }, 2000);
+  };
 
   const quickAmounts = [1000, 5000, 10000, 25000];
 
@@ -16,7 +47,7 @@ export default function DonationPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <Image src="/SAC-header.png" alt="St Andrews College" width={40} height={40} className="rounded-full" />
+              <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={40} height={40} className="rounded-full" />
               <h1 className="text-xl font-bold text-black">St Andrews Alumni Portal</h1>
             </div>
             <div className="flex items-center space-x-6">
@@ -29,6 +60,19 @@ export default function DonationPage() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Success Notification */}
+        {showSuccess && (
+          <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-fadeInUp">
+            <div className="flex items-center">
+              <div className="text-2xl mr-3">✓</div>
+              <div>
+                <p className="font-semibold">Donation Successful!</p>
+                <p className="text-sm">Thank you for your contribution.</p>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg p-12 text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Support Your Alma Mater</h1>
@@ -72,7 +116,17 @@ export default function DonationPage() {
                       <div className="text-3xl mb-4">{category.icon}</div>
                       <h3 className="text-xl font-bold text-black mb-2">{category.title}</h3>
                       <p className="text-gray-600 mb-4">{category.desc}</p>
-                      <button className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                      <button 
+                        onClick={() => {
+                          setSelectedCategory(category.title);
+                          if (amount) {
+                            handleDonate(category.title, amount);
+                          } else {
+                            alert('Please enter an amount first');
+                          }
+                        }}
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                      >
                         Donate Now
                       </button>
                     </div>
@@ -107,8 +161,17 @@ export default function DonationPage() {
                       onChange={(e) => setAmount(e.target.value)}
                     />
                   </div>
-                  <button className="w-full bg-red-600 text-white py-4 rounded-lg text-lg font-bold hover:bg-red-700 transition-colors">
-                    Proceed to Payment
+                  <button 
+                    onClick={() => handleDonate('General Fund', amount)}
+                    disabled={!amount || isProcessing}
+                    className="w-full bg-red-600 text-white py-4 rounded-lg text-lg font-bold hover:bg-red-700 transition-colors disabled:opacity-50"
+                  >
+                    {isProcessing ? (
+                      <div className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-2"></div>
+                        Processing...
+                      </div>
+                    ) : 'Proceed to Payment'}
                   </button>
                 </div>
               </div>
@@ -118,21 +181,22 @@ export default function DonationPage() {
               <div className="bg-white rounded-lg shadow-sm p-8">
                 <h2 className="text-2xl font-bold text-black mb-6">Donation History</h2>
                 <div className="space-y-4">
-                  {[
-                    { date: 'Nov 15, 2024', amount: '₹5,000', category: 'Scholarship Fund', status: 'Completed' },
-                    { date: 'Oct 20, 2024', amount: '₹2,500', category: 'Infrastructure', status: 'Completed' }
-                  ].map((donation, index) => (
-                    <div key={index} className="flex justify-between items-center p-4 border border-gray-200 rounded-lg">
-                      <div>
-                        <p className="font-semibold text-black">{donation.category}</p>
-                        <p className="text-sm text-gray-600">{donation.date}</p>
+                  {state.donations.length > 0 ? (
+                    state.donations.map((donation, index) => (
+                      <div key={index} className="flex justify-between items-center p-4 border border-gray-200 rounded-lg">
+                        <div>
+                          <p className="font-semibold text-black">{donation.category}</p>
+                          <p className="text-sm text-gray-600">{donation.date}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-bold text-black">₹{donation.amount.toLocaleString()}</p>
+                          <p className="text-sm text-green-600">{donation.status}</p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="font-bold text-black">{donation.amount}</p>
-                        <p className="text-sm text-green-600">{donation.status}</p>
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <p className="text-gray-600 text-center py-8">No donations yet. Make your first donation to support the college!</p>
+                  )}
                 </div>
               </div>
             )}

@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useApp } from '@/contexts/AppContext';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -10,11 +12,27 @@ export default function LoginPage() {
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { state, dispatch } = useApp();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
+    setError('');
+    
+    // Simulate login - find user in alumni list
+    const user = state.alumni.find(a => a.email === formData.email);
+    
+    setTimeout(() => {
+      if (user) {
+        dispatch({ type: 'LOGIN', payload: user });
+        router.push('/dashboard');
+      } else {
+        setError('Invalid email or password');
+      }
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
@@ -57,6 +75,12 @@ export default function LoginPage() {
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
               />
             </div>
+
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
 
             <div className="flex items-center justify-between">
               <label className="flex items-center">

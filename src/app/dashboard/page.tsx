@@ -1,11 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { useApp } from '@/contexts/AppContext';
 
 export default function DashboardPage() {
-  const [user] = useState({ name: 'John Doe', profileCompletion: 75 });
+  const { state } = useApp();
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!state.user) {
+      router.push('/login');
+    }
+  }, [state.user, router]);
+  
+  if (!state.user) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+    </div>;
+  }
+  
+  const profileCompletion = Math.round((
+    (state.user.firstName ? 1 : 0) +
+    (state.user.lastName ? 1 : 0) +
+    (state.user.email ? 1 : 0) +
+    (state.user.phone ? 1 : 0) +
+    (state.user.position ? 1 : 0) +
+    (state.user.company ? 1 : 0) +
+    (state.user.location ? 1 : 0) +
+    (state.user.bio ? 1 : 0)
+  ) / 8 * 100);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -38,7 +64,7 @@ export default function DashboardPage() {
 
           <div className="flex-1">
             <div className="mb-6 lg:mb-8">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-900 mb-2">Welcome back, {user.name}!</h1>
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-900 mb-2">Welcome back, {state.user.firstName} {state.user.lastName}!</h1>
               <p className="text-gray-600 text-sm lg:text-base">Here's what's happening in your alumni network</p>
             </div>
 
@@ -47,7 +73,7 @@ export default function DashboardPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs lg:text-sm font-semibold text-gray-600">Profile Completion</p>
-                    <p className="text-2xl lg:text-3xl font-bold text-blue-900">{user.profileCompletion}%</p>
+                    <p className="text-2xl lg:text-3xl font-bold text-blue-900">{profileCompletion}%</p>
                     <Link href="/profile" className="text-red-600 hover:text-red-800 text-xs lg:text-sm font-semibold">
                       Complete profile →
                     </Link>
@@ -62,7 +88,7 @@ export default function DashboardPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs lg:text-sm font-semibold text-gray-600">Connections</p>
-                    <p className="text-2xl lg:text-3xl font-bold text-blue-900">234</p>
+                    <p className="text-2xl lg:text-3xl font-bold text-blue-900">{state.alumni.length - 1}</p>
                     <Link href="/directory" className="text-red-600 hover:text-red-800 text-xs lg:text-sm font-semibold">
                       View all →
                     </Link>
@@ -77,7 +103,7 @@ export default function DashboardPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs lg:text-sm font-semibold text-gray-600">Upcoming Events</p>
-                    <p className="text-2xl lg:text-3xl font-bold text-blue-900">3</p>
+                    <p className="text-2xl lg:text-3xl font-bold text-blue-900">{state.events.length}</p>
                     <Link href="/events" className="text-red-600 hover:text-red-800 text-xs lg:text-sm font-semibold">
                       View calendar →
                     </Link>

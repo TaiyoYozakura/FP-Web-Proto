@@ -25,7 +25,7 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <Image src="/SAC-header.png" alt="St Andrews College" width={40} height={40} className="rounded-full" />
+              <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={40} height={40} className="rounded-full" />
               <h1 className="text-xl font-bold text-black">Admin Panel</h1>
             </div>
             <div className="flex items-center space-x-6">

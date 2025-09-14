@@ -1,11 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { useApp } from '@/contexts/AppContext';
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState('about');
   const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({
+    bio: '',
+    position: '',
+    company: '',
+    location: '',
+    skills: [] as string[]
+  });
+  const { state, dispatch } = useApp();
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!state.user) {
+      router.push('/login');
+    } else {
+      setEditData({
+        bio: state.user.bio || '',
+        position: state.user.position || '',
+        company: state.user.company || '',
+        location: state.user.location || '',
+        skills: state.user.skills || []
+      });
+    }
+  }, [state.user, router]);
+  
+  if (!state.user) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+    </div>;
+  }
+  
+  const handleSave = () => {
+    dispatch({ type: 'UPDATE_PROFILE', payload: editData });
+    setIsEditing(false);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -16,20 +52,20 @@ export default function ProfilePage() {
           <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-4 lg:space-y-0 lg:space-x-8">
             <div className="relative">
               <div className="w-24 h-24 lg:w-32 lg:h-32 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl lg:text-4xl font-bold">
-                JD
+                {state.user.firstName[0]}{state.user.lastName[0]}
               </div>
               <button className="absolute bottom-0 right-0 bg-white border-2 border-gray-300 rounded-full p-1 lg:p-2 hover:bg-gray-50 text-xs lg:text-base">
                 📷
               </button>
             </div>
             <div className="flex-1 text-center lg:text-left">
-              <h1 className="text-2xl lg:text-3xl font-bold text-black mb-2">John Doe</h1>
-              <p className="text-lg lg:text-xl text-gray-600 mb-2">Software Engineer at Tech Corp</p>
-              <p className="text-gray-600 mb-3 lg:mb-4 text-sm lg:text-base">Class of 2015 • Mumbai, Maharashtra</p>
-              <p className="text-gray-600 mb-4 lg:mb-6 text-sm lg:text-base">john.doe@email.com</p>
+              <h1 className="text-2xl lg:text-3xl font-bold text-black mb-2">{state.user.firstName} {state.user.lastName}</h1>
+              <p className="text-lg lg:text-xl text-gray-600 mb-2">{state.user.position || 'Position not specified'} {state.user.company && `at ${state.user.company}`}</p>
+              <p className="text-gray-600 mb-3 lg:mb-4 text-sm lg:text-base">Class of {state.user.graduationYear} • {state.user.location || 'Location not specified'}</p>
+              <p className="text-gray-600 mb-4 lg:mb-6 text-sm lg:text-base">{state.user.email}</p>
               <div className="flex flex-col sm:flex-row gap-2 lg:gap-4">
                 <button
-                  onClick={() => setIsEditing(!isEditing)}
+                  onClick={() => isEditing ? handleSave() : setIsEditing(true)}
                   className="bg-red-600 text-white px-4 lg:px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-sm lg:text-base"
                 >
                   {isEditing ? 'Save Profile' : 'Edit Profile'}
@@ -78,12 +114,12 @@ export default function ProfilePage() {
                   <textarea
                     className="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm lg:text-base"
                     placeholder="Tell us about yourself..."
-                    defaultValue="Passionate software engineer with 8+ years of experience in developing scalable web applications. Love connecting with fellow alumni and sharing knowledge."
+                    value={editData.bio}
+                    onChange={(e) => setEditData({...editData, bio: e.target.value})}
                   />
                 ) : (
                   <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
-                    Passionate software engineer with 8+ years of experience in developing scalable web applications. 
-                    Love connecting with fellow alumni and sharing knowledge.
+                    {state.user.bio || 'No bio added yet. Click Edit Profile to add your bio.'}
                   </p>
                 )}
               </div>
@@ -92,14 +128,52 @@ export default function ProfilePage() {
             {activeTab === 'experience' && (
               <div className="bg-white rounded-lg shadow-sm p-6">
                 <h2 className="text-xl font-bold text-black mb-4">Professional Experience</h2>
-                <div className="space-y-6">
-                  <div className="border-l-4 border-red-600 pl-4">
-                    <h3 className="font-bold text-black">Senior Software Engineer</h3>
-                    <p className="text-red-600 font-semibold">Tech Corp</p>
-                    <p className="text-gray-600">Jan 2020 - Present • Mumbai</p>
-                    <p className="text-gray-600 mt-2">Leading development of cloud-based solutions...</p>
+                {isEditing ? (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-black mb-2">Position</label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        placeholder="Your current position"
+                        value={editData.position}
+                        onChange={(e) => setEditData({...editData, position: e.target.value})}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-black mb-2">Company</label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        placeholder="Your company name"
+                        value={editData.company}
+                        onChange={(e) => setEditData({...editData, company: e.target.value})}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-black mb-2">Location</label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        placeholder="Your work location"
+                        value={editData.location}
+                        onChange={(e) => setEditData({...editData, location: e.target.value})}
+                      />
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="space-y-6">
+                    {state.user.position || state.user.company ? (
+                      <div className="border-l-4 border-red-600 pl-4">
+                        <h3 className="font-bold text-black">{state.user.position || 'Position not specified'}</h3>
+                        <p className="text-red-600 font-semibold">{state.user.company || 'Company not specified'}</p>
+                        <p className="text-gray-600">{state.user.location || 'Location not specified'}</p>
+                      </div>
+                    ) : (
+                      <p className="text-gray-600">No experience added yet. Click Edit Profile to add your professional experience.</p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 
@@ -107,9 +181,9 @@ export default function ProfilePage() {
               <div className="bg-white rounded-lg shadow-sm p-6">
                 <h2 className="text-xl font-bold text-black mb-4">Education</h2>
                 <div className="border-l-4 border-red-600 pl-4">
-                  <h3 className="font-bold text-black">Bachelor of Computer Science</h3>
+                  <h3 className="font-bold text-black">Bachelor's Degree</h3>
                   <p className="text-red-600 font-semibold">St Andrews College Bandra West</p>
-                  <p className="text-gray-600">2012 - 2015</p>
+                  <p className="text-gray-600">Graduated in {state.user.graduationYear}</p>
                 </div>
               </div>
             )}
@@ -117,13 +191,30 @@ export default function ProfilePage() {
             {activeTab === 'skills' && (
               <div className="bg-white rounded-lg shadow-sm p-6">
                 <h2 className="text-xl font-bold text-black mb-4">Skills</h2>
-                <div className="flex flex-wrap gap-2">
-                  {['JavaScript', 'React', 'Node.js', 'Python', 'AWS', 'Docker'].map((skill) => (
-                    <span key={skill} className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                {isEditing ? (
+                  <div>
+                    <label className="block text-sm font-semibold text-black mb-2">Skills (comma separated)</label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      placeholder="JavaScript, React, Node.js, Python..."
+                      value={editData.skills.join(', ')}
+                      onChange={(e) => setEditData({...editData, skills: e.target.value.split(',').map(s => s.trim()).filter(s => s)})}
+                    />
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {state.user.skills && state.user.skills.length > 0 ? (
+                      state.user.skills.map((skill, index) => (
+                        <span key={index} className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold">
+                          {skill}
+                        </span>
+                      ))
+                    ) : (
+                      <p className="text-gray-600">No skills added yet. Click Edit Profile to add your skills.</p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>

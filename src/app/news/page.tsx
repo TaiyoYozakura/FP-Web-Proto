@@ -1,17 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import { useApp } from '@/contexts/AppContext';
 
 export default function NewsPage() {
   const [activeTab, setActiveTab] = useState('all');
-
-  const news = [
-    { id: 1, title: 'College Ranks #1 in Innovation Index 2024', category: 'College Updates', date: 'Nov 1, 2024', excerpt: 'Our college has been ranked #1 in the National Innovation Index 2024...' },
-    { id: 2, title: 'Alumni Spotlight: Sarah Johnson Wins Award', category: 'Alumni Achievements', date: 'Oct 28, 2024', excerpt: 'Sarah Johnson, Class of 2015, has been awarded the Young Entrepreneur of the Year...' },
-    { id: 3, title: 'New Research Center Opens', category: 'College Updates', date: 'Oct 25, 2024', excerpt: 'The state-of-the-art AI Research Center is now open for students and faculty...' }
-  ];
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+  const { state } = useApp();
+  
+  const filteredNews = useMemo(() => {
+    if (activeTab === 'all') return state.news;
+    if (activeTab === 'college') return state.news.filter(n => n.category === 'College Updates');
+    if (activeTab === 'alumni') return state.news.filter(n => n.category === 'Alumni Achievements');
+    return state.news;
+  }, [state.news, activeTab]);
+  
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+      setTimeout(() => setSubscribed(false), 3000);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -29,7 +43,7 @@ export default function NewsPage() {
         </div>
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-2 space-y-6 lg:space-y-8">
-            {news.map((article) => (
+            {filteredNews.map((article) => (
               <article key={article.id} className="bg-white rounded-lg shadow-sm p-4 lg:p-8 hover:shadow-md transition-shadow">
                 <div className="flex flex-wrap items-center gap-2 lg:gap-4 mb-4">
                   <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs lg:text-sm font-semibold">
@@ -60,10 +74,26 @@ export default function NewsPage() {
               <h3 className="font-bold text-black mb-4 text-sm lg:text-base">Newsletter</h3>
               <p className="text-gray-600 mb-4 text-sm lg:text-base">Stay updated with the latest news and events</p>
               <div className="space-y-3">
-                <input type="email" placeholder="Enter your email" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm" />
-                <button className="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-sm">
-                  Subscribe
-                </button>
+                <form onSubmit={handleSubscribe} className="space-y-3">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <button 
+                    type="submit"
+                    className={`w-full py-2 rounded-lg font-semibold transition-colors text-sm ${
+                      subscribed 
+                        ? 'bg-green-600 text-white' 
+                        : 'bg-red-600 text-white hover:bg-red-700'
+                    }`}
+                  >
+                    {subscribed ? 'Subscribed ✓' : 'Subscribe'}
+                  </button>
+                </form>
               </div>
             </div>
           </div>
