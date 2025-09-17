@@ -43,6 +43,56 @@ const themes = {
     '--text-primary': '#0c4a6e',
     '--text-secondary': '#0369a1',
     '--border': '#bae6fd'
+  },
+  oxford: {
+    '--primary': '#002147',
+    '--primary-hover': '#001a38',
+    '--secondary': '#d4af37',
+    '--background': '#f8f9fa',
+    '--surface': '#ffffff',
+    '--text-primary': '#002147',
+    '--text-secondary': '#495057',
+    '--border': '#d4af37'
+  },
+  harvard: {
+    '--primary': '#a41e22',
+    '--primary-hover': '#8b1a1d',
+    '--secondary': '#ffffff',
+    '--background': '#fefefe',
+    '--surface': '#ffffff',
+    '--text-primary': '#2c2c2c',
+    '--text-secondary': '#666666',
+    '--border': '#e9ecef'
+  },
+  mithibai: {
+    '--primary': '#ff6b35',
+    '--primary-hover': '#e55a2b',
+    '--secondary': '#1e88e5',
+    '--background': '#fff8f5',
+    '--surface': '#ffffff',
+    '--text-primary': '#2c2c2c',
+    '--text-secondary': '#666666',
+    '--border': '#ffccb3'
+  },
+  kc: {
+    '--primary': '#2e7d32',
+    '--primary-hover': '#1b5e20',
+    '--secondary': '#ffc107',
+    '--background': '#f1f8e9',
+    '--surface': '#ffffff',
+    '--text-primary': '#1b5e20',
+    '--text-secondary': '#388e3c',
+    '--border': '#c8e6c9'
+  },
+  wilson: {
+    '--primary': '#1565c0',
+    '--primary-hover': '#0d47a1',
+    '--secondary': '#bdbdbd',
+    '--background': '#f3f7ff',
+    '--surface': '#ffffff',
+    '--text-primary': '#0d47a1',
+    '--text-secondary': '#1976d2',
+    '--border': '#bbdefb'
   }
 };
 

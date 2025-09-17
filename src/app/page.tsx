@@ -35,21 +35,22 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <div 
-        className="relative min-h-screen bg-cover bg-center"
+        className="relative min-h-screen bg-cover bg-center hero-overlay"
         style={{ 
-          backgroundImage: 'linear-gradient(rgba(30, 58, 138, 0.7), rgba(220, 38, 38, 0.2)), url(https://images.pexels.com/photos/159490/yale-university-landscape-universities-schools-159490.jpeg)',
+          backgroundImage: 'url(https://images.pexels.com/photos/159490/yale-university-landscape-universities-schools-159490.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        <div className={`flex flex-col items-center justify-center min-h-screen text-center px-4 sm:px-6 lg:px-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 lg:p-12 max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4 lg:mb-6">
+        <div className="hero-overlay absolute inset-0"></div>
+        <div className={`relative z-10 flex flex-col items-center justify-center min-h-screen text-center container-padding transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="card bg-white/10 backdrop-blur-md p-8 lg:p-16 max-w-5xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight">
               Welcome to <span className="text-yellow-300">AlumniPortal</span> Network
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white mb-3 lg:mb-4">Connecting Alumni Worldwide</p>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-6 lg:mb-8">Connect • Collaborate • Contribute</p>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-100 mb-8 lg:mb-12 leading-relaxed">
+            <p className="text-lead text-white mb-4 font-medium">Connecting Alumni Worldwide</p>
+            <p className="text-xl text-gray-200 mb-8 font-light tracking-wide">Connect • Collaborate • Contribute</p>
+            <p className="text-lg text-gray-100 mb-12 leading-relaxed max-w-3xl mx-auto">
               Join our vibrant community of distinguished alumni from your institution. 
               Network with professionals across industries, mentor current students, and contribute to our legacy of excellence.
             </p>
@@ -74,35 +75,37 @@ export default function LandingPage() {
       </div>
 
       {/* College Stats */}
-      <section className="py-12 lg:py-16 bg-blue-900 text-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 text-center">
-            <div className="bg-white/10 rounded-lg p-4 lg:p-6">
-              <h3 className="text-2xl lg:text-4xl font-bold text-yellow-300 mb-2">70+</h3>
-              <p className="text-sm lg:text-lg">Years of Excellence</p>
+      <section className="section-padding hero-gradient text-white">
+        <div className="container mx-auto container-padding">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 text-center">
+            <div className="card bg-white/10 backdrop-blur-sm p-6 lg:p-8 card-hover">
+              <h3 className="text-3xl lg:text-5xl font-extrabold text-yellow-300 mb-3">70+</h3>
+              <p className="text-body font-medium">Years of Excellence</p>
             </div>
-            <div className="bg-white/10 rounded-lg p-4 lg:p-6">
-              <h3 className="text-2xl lg:text-4xl font-bold text-yellow-300 mb-2">{state.alumni.length}+</h3>
-              <p className="text-sm lg:text-lg">Alumni Worldwide</p>
+            <div className="card bg-white/10 backdrop-blur-sm p-6 lg:p-8 card-hover">
+              <h3 className="text-3xl lg:text-5xl font-extrabold text-yellow-300 mb-3">{state.alumni.length}+</h3>
+              <p className="text-body font-medium">Alumni Worldwide</p>
             </div>
-            <div className="bg-white/10 rounded-lg p-4 lg:p-6">
-              <h3 className="text-2xl lg:text-4xl font-bold text-yellow-300 mb-2">50+</h3>
-              <p className="text-sm lg:text-lg">Countries Represented</p>
+            <div className="card bg-white/10 backdrop-blur-sm p-6 lg:p-8 card-hover">
+              <h3 className="text-3xl lg:text-5xl font-extrabold text-yellow-300 mb-3">50+</h3>
+              <p className="text-body font-medium">Countries Represented</p>
             </div>
-            <div className="bg-white/10 rounded-lg p-4 lg:p-6">
-              <h3 className="text-2xl lg:text-4xl font-bold text-yellow-300 mb-2">100+</h3>
-              <p className="text-sm lg:text-lg">Industry Leaders</p>
+            <div className="card bg-white/10 backdrop-blur-sm p-6 lg:p-8 card-hover">
+              <h3 className="text-3xl lg:text-5xl font-extrabold text-yellow-300 mb-3">100+</h3>
+              <p className="text-body font-medium">Industry Leaders</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section id="services" className="py-12 lg:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-blue-900 mb-4">Alumni Services</h2>
-          <p className="text-center text-gray-600 mb-8 lg:mb-16 text-base lg:text-lg">Connecting our graduates for lifelong success</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <section id="services" className="section-padding bg-gray-50">
+        <div className="container mx-auto container-padding">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 mb-6">Alumni Services</h2>
+            <p className="text-lead text-gray-600 max-w-2xl mx-auto">Connecting our graduates for lifelong success</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Alumni Directory', desc: 'Connect with classmates and professionals across industries', icon: '🎓', color: 'border-blue-500', link: '/directory' },
               { title: 'Career Network', desc: 'Access job opportunities and mentorship programs', icon: '💼', color: 'border-red-500', link: '/jobs' },
@@ -111,10 +114,10 @@ export default function LandingPage() {
               { title: 'Giving Back', desc: 'Support scholarships and college development', icon: '❤️', color: 'border-purple-500', link: '/donation' },
               { title: 'Global Network', desc: 'Connect with alumni chapters worldwide', icon: '🌍', color: 'border-indigo-500', link: '/directory' }
             ].map((feature, index) => (
-              <Link key={index} href={feature.link} className={`bg-white border-l-4 ${feature.color} p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 block`}>
-                <div className="text-4xl lg:text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm lg:text-base">{feature.desc}</p>
+              <Link key={index} href={feature.link} className={`card card-hover border-l-4 ${feature.color} p-8 block group`}>
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{feature.icon}</div>
+                <h3 className="text-xl font-bold text-blue-900 mb-4">{feature.title}</h3>
+                <p className="text-body text-gray-600">{feature.desc}</p>
               </Link>
             ))}
           </div>
@@ -122,24 +125,29 @@ export default function LandingPage() {
       </section>
 
       {/* News & Updates */}
-      <section id="updates" className="py-12 lg:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-blue-900 mb-8 lg:mb-16">Latest Updates</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <section id="updates" className="section-padding bg-white">
+        <div className="container mx-auto container-padding">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 mb-6">Latest Updates</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Annual Alumni Reunion 2024', date: 'December 15, 2024', preview: 'Join us for our biggest alumni gathering featuring distinguished speakers and networking opportunities...', category: 'Event', link: '/events' },
               { title: 'New Scholarship Fund Launched', date: 'November 20, 2024', preview: 'Alumni contributions establish merit-based scholarships for deserving students from economically weaker sections...', category: 'News', link: '/news' },
               { title: 'Distinguished Alumni Awards', date: 'October 30, 2024', preview: 'Celebrating outstanding achievements of our alumni in various fields including business, arts, and social service...', category: 'Achievement', link: '/news' }
             ].map((news, index) => (
-              <article key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                <div className="p-4 lg:p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs lg:text-sm font-semibold">{news.category}</span>
-                    <span className="text-gray-500 text-xs lg:text-sm">{news.date}</span>
+              <article key={index} className="card card-hover overflow-hidden group">
+                <div className="p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-small font-semibold">{news.category}</span>
+                    <span className="text-gray-500 text-small font-medium">{news.date}</span>
                   </div>
-                  <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3">{news.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed text-sm lg:text-base">{news.preview}</p>
-                  <Link href={news.link} className="text-red-600 hover:text-red-800 font-semibold text-sm lg:text-base">Read More →</Link>
+                  <h3 className="text-xl font-bold text-blue-900 mb-4 group-hover:text-red-600 transition-colors">{news.title}</h3>
+                  <p className="text-body text-gray-600 mb-6">{news.preview}</p>
+                  <Link href={news.link} className="text-red-600 hover:text-red-800 font-semibold inline-flex items-center group">
+                    Read More 
+                    <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  </Link>
                 </div>
               </article>
             ))}
