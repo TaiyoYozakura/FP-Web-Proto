@@ -37,7 +37,7 @@ export default function LandingPage() {
       <div 
         className="relative min-h-screen bg-cover bg-center"
         style={{ 
-          backgroundImage: 'linear-gradient(rgba(30, 58, 138, 0.7), rgba(220, 38, 38, 0.2)), url(/St-Andrews-Bg.jpg)',
+          backgroundImage: 'linear-gradient(rgba(30, 58, 138, 0.7), rgba(220, 38, 38, 0.2)), url(https://images.pexels.com/photos/159490/yale-university-landscape-universities-schools-159490.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}

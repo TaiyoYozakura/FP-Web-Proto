@@ -25,6 +25,7 @@ interface AppState {
   news: any[];
   messages: any[];
   donations: any[];
+  theme: string;
 }
 
 type AppAction = 
@@ -36,7 +37,8 @@ type AppAction =
   | { type: 'ADD_JOB'; payload: any }
   | { type: 'ADD_NEWS'; payload: any }
   | { type: 'SEND_MESSAGE'; payload: any }
-  | { type: 'ADD_DONATION'; payload: any };
+  | { type: 'ADD_DONATION'; payload: any }
+  | { type: 'SET_THEME'; payload: string };
 
 const initialState: AppState = {
   user: null,
@@ -62,7 +64,8 @@ const initialState: AppState = {
     { id: '3', title: 'New Research Center Opens', category: 'College Updates', date: 'Oct 25, 2024', excerpt: 'The state-of-the-art AI Research Center is now open for students and faculty...' }
   ],
   messages: [],
-  donations: []
+  donations: [],
+  theme: 'dark'
 };
 
 function appReducer(state: AppState, action: AppAction): AppState {
@@ -96,6 +99,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, messages: [...state.messages, { ...action.payload, id: Date.now().toString() }] };
     case 'ADD_DONATION':
       return { ...state, donations: [...state.donations, { ...action.payload, id: Date.now().toString() }] };
+    case 'SET_THEME':
+      return { ...state, theme: action.payload };
     default:
       return state;
   }

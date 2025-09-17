@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useApp } from '@/contexts/AppContext';
 
 export default function AdminPage() {
   const [activeSection, setActiveSection] = useState('dashboard');
+  const { state, dispatch } = useApp();
 
   const stats = [
     { title: 'Total Alumni', value: '2,456', change: '+12 this month', color: 'text-green-600' },
@@ -81,20 +83,23 @@ export default function AdminPage() {
               <p className="text-gray-600">Manage your alumni portal</p>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                  <h3 className="text-sm font-semibold text-gray-600 mb-2">{stat.title}</h3>
-                  <p className="text-3xl font-bold text-black mb-1">{stat.value}</p>
-                  <p className={`text-sm ${stat.color}`}>{stat.change}</p>
-                </div>
-              ))}
-            </div>
+            {/* Stats Grid - Show when dashboard is active */}
+            {activeSection === 'dashboard' && (
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {stats.map((stat, index) => (
+                  <div key={index} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                    <h3 className="text-sm font-semibold text-gray-600 mb-2">{stat.title}</h3>
+                    <p className="text-3xl font-bold text-black mb-1">{stat.value}</p>
+                    <p className={`text-sm ${stat.color}`}>{stat.change}</p>
+                  </div>
+                ))}
+              </div>
+            )}
 
-            {/* Recent Registrations */}
-            <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-              <h2 className="text-xl font-bold text-black mb-6">Recent User Registrations</h2>
+            {/* Recent Registrations - Show when dashboard is active */}
+            {activeSection === 'dashboard' && (
+              <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <h2 className="text-xl font-bold text-black mb-6">Recent User Registrations</h2>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -143,30 +148,75 @@ export default function AdminPage() {
                   </tbody>
                 </table>
               </div>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-bold text-black mb-6">Quick Actions</h2>
-              <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {[
-                  { name: 'Send Newsletter', icon: '📧' },
-                  { name: 'Create Event', icon: '📅' },
-                  { name: 'Post News', icon: '📰' },
-                  { name: 'Export Data', icon: '📊' },
-                  { name: 'View Reports', icon: '📈' },
-                  { name: 'System Backup', icon: '💾' }
-                ].map((action, index) => (
-                  <button
-                    key={index}
-                    className="flex flex-col items-center p-4 border border-gray-300 rounded-lg hover:bg-red-50 hover:border-red-300 transition-colors"
-                  >
-                    <span className="text-2xl mb-2">{action.icon}</span>
-                    <span className="text-sm font-semibold text-center">{action.name}</span>
-                  </button>
-                ))}
               </div>
-            </div>
+            )}
+
+            {/* Theme Settings - Show when settings section is active */}
+            {activeSection === 'settings' && (
+              <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <h2 className="text-xl font-bold text-black mb-6">Website Theme Settings</h2>
+                <div className="space-y-4">
+                  <p className="text-gray-600 mb-4">Choose a theme for the entire website:</p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { id: 'default', name: 'St Andrews Bandra West', color: 'bg-red-600' },
+                      { id: 'dark', name: 'Dark Mode', color: 'bg-gray-800' },
+                      { id: 'purple', name: 'Dnyanasadhana', color: 'bg-purple-700' },
+                      { id: 'skyblue', name: 'DG Ruparel', color: 'bg-sky-500' }
+                    ].map((theme) => (
+                      <button
+                        key={theme.id}
+                        onClick={() => dispatch({ type: 'SET_THEME', payload: theme.id })}
+                        className={`p-4 rounded-lg border-2 transition-all ${
+                          state.theme === theme.id
+                            ? 'border-blue-500 bg-blue-50'
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <div className={`w-full h-8 ${theme.color} rounded mb-2`}></div>
+                        <span className="text-sm font-semibold">{theme.name}</span>
+                        {state.theme === theme.id && (
+                          <div className="text-blue-600 text-xs mt-1">✓ Active</div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-600">
+                      <strong>Current Theme:</strong> {state.theme.charAt(0).toUpperCase() + state.theme.slice(1)}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Theme changes apply instantly across the entire website.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Quick Actions - Show when dashboard is active */}
+            {activeSection === 'dashboard' && (
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <h2 className="text-xl font-bold text-black mb-6">Quick Actions</h2>
+                <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {[
+                    { name: 'Send Newsletter', icon: '📧' },
+                    { name: 'Create Event', icon: '📅' },
+                    { name: 'Post News', icon: '📰' },
+                    { name: 'Export Data', icon: '📊' },
+                    { name: 'View Reports', icon: '📈' },
+                    { name: 'System Backup', icon: '💾' }
+                  ].map((action, index) => (
+                    <button
+                      key={index}
+                      className="flex flex-col items-center p-4 border border-gray-300 rounded-lg hover:bg-red-50 hover:border-red-300 transition-colors"
+                    >
+                      <span className="text-2xl mb-2">{action.icon}</span>
+                      <span className="text-sm font-semibold text-center">{action.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,9 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --accent: #dc2626;
+  /* Default theme variables - Dark Mode */
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --secondary: #9ca3af;
+  --background: #111827;
+  --surface: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --border: #374151;
+  
+  /* Legacy variables for compatibility */
+  --foreground: var(--text-primary);
+  --accent: var(--primary);
 }
 
 body {
@@ -62,5 +72,34 @@ img {
   .safe-area-inset {
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+  }
+  
+  /* Theme-aware utilities */
+  .bg-theme-primary {
+    background-color: var(--primary);
+  }
+  
+  .bg-theme-surface {
+    background-color: var(--surface);
+  }
+  
+  .bg-theme-background {
+    background-color: var(--background);
+  }
+  
+  .text-theme-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-theme-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .border-theme {
+    border-color: var(--border);
+  }
+  
+  .hover\:bg-theme-primary:hover {
+    background-color: var(--primary-hover);
   }
 }
