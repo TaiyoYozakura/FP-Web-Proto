@@ -65,7 +65,7 @@ const initialState: AppState = {
   ],
   messages: [],
   donations: [],
-  theme: 'dark'
+  theme: typeof window !== 'undefined' ? (localStorage.getItem('globalDefaultTheme') || 'dark') : 'dark'
 };
 
 function appReducer(state: AppState, action: AppAction): AppState {

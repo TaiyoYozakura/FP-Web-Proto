@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import SearchBar from '@/components/SearchBar';
 import { useApp } from '@/contexts/AppContext';
 
 export default function LandingPage() {
@@ -21,14 +22,19 @@ export default function LandingPage() {
       <Navbar />
       
       {/* Landing Page Navigation */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
+      <div className="sticky-nav bg-white shadow-sm border-b border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center lg:justify-end items-center py-3 space-x-4 lg:space-x-8">
-            <Link href="#about" className="text-blue-900 hover:text-red-600 font-semibold transition-colors text-sm lg:text-base">About</Link>
-            <Link href="#services" className="text-blue-900 hover:text-red-600 font-semibold transition-colors text-sm lg:text-base">Services</Link>
-            <Link href="#updates" className="text-blue-900 hover:text-red-600 font-semibold transition-colors text-sm lg:text-base">Updates</Link>
-            <Link href="/login" className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm lg:text-base">Login</Link>
-            <Link href="/register" className="border-2 border-blue-900 text-blue-900 px-4 py-2 rounded hover:bg-blue-900 hover:text-white transition-colors text-sm lg:text-base">Register</Link>
+          <div className="flex flex-wrap justify-between items-center py-3">
+            <div className="w-full lg:w-auto mb-3 lg:mb-0">
+              <SearchBar placeholder="Search alumni, events, news..." className="max-w-md" />
+            </div>
+            <div className="flex space-x-4 lg:space-x-8">
+              <Link href="#about" className="btn text-blue-900 hover:text-red-600 font-semibold text-sm lg:text-base">About</Link>
+              <Link href="#services" className="btn text-blue-900 hover:text-red-600 font-semibold text-sm lg:text-base">Services</Link>
+              <Link href="#updates" className="btn text-blue-900 hover:text-red-600 font-semibold text-sm lg:text-base">Updates</Link>
+              <Link href="/login" className="btn ripple bg-red-600 text-white px-4 py-2 rounded text-sm lg:text-base">Login</Link>
+              <Link href="/register" className="btn ripple border-2 border-blue-900 text-blue-900 px-4 py-2 rounded hover:bg-blue-900 hover:text-white text-sm lg:text-base">Register</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -57,15 +63,15 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
               {!state.user ? (
                 <>
-                  <Link href="/register" className="bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-red-700 transform hover:scale-105 transition-all shadow-2xl">
+                  <Link href="/register" className="btn ripple micro-bounce bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold shadow-2xl">
                     Join Alumni Network
                   </Link>
-                  <Link href="/login" className="border-2 border-white text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-white hover:text-blue-900 transform hover:scale-105 transition-all shadow-2xl">
+                  <Link href="/login" className="btn ripple micro-bounce border-2 border-white text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-white hover:text-blue-900 shadow-2xl">
                     Alumni Login
                   </Link>
                 </>
               ) : (
-                <Link href="/dashboard" className="bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold hover:bg-red-700 transform hover:scale-105 transition-all shadow-2xl">
+                <Link href="/dashboard" className="btn ripple micro-bounce bg-red-600 text-white px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-lg text-base lg:text-lg font-bold shadow-2xl">
                   Go to Dashboard
                 </Link>
               )}
@@ -114,8 +120,8 @@ export default function LandingPage() {
               { title: 'Giving Back', desc: 'Support scholarships and college development', icon: '❤️', color: 'border-purple-500', link: '/donation' },
               { title: 'Global Network', desc: 'Connect with alumni chapters worldwide', icon: '🌍', color: 'border-indigo-500', link: '/directory' }
             ].map((feature, index) => (
-              <Link key={index} href={feature.link} className={`card card-hover border-l-4 ${feature.color} p-8 block group`}>
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{feature.icon}</div>
+              <Link key={index} href={feature.link} className={`card card-hover micro-pulse border-l-4 ${feature.color} p-8 block group`}>
+                <div className="text-5xl mb-6 group-hover:scale-110 micro-bounce transition-transform">{feature.icon}</div>
                 <h3 className="text-xl font-bold text-blue-900 mb-4">{feature.title}</h3>
                 <p className="text-body text-gray-600">{feature.desc}</p>
               </Link>
@@ -136,7 +142,7 @@ export default function LandingPage() {
               { title: 'New Scholarship Fund Launched', date: 'November 20, 2024', preview: 'Alumni contributions establish merit-based scholarships for deserving students from economically weaker sections...', category: 'News', link: '/news' },
               { title: 'Distinguished Alumni Awards', date: 'October 30, 2024', preview: 'Celebrating outstanding achievements of our alumni in various fields including business, arts, and social service...', category: 'Achievement', link: '/news' }
             ].map((news, index) => (
-              <article key={index} className="card card-hover overflow-hidden group">
+              <article key={index} className="card card-hover micro-pulse overflow-hidden group">
                 <div className="p-8">
                   <div className="flex items-center justify-between mb-6">
                     <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-small font-semibold">{news.category}</span>
@@ -144,7 +150,7 @@ export default function LandingPage() {
                   </div>
                   <h3 className="text-xl font-bold text-blue-900 mb-4 group-hover:text-red-600 transition-colors">{news.title}</h3>
                   <p className="text-body text-gray-600 mb-6">{news.preview}</p>
-                  <Link href={news.link} className="text-red-600 hover:text-red-800 font-semibold inline-flex items-center group">
+                  <Link href={news.link} className="btn text-red-600 hover:text-red-800 font-semibold inline-flex items-center group">
                     Read More 
                     <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                   </Link>

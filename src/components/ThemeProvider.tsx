@@ -12,7 +12,8 @@ const themes = {
     '--surface': '#ffffff',
     '--text-primary': '#111827',
     '--text-secondary': '#6b7280',
-    '--border': '#e5e7eb'
+    '--border': '#e5e7eb',
+    '--theme-border': '#d1d5db'
   },
   dark: {
     '--primary': '#ef4444',
@@ -22,7 +23,8 @@ const themes = {
     '--surface': '#1f2937',
     '--text-primary': '#f9fafb',
     '--text-secondary': '#d1d5db',
-    '--border': '#374151'
+    '--border': '#374151',
+    '--theme-border': '#4b5563'
   },
   purple: {
     '--primary': '#6c3185',
