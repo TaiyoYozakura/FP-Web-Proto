@@ -45,12 +45,12 @@ export default function LandingPage() {
         <div className={`flex flex-col items-center justify-center min-h-screen text-center px-4 sm:px-6 lg:px-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 lg:p-12 max-w-4xl mx-auto">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4 lg:mb-6">
-              Welcome to <span className="text-yellow-300">St Andrews</span> Alumni Network
+              Welcome to <span className="text-yellow-300">AlumniPortal</span> Network
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white mb-3 lg:mb-4">Excellence in Education Since 1951</p>
+            <p className="text-lg sm:text-xl lg:text-2xl text-white mb-3 lg:mb-4">Connecting Alumni Worldwide</p>
             <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-6 lg:mb-8">Connect • Collaborate • Contribute</p>
             <p className="text-sm sm:text-base lg:text-lg text-gray-100 mb-8 lg:mb-12 leading-relaxed">
-              Join our vibrant community of distinguished alumni from St Andrews College, Bandra West. 
+              Join our vibrant community of distinguished alumni from your institution. 
               Network with professionals across industries, mentor current students, and contribute to our legacy of excellence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
@@ -153,13 +153,13 @@ export default function LandingPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
             <div>
               <div className="flex items-center mb-4">
-                <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={40} height={40} className="mr-3 lg:w-12 lg:h-12" />
+                <Image src="/SAC-LOGO.webp" alt="AlumniPortal" width={40} height={40} className="mr-3 lg:w-12 lg:h-12" />
                 <div>
-                  <h3 className="font-bold text-base lg:text-lg">St Andrews College</h3>
-                  <p className="text-xs lg:text-sm text-gray-300">Bandra West, Mumbai</p>
+                  <h3 className="font-bold text-base lg:text-lg">AlumniPortal</h3>
+                  <p className="text-xs lg:text-sm text-gray-300">Global Alumni Network</p>
                 </div>
               </div>
-              <p className="text-gray-300 text-xs lg:text-sm">Excellence in Education Since 1951</p>
+              <p className="text-gray-300 text-xs lg:text-sm">Connecting Alumni Worldwide</p>
             </div>
             <div>
               <h4 className="font-bold mb-4 text-sm lg:text-base">Quick Links</h4>
@@ -174,9 +174,9 @@ export default function LandingPage() {
             <div>
               <h4 className="font-bold mb-4 text-sm lg:text-base">Contact Info</h4>
               <div className="space-y-2 text-xs lg:text-sm text-gray-300">
-                <p>📍 St Andrews College, Bandra West, Mumbai - 400050</p>
-                <p>📞 +91 22 2640 0348</p>
-                <p>📧 alumni@standrewscollege.ac.in</p>
+                <p>📍 Your Institution Address</p>
+                <p>📞 Your Contact Number</p>
+                <p>📧 alumni@yourinstitution.edu</p>
               </div>
             </div>
             <div>
@@ -190,7 +190,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="border-t border-blue-800 pt-6 lg:pt-8 text-center">
-            <p className="text-gray-400 text-xs lg:text-sm">© 2024 St Andrews College Alumni Portal. All rights reserved.</p>
+            <p className="text-gray-400 text-xs lg:text-sm">© 2024 AlumniPortal. All rights reserved.</p>
           </div>
         </div>
       </footer>

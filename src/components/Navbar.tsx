@@ -22,7 +22,7 @@ export default function Navbar() {
       {/* Top Bar */}
       <div className="bg-blue-900 text-white py-2 px-4 text-xs sm:text-sm">
         <div className="container mx-auto flex flex-col sm:flex-row sm:justify-between items-center">
-          <span className="mb-2 sm:mb-0">📧 alumni@standrewscollege.ac.in | 📞 +91 22 2640 0348</span>
+          <span className="mb-2 sm:mb-0">📧 alumni@yourinstitution.edu | 📞 Your Contact Number</span>
           <div className="flex space-x-4">
             <Link href="#" className="hover:text-yellow-300">Student Portal</Link>
             <Link href="#" className="hover:text-yellow-300">Faculty Portal</Link>
@@ -36,11 +36,11 @@ export default function Navbar() {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2 sm:space-x-4">
-              <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={60} height={60} className="sm:w-20 sm:h-20" />
+              <Image src="/SAC-LOGO.webp" alt="AlumniPortal" width={60} height={60} className="sm:w-20 sm:h-20" />
               <div>
-                <h1 className="text-lg sm:text-2xl font-bold text-blue-900">ST. ANDREWS COLLEGE</h1>
-                <p className="text-xs sm:text-sm text-gray-600">BANDRA (WEST), MUMBAI</p>
-                <p className="text-xs text-red-600 font-semibold">ALUMNI PORTAL</p>
+                <h1 className="text-lg sm:text-2xl font-bold text-blue-900">ALUMNIPORTAL</h1>
+                <p className="text-xs sm:text-sm text-gray-600">GLOBAL ALUMNI NETWORK</p>
+                <p className="text-xs text-red-600 font-semibold">CONNECTING ALUMNI WORLDWIDE</p>
               </div>
             </Link>
             
