@@ -19,38 +19,40 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-theme-primary text-white py-2 px-4 text-xs sm:text-sm">
-        <div className="container mx-auto flex flex-col sm:flex-row sm:justify-between items-center">
-          <span className="mb-2 sm:mb-0">📧 alumni@yourinstitution.edu | 📞 Your Contact Number</span>
+      {/* Clean Top Bar */}
+      <div className="bg-theme-primary text-white py-3">
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-sm">
+          <div className="flex items-center space-x-6">
+            <span>Email: alumni@dnyanasadhana.edu.in</span>
+            <span>Phone: +91-22-2534-1191</span>
+          </div>
           <div className="flex space-x-4">
-            <Link href="#" className="hover:text-theme-secondary">Student Portal</Link>
-            <Link href="#" className="hover:text-theme-secondary">Faculty Portal</Link>
+            <Link href="#" className="hover:text-white/80 transition-colors">Student Portal</Link>
+            <Link href="#" className="hover:text-white/80 transition-colors">Faculty Portal</Link>
           </div>
         </div>
       </div>
       
-      {/* Main Navigation */}
-      <nav className="bg-theme-surface shadow-md border-b-4 border-theme-primary">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
-            {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 sm:space-x-4">
-              <Image src="/SAC-LOGO.webp" alt="AlumniPortal" width={60} height={60} className="sm:w-20 sm:h-20" />
+      {/* Professional Navigation */}
+      <nav className="bg-theme-surface shadow-sm">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex justify-between items-center py-6">
+            {/* Clean Logo */}
+            <Link href="/" className="flex items-center space-x-4">
+              <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={50} height={50} />
               <div>
-                <h1 className="text-lg sm:text-2xl font-bold text-theme-primary">ALUMNIPORTAL</h1>
-                <p className="text-xs sm:text-sm text-theme-secondary">GLOBAL ALUMNI NETWORK</p>
-                <p className="text-xs text-theme-primary font-semibold">CONNECTING ALUMNI WORLDWIDE</p>
+                <h1 className="text-2xl font-bold text-theme-primary">Dnyanasadhana College</h1>
+                <p className="text-sm text-theme-secondary font-medium">Alumni Portal</p>
               </div>
             </Link>
             
-            {/* Desktop Menu */}
+            {/* Clean Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/dashboard" className="text-theme-primary hover:text-theme-secondary font-semibold transition-colors">Dashboard</Link>
-              <Link href="/directory" className="text-theme-primary hover:text-theme-secondary font-semibold transition-colors">Directory</Link>
-              <Link href="/events" className="text-theme-primary hover:text-theme-secondary font-semibold transition-colors">Events</Link>
-              <Link href="/jobs" className="text-theme-primary hover:text-theme-secondary font-semibold transition-colors">Jobs</Link>
-              <Link href="/news" className="text-theme-primary hover:text-theme-secondary font-semibold transition-colors">News</Link>
+              <Link href="/dashboard" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Dashboard</Link>
+              <Link href="/directory" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Directory</Link>
+              <Link href="/events" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Events</Link>
+              <Link href="/jobs" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Careers</Link>
+              <Link href="/news" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">News</Link>
               
               {state.user && (
                 <div className="relative">

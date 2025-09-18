@@ -102,6 +102,17 @@ const themes = {
     '--text-secondary': '#1976d2',
     '--border': '#e3f2fd',
     '--theme-border': '#bbdefb'
+  },
+  dnyanasadhana: {
+    '--primary': '#1e3a8a',
+    '--primary-hover': '#1e40af',
+    '--secondary': '#f59e0b',
+    '--background': '#f8fafc',
+    '--surface': '#ffffff',
+    '--text-primary': '#1e293b',
+    '--text-secondary': '#475569',
+    '--border': '#e2e8f0',
+    '--theme-border': '#cbd5e1'
   }
 };
 

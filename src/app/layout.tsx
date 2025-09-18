@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/contexts/AppContext";
-import ThemeProvider from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,17 +33,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/SAC-LOGO.webp" />
+        <link rel="icon" href="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased`} suppressHydrationWarning={true}>
         <AppProvider>
-          <ThemeProvider>
-            <div id="root">
-              {children}
-            </div>
-          </ThemeProvider>
+          <div id="root">
+            {children}
+          </div>
         </AppProvider>
       </body>
     </html>

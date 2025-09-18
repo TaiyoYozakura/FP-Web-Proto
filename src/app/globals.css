@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Default theme variables - Dark Mode */
-  --primary: #ef4444;
-  --primary-hover: #dc2626;
-  --secondary: #9ca3af;
-  --background: #111827;
-  --surface: #1f2937;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --border: #374151;
+  /* Dnyanasadhana College Theme */
+  --primary: #1e3a8a;
+  --primary-hover: #1e40af;
+  --secondary: #f59e0b;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --border: #e2e8f0;
+  --theme-border: #cbd5e1;
   
   /* Legacy variables for compatibility */
   --foreground: var(--text-primary);

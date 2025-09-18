@@ -55,28 +55,15 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <Image src="/SAC-LOGO.webp" alt="AlumniPortal" width={32} height={32} className="rounded-full sm:w-10 sm:h-10" />
-              <h1 className="text-lg sm:text-xl font-bold text-theme-primary">Admin Panel</h1>
+              <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={32} height={32} className="sm:w-10 sm:h-10" />
+              <h1 className="text-lg sm:text-xl font-bold text-theme-primary">Dnyanasadhana Admin</h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-6">
-              <Link href="/" className="text-theme-secondary hover:text-theme-primary font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-theme-background">🏠 Home</Link>
-              <button 
-                onClick={() => {
-                  const currentTheme = state.theme;
-                  const newTheme = currentTheme === 'dark' ? (localStorage.getItem('previousTheme') || defaultTheme) : 'dark';
-                  if (currentTheme !== 'dark') {
-                    localStorage.setItem('previousTheme', currentTheme);
-                  }
-                  dispatch({ type: 'SET_THEME', payload: newTheme });
-                }}
-                className="btn p-2 rounded-lg bg-theme-background hover:bg-theme-border micro-bounce"
-                title="Toggle Dark Mode"
-              >
-                {state.theme === 'dark' ? '☀️' : '🌙'}
-              </button>
+              <Link href="/" className="text-theme-secondary hover:text-theme-primary font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-theme-background">Home</Link>
+
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-theme-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">A</div>
-                <span className="hidden sm:inline text-theme-primary">Admin ▼</span>
+                <span className="hidden sm:inline text-theme-primary">Admin</span>
               </div>
             </div>
           </div>
@@ -91,12 +78,12 @@ export default function AdminPage() {
               <h3 className="text-lg sm:text-xl font-bold text-theme-primary mb-4 lg:mb-6">Admin Menu</h3>
               <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-3">
                 {[
-                  { id: 'dashboard', name: 'Dashboard', icon: '📊' },
-                  { id: 'users', name: 'User Management', icon: '👥' },
-                  { id: 'content', name: 'Content Management', icon: '📝' },
-                  { id: 'events', name: 'Event Management', icon: '📅' },
-                  { id: 'analytics', name: 'Analytics', icon: '📈' },
-                  { id: 'settings', name: 'System Settings', icon: '⚙️' }
+                  { id: 'dashboard', name: 'Dashboard' },
+                  { id: 'users', name: 'User Management' },
+                  { id: 'content', name: 'Content Management' },
+                  { id: 'events', name: 'Event Management' },
+                  { id: 'analytics', name: 'Analytics' },
+                  { id: 'settings', name: 'System Settings' }
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -107,7 +94,6 @@ export default function AdminPage() {
                         : 'hover:bg-theme-background text-theme-secondary'
                     }`}
                   >
-                    <span className="text-lg lg:text-xl mb-1 lg:mb-0">{item.icon}</span>
                     <span className="text-center lg:text-left">{item.name}</span>
                   </button>
                 ))}
@@ -207,77 +193,7 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* Theme Settings - Show when settings section is active */}
-            {activeSection === 'settings' && (
-              <div className="card p-4 lg:p-8 mb-6 lg:mb-12">
-                <h2 className="text-xl lg:text-2xl font-bold text-theme-primary mb-4 lg:mb-8">Website Theme Settings</h2>
-                <div className="space-y-4 lg:space-y-6">
-                  <p className="text-body lg:text-lead text-theme-secondary mb-4 lg:mb-6">Choose a theme for the entire website:</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
-                    {[
-                      { id: 'default', name: 'St Andrews Bandra West', color: 'bg-red-600' },
-                      { id: 'dark', name: 'Dark Mode', color: 'bg-gray-800' },
-                      { id: 'purple', name: 'Dnyanasadhana', color: 'bg-purple-700' },
-                      { id: 'skyblue', name: 'DG Ruparel', color: 'bg-sky-500' },
-                      { id: 'oxford', name: 'Oxford Style', color: 'bg-blue-900' },
-                      { id: 'harvard', name: 'Harvard Style', color: 'bg-red-800' },
-                      { id: 'mithibai', name: 'Mithibai College', color: 'bg-orange-500' },
-                      { id: 'kc', name: 'KC College', color: 'bg-green-600' },
-                      { id: 'wilson', name: 'Wilson College', color: 'bg-blue-600' }
-                    ].map((theme) => (
-                      <div key={theme.id} className="relative">
-                        <button
-                          onClick={() => dispatch({ type: 'SET_THEME', payload: theme.id })}
-                          className={`btn ripple card card-hover micro-bounce p-3 lg:p-6 border-2 transition-all w-full ${
-                            state.theme === theme.id
-                              ? 'border-blue-500 bg-blue-50 card-elevated'
-                              : 'border-theme'
-                          }`}
-                        >
-                          <div className={`w-full h-6 lg:h-10 ${theme.color} rounded-lg mb-2 lg:mb-4`}></div>
-                          <span className="text-xs lg:text-body font-semibold text-center block">{theme.name}</span>
-                          {state.theme === theme.id && (
-                            <div className="text-blue-600 text-xs lg:text-small font-medium mt-1 lg:mt-2 text-center">✓ Active</div>
-                          )}
-                          {defaultTheme === theme.id && (
-                            <div className="text-yellow-600 text-xs lg:text-small font-medium mt-1 text-center">★ Default</div>
-                          )}
-                        </button>
-                        <div className="absolute top-2 right-2 flex gap-1">
-                          <button
-                            onClick={() => setAsDefault(theme.id)}
-                            className={`p-1 rounded-full text-sm hover:bg-theme-background transition-colors ${
-                              defaultTheme === theme.id ? 'text-yellow-500' : 'text-theme-secondary'
-                            }`}
-                            title="Set as personal default"
-                          >
-                            ★
-                          </button>
-                          <button
-                            onClick={() => setGlobalDefault(theme.id)}
-                            className="p-1 rounded-full text-sm hover:bg-theme-background text-red-600 transition-colors"
-                            title="Set as global default for all users"
-                          >
-                            🌍
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-8 p-6 bg-theme-background rounded-xl">
-                    <p className="text-body text-theme-secondary font-medium">
-                      <strong>Current Theme:</strong> {state.theme.charAt(0).toUpperCase() + state.theme.slice(1)}
-                    </p>
-                    <p className="text-body text-theme-secondary font-medium mt-2">
-                      <strong>Default Theme:</strong> {defaultTheme.charAt(0).toUpperCase() + defaultTheme.slice(1)}
-                    </p>
-                    <p className="text-small text-theme-secondary mt-2">
-                      Theme changes apply instantly. Click the star (★) for personal default or globe (🌍) to set as global default for all users.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
+
 
             {/* Quick Actions - Show when dashboard is active */}
             {activeSection === 'dashboard' && (
@@ -285,18 +201,17 @@ export default function AdminPage() {
                 <h2 className="text-xl lg:text-2xl font-bold text-theme-primary mb-4 lg:mb-8">Quick Actions</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
                   {[
-                    { name: 'Send Newsletter', icon: '📧' },
-                    { name: 'Create Event', icon: '📅' },
-                    { name: 'Post News', icon: '📰' },
-                    { name: 'Export Data', icon: '📊' },
-                    { name: 'View Reports', icon: '📈' },
-                    { name: 'System Backup', icon: '💾' }
+                    { name: 'Send Newsletter' },
+                    { name: 'Create Event' },
+                    { name: 'Post News' },
+                    { name: 'Export Data' },
+                    { name: 'View Reports' },
+                    { name: 'System Backup' }
                   ].map((action, index) => (
                     <button
                       key={index}
                       className="btn ripple card card-hover micro-bounce flex flex-col items-center p-3 lg:p-6 border border-theme group hover:border-theme-primary"
                     >
-                      <span className="text-2xl lg:text-3xl mb-2 lg:mb-4 group-hover:scale-110 transition-transform">{action.icon}</span>
                       <span className="text-xs lg:text-small font-semibold text-center text-theme-primary group-hover:text-theme-primary">{action.name}</span>
                     </button>
                   ))}

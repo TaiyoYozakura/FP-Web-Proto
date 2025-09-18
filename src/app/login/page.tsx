@@ -36,21 +36,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-background flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-theme-background flex items-center justify-center p-6">
       <div className="max-w-md w-full">
-        <div className="text-center mb-6 lg:mb-8">
-          <Link href="/" className="inline-flex items-center space-x-2 lg:space-x-3 mb-4 lg:mb-6">
-            <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={50} height={50} className="lg:w-15 lg:h-15" />
+        <div className="text-center mb-8">
+          <Link href="/" className="inline-flex items-center space-x-3 mb-6">
+            <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={60} height={60} />
             <div className="text-left">
-              <span className="text-lg lg:text-xl font-bold text-theme-primary block">ST. ANDREWS COLLEGE</span>
-              <span className="text-xs lg:text-sm text-theme-secondary">Alumni Portal</span>
+              <span className="text-xl font-bold text-theme-primary block">Dnyanasadhana College</span>
+              <span className="text-sm text-theme-secondary">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-2xl lg:text-3xl font-bold text-theme-primary mb-2">Welcome Back</h1>
-          <p className="text-theme-secondary text-sm lg:text-base">Sign in to your alumni account</p>
+          <h1 className="text-3xl font-bold text-theme-primary mb-3">Welcome Back</h1>
+          <p className="text-theme-secondary text-lg">Sign in to your alumni account</p>
         </div>
 
-        <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-theme">
+        <div className="card p-8 shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-theme-primary mb-2">Email Address</label>
@@ -95,7 +95,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn ripple w-full bg-theme-primary text-white py-3 rounded-lg font-semibold hover:bg-theme-primary-hover disabled:opacity-50 text-sm lg:text-base"
+              className="btn w-full bg-theme-primary text-white py-4 rounded-lg font-semibold hover:bg-theme-primary-hover disabled:opacity-50 text-lg"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -106,16 +106,16 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 lg:mt-8 text-center">
-            <p className="text-theme-secondary text-sm lg:text-base">
+          <div className="mt-8 text-center">
+            <p className="text-theme-secondary text-lg">
               Don't have an account?{' '}
               <Link href="/register" className="text-theme-primary hover:text-theme-secondary font-semibold">Register here</Link>
             </p>
           </div>
         </div>
 
-        <div className="text-center mt-4 lg:mt-6">
-          <Link href="/" className="text-theme-secondary hover:text-theme-primary transition-colors text-sm lg:text-base">← Back to Home</Link>
+        <div className="text-center mt-6">
+          <Link href="/" className="text-theme-secondary hover:text-theme-primary transition-colors text-lg">← Back to Home</Link>
         </div>
       </div>
     </div>
