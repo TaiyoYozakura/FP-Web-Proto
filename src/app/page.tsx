@@ -162,7 +162,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer id="about" className="bg-blue-900 text-white py-8 lg:py-12">
+      <footer id="about" className="bg-theme-primary text-white py-8 lg:py-12">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
             <div>
@@ -178,11 +178,11 @@ export default function LandingPage() {
             <div>
               <h4 className="font-bold mb-4 text-sm lg:text-base">Quick Links</h4>
               <div className="space-y-2 text-xs lg:text-sm">
-                <Link href="/dashboard" className="block text-gray-300 hover:text-yellow-300">Dashboard</Link>
-                <Link href="/directory" className="block text-gray-300 hover:text-yellow-300">Alumni Directory</Link>
-                <Link href="/events" className="block text-gray-300 hover:text-yellow-300">Events</Link>
-                <Link href="/jobs" className="block text-gray-300 hover:text-yellow-300">Career Services</Link>
-                <Link href="/news" className="block text-gray-300 hover:text-yellow-300">News</Link>
+                <Link href="/dashboard" className="block text-gray-300 hover:text-theme-secondary opacity-80 hover:opacity-100">Dashboard</Link>
+                <Link href="/directory" className="block text-gray-300 hover:text-theme-secondary opacity-80 hover:opacity-100">Alumni Directory</Link>
+                <Link href="/events" className="block text-gray-300 hover:text-theme-secondary opacity-80 hover:opacity-100">Events</Link>
+                <Link href="/jobs" className="block text-gray-300 hover:text-theme-secondary opacity-80 hover:opacity-100">Career Services</Link>
+                <Link href="/news" className="block text-gray-300 hover:text-theme-secondary opacity-80 hover:opacity-100">News</Link>
               </div>
             </div>
             <div>
@@ -196,14 +196,14 @@ export default function LandingPage() {
             <div>
               <h4 className="font-bold mb-4 text-sm lg:text-base">Follow Us</h4>
               <div className="flex space-x-4">
-                <Link href="#" className="text-gray-300 hover:text-yellow-300 text-xl lg:text-2xl">📘</Link>
-                <Link href="#" className="text-gray-300 hover:text-yellow-300 text-xl lg:text-2xl">📷</Link>
-                <Link href="#" className="text-gray-300 hover:text-yellow-300 text-xl lg:text-2xl">🐦</Link>
-                <Link href="#" className="text-gray-300 hover:text-yellow-300 text-xl lg:text-2xl">💼</Link>
+                <Link href="#" className="text-gray-300 hover:text-theme-secondary text-xl lg:text-2xl opacity-80 hover:opacity-100">📘</Link>
+                <Link href="#" className="text-gray-300 hover:text-theme-secondary text-xl lg:text-2xl opacity-80 hover:opacity-100">📷</Link>
+                <Link href="#" className="text-gray-300 hover:text-theme-secondary text-xl lg:text-2xl opacity-80 hover:opacity-100">🐦</Link>
+                <Link href="#" className="text-gray-300 hover:text-theme-secondary text-xl lg:text-2xl opacity-80 hover:opacity-100">💼</Link>
               </div>
             </div>
           </div>
-          <div className="border-t border-blue-800 pt-6 lg:pt-8 text-center">
+          <div className="border-t border-white border-opacity-20 pt-6 lg:pt-8 text-center">
             <p className="text-gray-400 text-xs lg:text-sm">© 2024 AlumniPortal. All rights reserved.</p>
           </div>
         </div>

@@ -7,17 +7,17 @@ import ThemeProvider from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "St Andrews College Alumni Portal",
-  description: "Connect with fellow alumni from St Andrews College Bandra West. Network, grow, and give back to your alma mater.",
-  keywords: "St Andrews College, Alumni, Bandra West, Mumbai, Network, Education",
-  authors: [{ name: "St Andrews College" }],
+  title: "Dnyanasadhana College Alumni Portal",
+  description: "Connect with fellow alumni from Dnyanasadhana College Thane. Network, grow, and give back to your alma mater.",
+  keywords: "Dnyanasadhana College, Alumni, Thane, Maharashtra, Network, Education, Commerce, Arts, Science",
+  authors: [{ name: "Dnyanasadhana College" }],
   robots: "index, follow",
   openGraph: {
-    title: "St Andrews College Alumni Portal",
-    description: "Connect with fellow alumni from St Andrews College Bandra West",
+    title: "Dnyanasadhana College Alumni Portal",
+    description: "Connect with fellow alumni from Dnyanasadhana College Thane",
     type: "website",
     locale: "en_US",
-    siteName: "St Andrews Alumni Portal"
+    siteName: "Dnyanasadhana Alumni Portal"
   }
 };
 

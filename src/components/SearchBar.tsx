@@ -41,7 +41,7 @@ export default function SearchBar({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="search-input w-full pl-12 pr-4 py-3 bg-theme-surface border border-theme rounded-xl text-theme-primary placeholder-theme-secondary focus:border-theme-primary"
+          className="search-input w-full pl-12 pr-4 py-3 bg-theme-surface border border-theme rounded-xl text-theme-primary placeholder:text-theme-secondary focus:border-theme-primary"
         />
         {query && (
           <button

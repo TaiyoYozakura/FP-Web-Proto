@@ -27,74 +27,81 @@ const themes = {
     '--theme-border': '#4b5563'
   },
   purple: {
-    '--primary': '#6c3185',
-    '--primary-hover': '#5a2a6f',
-    '--secondary': '#f7c500',
-    '--background': '#fefcf7',
+    '--primary': '#673ab7',
+    '--primary-hover': '#5e35b1',
+    '--secondary': '#ffc107',
+    '--background': '#faf8ff',
     '--surface': '#ffffff',
-    '--text-primary': '#2d1b69',
-    '--text-secondary': '#6c3185',
-    '--border': '#f7c500'
+    '--text-primary': '#4a148c',
+    '--text-secondary': '#7b1fa2',
+    '--border': '#f3e5f5',
+    '--theme-border': '#e1bee7'
   },
   skyblue: {
-    '--primary': '#0ea5e9',
-    '--primary-hover': '#0284c7',
-    '--secondary': '#fbbf24',
-    '--background': '#f0f9ff',
+    '--primary': '#03a9f4',
+    '--primary-hover': '#0288d1',
+    '--secondary': '#ff9800',
+    '--background': '#f1f8ff',
     '--surface': '#ffffff',
-    '--text-primary': '#0c4a6e',
-    '--text-secondary': '#0369a1',
-    '--border': '#bae6fd'
+    '--text-primary': '#01579b',
+    '--text-secondary': '#0277bd',
+    '--border': '#e1f5fe',
+    '--theme-border': '#b3e5fc'
   },
   oxford: {
     '--primary': '#002147',
-    '--primary-hover': '#001a38',
-    '--secondary': '#d4af37',
-    '--background': '#f8f9fa',
-    '--surface': '#ffffff',
-    '--text-primary': '#002147',
-    '--text-secondary': '#495057',
-    '--border': '#d4af37'
-  },
-  harvard: {
-    '--primary': '#a41e22',
-    '--primary-hover': '#8b1a1d',
-    '--secondary': '#ffffff',
+    '--primary-hover': '#001635',
+    '--secondary': '#c5a572',
     '--background': '#fefefe',
     '--surface': '#ffffff',
-    '--text-primary': '#2c2c2c',
-    '--text-secondary': '#666666',
-    '--border': '#e9ecef'
+    '--text-primary': '#002147',
+    '--text-secondary': '#4a5568',
+    '--border': '#e2e8f0',
+    '--theme-border': '#cbd5e0'
+  },
+  harvard: {
+    '--primary': '#a51c30',
+    '--primary-hover': '#8b1538',
+    '--secondary': '#f8f9fa',
+    '--background': '#ffffff',
+    '--surface': '#ffffff',
+    '--text-primary': '#1a1a1a',
+    '--text-secondary': '#6c757d',
+    '--border': '#dee2e6',
+    '--theme-border': '#ced4da'
   },
   mithibai: {
-    '--primary': '#ff6b35',
-    '--primary-hover': '#e55a2b',
-    '--secondary': '#1e88e5',
-    '--background': '#fff8f5',
+    '--primary': '#ff5722',
+    '--primary-hover': '#e64a19',
+    '--secondary': '#2196f3',
+    '--background': '#fafafa',
     '--surface': '#ffffff',
-    '--text-primary': '#2c2c2c',
-    '--text-secondary': '#666666',
-    '--border': '#ffccb3'
+    '--text-primary': '#212121',
+    '--text-secondary': '#757575',
+    '--border': '#e0e0e0',
+    '--theme-border': '#bdbdbd'
   },
   kc: {
-    '--primary': '#2e7d32',
-    '--primary-hover': '#1b5e20',
-    '--secondary': '#ffc107',
-    '--background': '#f1f8e9',
+    '--primary': '#4caf50',
+    '--primary-hover': '#388e3c',
+    '--secondary': '#ffeb3b',
+    '--background': '#f8fdf8',
     '--surface': '#ffffff',
     '--text-primary': '#1b5e20',
-    '--text-secondary': '#388e3c',
-    '--border': '#c8e6c9'
+    '--text-secondary': '#4caf50',
+    '--border': '#e8f5e8',
+    '--theme-border': '#c8e6c9'
   },
   wilson: {
-    '--primary': '#1565c0',
-    '--primary-hover': '#0d47a1',
-    '--secondary': '#bdbdbd',
-    '--background': '#f3f7ff',
+    '--primary': '#1976d2',
+    '--primary-hover': '#1565c0',
+    '--secondary': '#90caf9',
+    '--background': '#f5f7fa',
     '--surface': '#ffffff',
     '--text-primary': '#0d47a1',
     '--text-secondary': '#1976d2',
-    '--border': '#bbdefb'
+    '--border': '#e3f2fd',
+    '--theme-border': '#bbdefb'
   }
 };
 

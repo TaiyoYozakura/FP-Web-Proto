@@ -36,28 +36,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-theme-background flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full">
         <div className="text-center mb-6 lg:mb-8">
           <Link href="/" className="inline-flex items-center space-x-2 lg:space-x-3 mb-4 lg:mb-6">
             <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={50} height={50} className="lg:w-15 lg:h-15" />
             <div className="text-left">
-              <span className="text-lg lg:text-xl font-bold text-blue-900 block">ST. ANDREWS COLLEGE</span>
-              <span className="text-xs lg:text-sm text-gray-600">Alumni Portal</span>
+              <span className="text-lg lg:text-xl font-bold text-theme-primary block">ST. ANDREWS COLLEGE</span>
+              <span className="text-xs lg:text-sm text-theme-secondary">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-2xl lg:text-3xl font-bold text-blue-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600 text-sm lg:text-base">Sign in to your alumni account</p>
+          <h1 className="text-2xl lg:text-3xl font-bold text-theme-primary mb-2">Welcome Back</h1>
+          <p className="text-theme-secondary text-sm lg:text-base">Sign in to your alumni account</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-gray-100">
+        <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-theme">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-blue-900 mb-2">Email Address</label>
+              <label className="block text-sm font-semibold text-theme-primary mb-2">Email Address</label>
               <input
                 type="email"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
                 placeholder="your.email@example.com"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -65,11 +65,11 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-blue-900 mb-2">Password</label>
+              <label className="block text-sm font-semibold text-theme-primary mb-2">Password</label>
               <input
                 type="password"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
@@ -84,10 +84,10 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center">
-                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                <input type="checkbox" className="rounded border-theme text-theme-primary focus:ring-theme-primary" />
+                <span className="ml-2 text-sm text-theme-secondary">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-800 font-semibold">
+              <Link href="/forgot-password" className="text-sm text-theme-primary hover:text-theme-secondary font-semibold">
                 Forgot password?
               </Link>
             </div>
@@ -95,7 +95,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all disabled:opacity-50 text-sm lg:text-base"
+              className="btn ripple w-full bg-theme-primary text-white py-3 rounded-lg font-semibold hover:bg-theme-primary-hover disabled:opacity-50 text-sm lg:text-base"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -107,15 +107,15 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 lg:mt-8 text-center">
-            <p className="text-gray-600 text-sm lg:text-base">
+            <p className="text-theme-secondary text-sm lg:text-base">
               Don't have an account?{' '}
-              <Link href="/register" className="text-blue-600 hover:text-blue-800 font-semibold">Register here</Link>
+              <Link href="/register" className="text-theme-primary hover:text-theme-secondary font-semibold">Register here</Link>
             </p>
           </div>
         </div>
 
         <div className="text-center mt-4 lg:mt-6">
-          <Link href="/" className="text-gray-600 hover:text-blue-900 transition-colors text-sm lg:text-base">← Back to Home</Link>
+          <Link href="/" className="text-theme-secondary hover:text-theme-primary transition-colors text-sm lg:text-base">← Back to Home</Link>
         </div>
       </div>
     </div>
