@@ -10,27 +10,18 @@ export default function DashboardPage() {
   const { state } = useApp();
   const router = useRouter();
   
-  useEffect(() => {
-    if (!state.user) {
-      router.push('/login');
-    }
-  }, [state.user, router]);
-  
-  if (!state.user) {
-    return <div className="min-h-screen bg-theme-background flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-theme-primary"></div>
-    </div>;
-  }
+  // Mock user for demo purposes
+  const mockUser = state.user || { firstName: 'Demo', lastName: 'User', email: 'demo@example.com' };
   
   const profileCompletion = Math.round((
-    (state.user.firstName ? 1 : 0) +
-    (state.user.lastName ? 1 : 0) +
-    (state.user.email ? 1 : 0) +
-    (state.user.phone ? 1 : 0) +
-    (state.user.position ? 1 : 0) +
-    (state.user.company ? 1 : 0) +
-    (state.user.location ? 1 : 0) +
-    (state.user.bio ? 1 : 0)
+    (mockUser.firstName ? 1 : 0) +
+    (mockUser.lastName ? 1 : 0) +
+    (mockUser.email ? 1 : 0) +
+    (mockUser.phone ? 1 : 0) +
+    (mockUser.position ? 1 : 0) +
+    (mockUser.company ? 1 : 0) +
+    (mockUser.location ? 1 : 0) +
+    (mockUser.bio ? 1 : 0)
   ) / 8 * 100);
 
   return (
@@ -64,7 +55,7 @@ export default function DashboardPage() {
 
           <div className="flex-1">
             <div className="mb-12">
-              <h1 className="text-4xl font-bold text-theme-primary mb-4">Welcome back, {state.user.firstName} {state.user.lastName}!</h1>
+              <h1 className="text-4xl font-bold text-theme-primary mb-4">Welcome back, {mockUser.firstName} {mockUser.lastName}!</h1>
               <p className="text-theme-secondary text-xl">Here's what's happening in your alumni network</p>
             </div>
 

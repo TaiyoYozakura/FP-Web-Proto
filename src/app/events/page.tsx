@@ -26,35 +26,35 @@ export default function EventsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-theme-background">
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 lg:py-8">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-black mb-4">Alumni Events</h1>
-        <p className="text-gray-600 mb-6 lg:mb-8">Showing {filteredEvents.length} events</p>
-        <div className="flex flex-wrap gap-1 mb-6 lg:mb-8 bg-white rounded-lg p-1 shadow-sm w-fit">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <h1 className="text-4xl font-bold text-theme-primary mb-4">Alumni Events</h1>
+        <p className="text-theme-secondary mb-8 text-lg">Showing {filteredEvents.length} events</p>
+        <div className="flex flex-wrap gap-1 mb-8 bg-theme-surface rounded-lg p-1 shadow-sm w-fit">
           {['upcoming', 'past', 'my-events'].map((tab) => (
             <button 
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 lg:px-6 py-2 rounded-md font-semibold text-sm lg:text-base transition-colors ${
-                activeTab === tab ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-black'
+              className={`px-6 py-2 rounded-md font-semibold transition-colors ${
+                activeTab === tab ? 'bg-theme-primary text-white' : 'text-theme-secondary hover:text-theme-primary'
               }`}
             >
               {tab === 'upcoming' ? 'Upcoming' : tab === 'past' ? 'Past Events' : 'My Events'}
             </button>
           ))}
         </div>
-        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="lg:col-span-2 space-y-4 lg:space-y-6">
+        <div className="grid lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-6">
             {filteredEvents.map((event) => (
-              <div key={event.id} className="bg-white rounded-lg shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
+              <div key={event.id} className="card p-6 hover:shadow-lg transition-all">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-3">
                   <div>
-                    <h3 className="text-lg lg:text-xl font-bold text-black mb-2">{event.title}</h3>
-                    <div className="space-y-1 text-gray-600 text-sm lg:text-base">
-                      <p>📅 {event.date}</p>
-                      <p>📍 {event.location}</p>
-                      <p>🏷️ {event.type}</p>
+                    <h3 className="text-xl font-bold text-theme-primary mb-2">{event.title}</h3>
+                    <div className="space-y-1 text-theme-secondary">
+                      <p>{event.date}</p>
+                      <p>{event.location}</p>
+                      <p>{event.type}</p>
                     </div>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs lg:text-sm font-semibold self-start ${
@@ -63,14 +63,14 @@ export default function EventsPage() {
                     {isRegistered(event.id) ? 'Registered' : 'Open'}
                   </span>
                 </div>
-                <p className="text-gray-600 mb-4 text-sm lg:text-base">Join us for an amazing gathering of alumni...</p>
+                <p className="text-theme-secondary mb-4">Join us for an amazing gathering of alumni...</p>
                 <div className="flex gap-2">
                   <button 
                     onClick={() => isRegistered(event.id) ? handleUnregister(event.id) : handleRegister(event.id)}
-                    className={`px-4 lg:px-6 py-2 rounded-lg font-semibold transition-colors text-sm lg:text-base ${
+                    className={`btn px-6 py-2 rounded-lg font-semibold transition-colors ${
                       isRegistered(event.id) 
                         ? 'bg-green-600 text-white hover:bg-green-700' 
-                        : 'bg-red-600 text-white hover:bg-red-700'
+                        : 'bg-theme-primary text-white hover:bg-theme-primary-hover'
                     }`}
                   >
                     {isRegistered(event.id) ? 'Registered ✓' : 'Register Now'}
@@ -78,7 +78,7 @@ export default function EventsPage() {
                   {isRegistered(event.id) && (
                     <button 
                       onClick={() => handleUnregister(event.id)}
-                      className="px-4 lg:px-6 py-2 rounded-lg font-semibold transition-colors text-sm lg:text-base border border-red-600 text-red-600 hover:bg-red-50"
+                      className="btn px-6 py-2 rounded-lg font-semibold transition-colors border border-theme-primary text-theme-primary hover:bg-theme-background"
                     >
                       Cancel
                     </button>
@@ -87,18 +87,18 @@ export default function EventsPage() {
               </div>
             ))}
           </div>
-          <div className="space-y-4 lg:space-y-6">
-            <div className="bg-white rounded-lg shadow-sm p-4 lg:p-6">
-              <h3 className="font-bold text-black mb-4 text-sm lg:text-base">Filter Events</h3>
+          <div className="space-y-6">
+            <div className="card p-6">
+              <h3 className="font-bold text-theme-primary mb-6 text-lg">Filter Events</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs lg:text-sm font-semibold text-black mb-2">Event Type</label>
+                  <label className="block text-sm font-semibold text-theme-primary mb-2">Event Type</label>
                   <div className="space-y-2">
                     {['Reunion', 'Networking', 'Workshop'].map((type) => (
                       <label key={type} className="flex items-center">
                         <input 
                           type="checkbox" 
-                          className="rounded border-gray-300 text-red-600 focus:ring-red-500" 
+                          className="rounded border-theme text-theme-primary focus:ring-theme-primary" 
                           checked={selectedFilters.includes(type)}
                           onChange={(e) => {
                             if (e.target.checked) {
@@ -108,14 +108,14 @@ export default function EventsPage() {
                             }
                           }}
                         />
-                        <span className="ml-2 text-gray-600 text-sm">{type}</span>
+                        <span className="ml-2 text-theme-secondary">{type}</span>
                       </label>
                     ))}
                   </div>
                 </div>
                 <button 
                   onClick={() => setSelectedFilters([])}
-                  className="w-full bg-gray-600 text-white py-2 rounded-lg font-semibold hover:bg-gray-700 transition-colors text-sm"
+                  className="btn w-full bg-theme-primary text-white py-3 rounded-lg font-semibold hover:bg-theme-primary-hover"
                 >
                   Clear Filters
                 </button>

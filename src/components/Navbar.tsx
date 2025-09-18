@@ -27,8 +27,8 @@ export default function Navbar() {
             <span>Phone: +91-22-2534-1191</span>
           </div>
           <div className="flex space-x-4">
-            <Link href="#" className="hover:text-white/80 transition-colors">Student Portal</Link>
-            <Link href="#" className="hover:text-white/80 transition-colors">Faculty Portal</Link>
+            <Link href="/student-login" className="hover:text-white/80 transition-colors">Student Portal</Link>
+            <Link href="/faculty-login" className="hover:text-white/80 transition-colors">Faculty Portal</Link>
           </div>
         </div>
       </div>
