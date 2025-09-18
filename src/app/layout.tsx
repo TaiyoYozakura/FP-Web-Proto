@@ -6,17 +6,17 @@ import { AppProvider } from "@/contexts/AppContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dnyanasadhana College Alumni Portal",
-  description: "Connect with fellow alumni from Dnyanasadhana College Thane. Network, grow, and give back to your alma mater.",
-  keywords: "Dnyanasadhana College, Alumni, Thane, Maharashtra, Network, Education, Commerce, Arts, Science",
-  authors: [{ name: "Dnyanasadhana College" }],
+  title: "Satish Pradhan Dnyanasadhana College Alumni Portal",
+  description: "Connect with fellow alumni from Satish Pradhan Dnyanasadhana College Thane. Network, grow, and give back to your alma mater.",
+  keywords: "Satish Pradhan Dnyanasadhana College, Alumni, Thane, Maharashtra, Network, Education, Commerce, Arts, Science",
+  authors: [{ name: "Satish Pradhan Dnyanasadhana College" }],
   robots: "index, follow",
   openGraph: {
-    title: "Dnyanasadhana College Alumni Portal",
-    description: "Connect with fellow alumni from Dnyanasadhana College Thane",
+    title: "Satish Pradhan Dnyanasadhana College Alumni Portal",
+    description: "Connect with fellow alumni from Satish Pradhan Dnyanasadhana College Thane",
     type: "website",
     locale: "en_US",
-    siteName: "Dnyanasadhana Alumni Portal"
+    siteName: "Satish Pradhan Dnyanasadhana Alumni Portal"
   }
 };
 

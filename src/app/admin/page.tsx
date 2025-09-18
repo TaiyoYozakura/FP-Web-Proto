@@ -73,7 +73,7 @@ export default function AdminPage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={32} height={32} className="sm:w-10 sm:h-10" />
-              <h1 className="text-lg sm:text-xl font-bold text-theme-primary">Dnyanasadhana Admin</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-theme-primary">SPDNC Admin</h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-6">
               <Link href="/" className="text-theme-secondary hover:text-theme-primary font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-theme-background">Home</Link>
@@ -132,7 +132,7 @@ export default function AdminPage() {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
                 <div>
                   <h1 className="text-3xl font-bold text-theme-primary mb-2">Admin Dashboard</h1>
-                  <p className="text-theme-secondary">Manage Dnyanasadhana College Alumni Portal</p>
+                  <p className="text-theme-secondary">Manage Satish Pradhan Dnyanasadhana College Alumni Portal</p>
                 </div>
                 <div className="mt-4 lg:mt-0 flex items-center space-x-4">
                   <input
@@ -277,6 +277,258 @@ export default function AdminPage() {
             )}
 
 
+
+            {/* Content Management Section */}
+            {activeSection === 'content' && (
+              <div className="space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <h2 className="text-2xl font-bold text-theme-primary mb-4 sm:mb-0">Content Management</h2>
+                  <div className="flex space-x-3">
+                    <button 
+                      onClick={() => handleExport('content')}
+                      className="btn border border-theme text-theme-primary px-4 py-2 rounded-lg hover:bg-theme-background"
+                    >
+                      Export Content
+                    </button>
+                    <button 
+                      onClick={() => { setModalType('content'); setShowModal(true); }}
+                      className="btn bg-theme-primary text-white px-4 py-2 rounded-lg"
+                    >
+                      Add Content
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="card p-6">
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-theme">
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Title</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Type</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Author</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Status</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Date</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {content.map((item) => (
+                          <tr key={item.id} className="border-b border-theme hover:bg-theme-background">
+                            <td className="py-3 px-4 text-theme-primary font-medium">{item.title}</td>
+                            <td className="py-3 px-4 text-theme-secondary">{item.type}</td>
+                            <td className="py-3 px-4 text-theme-secondary">{item.author}</td>
+                            <td className="py-3 px-4">
+                              <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                item.status === 'Published' ? 'bg-green-100 text-green-800' :
+                                item.status === 'Draft' ? 'bg-yellow-100 text-yellow-800' :
+                                'bg-gray-100 text-gray-800'
+                              }`}>
+                                {item.status}
+                              </span>
+                            </td>
+                            <td className="py-3 px-4 text-theme-secondary text-sm">{item.date}</td>
+                            <td className="py-3 px-4">
+                              <div className="flex space-x-2">
+                                <button className="text-theme-primary hover:text-theme-secondary text-sm font-medium">
+                                  Edit
+                                </button>
+                                <button className="text-red-600 hover:text-red-800 text-sm font-medium">
+                                  Delete
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Event Management Section */}
+            {activeSection === 'events' && (
+              <div className="space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <h2 className="text-2xl font-bold text-theme-primary mb-4 sm:mb-0">Event Management</h2>
+                  <div className="flex space-x-3">
+                    <button 
+                      onClick={() => handleExport('events')}
+                      className="btn border border-theme text-theme-primary px-4 py-2 rounded-lg hover:bg-theme-background"
+                    >
+                      Export Events
+                    </button>
+                    <button 
+                      onClick={() => { setModalType('event'); setShowModal(true); }}
+                      className="btn bg-theme-primary text-white px-4 py-2 rounded-lg"
+                    >
+                      Create Event
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="card p-6">
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-theme">
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Event Title</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Date</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Attendees</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Status</th>
+                          <th className="text-left py-3 px-4 font-semibold text-theme-primary">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {events.map((event) => (
+                          <tr key={event.id} className="border-b border-theme hover:bg-theme-background">
+                            <td className="py-3 px-4 text-theme-primary font-medium">{event.title}</td>
+                            <td className="py-3 px-4 text-theme-secondary">{event.date}</td>
+                            <td className="py-3 px-4 text-theme-secondary">{event.attendees}</td>
+                            <td className="py-3 px-4">
+                              <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                event.status === 'Published' ? 'bg-green-100 text-green-800' :
+                                event.status === 'Draft' ? 'bg-yellow-100 text-yellow-800' :
+                                'bg-gray-100 text-gray-800'
+                              }`}>
+                                {event.status}
+                              </span>
+                            </td>
+                            <td className="py-3 px-4">
+                              <div className="flex space-x-2">
+                                <button className="text-theme-primary hover:text-theme-secondary text-sm font-medium">
+                                  Edit
+                                </button>
+                                <button className="text-red-600 hover:text-red-800 text-sm font-medium">
+                                  Delete
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Analytics Section */}
+            {activeSection === 'analytics' && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-theme-primary mb-6">Analytics & Reports</h2>
+                
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="card p-6">
+                    <h3 className="text-lg font-semibold text-theme-primary mb-4">User Growth</h3>
+                    <div className="h-32 bg-theme-background rounded-lg flex items-center justify-center">
+                      <p className="text-theme-secondary">Chart Placeholder</p>
+                    </div>
+                  </div>
+                  <div className="card p-6">
+                    <h3 className="text-lg font-semibold text-theme-primary mb-4">Event Attendance</h3>
+                    <div className="h-32 bg-theme-background rounded-lg flex items-center justify-center">
+                      <p className="text-theme-secondary">Chart Placeholder</p>
+                    </div>
+                  </div>
+                  <div className="card p-6">
+                    <h3 className="text-lg font-semibold text-theme-primary mb-4">Revenue Trends</h3>
+                    <div className="h-32 bg-theme-background rounded-lg flex items-center justify-center">
+                      <p className="text-theme-secondary">Chart Placeholder</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="card p-6">
+                  <h3 className="text-xl font-semibold text-theme-primary mb-4">Generate Reports</h3>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <button 
+                      onClick={() => handleExport('user-report')}
+                      className="btn border border-theme text-theme-primary p-4 rounded-lg hover:bg-theme-background text-center"
+                    >
+                      User Report
+                    </button>
+                    <button 
+                      onClick={() => handleExport('event-report')}
+                      className="btn border border-theme text-theme-primary p-4 rounded-lg hover:bg-theme-background text-center"
+                    >
+                      Event Report
+                    </button>
+                    <button 
+                      onClick={() => handleExport('financial-report')}
+                      className="btn border border-theme text-theme-primary p-4 rounded-lg hover:bg-theme-background text-center"
+                    >
+                      Financial Report
+                    </button>
+                    <button 
+                      onClick={() => handleExport('activity-report')}
+                      className="btn border border-theme text-theme-primary p-4 rounded-lg hover:bg-theme-background text-center"
+                    >
+                      Activity Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* System Settings Section */}
+            {activeSection === 'settings' && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-theme-primary mb-6">System Settings</h2>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="card p-6">
+                    <h3 className="text-lg font-semibold text-theme-primary mb-4">General Settings</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-theme-primary mb-2">Site Name</label>
+                        <input 
+                          type="text" 
+                          defaultValue="Satish Pradhan Dnyanasadhana College Alumni Portal"
+                          className="w-full px-3 py-2 border border-theme rounded-lg bg-theme-surface text-theme-primary"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-theme-primary mb-2">Contact Email</label>
+                        <input 
+                          type="email" 
+                          defaultValue="alumni@dnyanasadhana.edu.in"
+                          className="w-full px-3 py-2 border border-theme rounded-lg bg-theme-surface text-theme-primary"
+                        />
+                      </div>
+                      <button className="btn bg-theme-primary text-white px-4 py-2 rounded-lg">
+                        Save Changes
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="card p-6">
+                    <h3 className="text-lg font-semibold text-theme-primary mb-4">Security Settings</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-theme-primary">Two-Factor Authentication</span>
+                        <button className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                          Enabled
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-theme-primary">Auto-approve Alumni</span>
+                        <button className="bg-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm">
+                          Disabled
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-theme-primary">Email Notifications</span>
+                        <button className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                          Enabled
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Recent Activity - Dashboard */}
             {activeSection === 'dashboard' && (
