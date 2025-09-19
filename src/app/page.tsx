@@ -1,15 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import SearchBar from '@/components/SearchBar';
-import QuickActions from '@/components/QuickActions';
-import LiveChat from '@/components/LiveChat';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import CookieConsent from '@/components/CookieConsent';
+import Analytics from '@/components/Analytics';
 import { useApp } from '@/contexts/AppContext';
+
+// Lazy load heavy components
+const QuickActions = dynamic(() => import('@/components/QuickActions'), {
+  loading: () => <LoadingSpinner size="sm" />
+});
+const LiveChat = dynamic(() => import('@/components/LiveChat'), {
+  loading: () => <LoadingSpinner size="sm" />
+});
 
 export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -51,8 +62,9 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
+    <ErrorBoundary>
+      <div className="min-h-screen bg-white">
+        <Navbar />
       
       <AnnouncementBar />
       
@@ -146,25 +158,85 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-theme-surface">
+      {/* Enhanced Stats Section */}
+      <section className="py-20 bg-theme-surface">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-theme-primary mb-4">Trusted by Thousands of Alumni Worldwide</h2>
+            <p className="text-xl text-theme-secondary">Join a network that spans industries, continents, and generations</p>
+          </div>
+          
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
+            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
+              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
               <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.years}+</h3>
               <p className="text-theme-secondary font-medium">Years of Excellence</p>
+              <p className="text-sm text-theme-secondary mt-2">Since 1964</p>
             </div>
-            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
+              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
               <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.alumni}K+</h3>
-              <p className="text-theme-secondary font-medium">Alumni Network</p>
+              <p className="text-theme-secondary font-medium">Active Alumni</p>
+              <p className="text-sm text-theme-secondary mt-2">Verified profiles</p>
             </div>
-            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
+              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
               <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.countries}+</h3>
               <p className="text-theme-secondary font-medium">Countries</p>
+              <p className="text-sm text-theme-secondary mt-2">Global presence</p>
             </div>
-            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
+              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
               <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.leaders}+</h3>
               <p className="text-theme-secondary font-medium">Industry Leaders</p>
+              <p className="text-sm text-theme-secondary mt-2">C-level executives</p>
+            </div>
+          </div>
+          
+          {/* Trust Indicators */}
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div className="p-6">
+              <div className="w-12 h-12 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-theme-primary mb-2">Verified Network</h4>
+              <p className="text-sm text-theme-secondary">All alumni profiles are verified by the college administration</p>
+            </div>
+            <div className="p-6">
+              <div className="w-12 h-12 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-theme-primary mb-2">Secure Platform</h4>
+              <p className="text-sm text-theme-secondary">Enterprise-grade security with encrypted data protection</p>
+            </div>
+            <div className="p-6">
+              <div className="w-12 h-12 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-theme-primary mb-2">Always Active</h4>
+              <p className="text-sm text-theme-secondary">24/7 platform availability with 99.9% uptime guarantee</p>
             </div>
           </div>
         </div>
@@ -262,6 +334,63 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-theme-primary mb-4">What Our Alumni Say</h2>
+            <p className="text-xl text-theme-secondary">Success stories from our global community</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="card p-8 text-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold">
+                  RS
+                </div>
+              </div>
+              <blockquote className="text-theme-secondary mb-6 italic">
+                "The alumni network opened doors I never knew existed. Within 6 months of graduation, I landed my dream job at a Fortune 500 company through a connection made here."
+              </blockquote>
+              <div>
+                <h4 className="font-semibold text-theme-primary">Rajesh Sharma</h4>
+                <p className="text-sm text-theme-secondary">Software Engineer, Google • Class of 2018</p>
+              </div>
+            </div>
+            
+            <div className="card p-8 text-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center text-white text-2xl font-bold">
+                  PM
+                </div>
+              </div>
+              <blockquote className="text-theme-secondary mb-6 italic">
+                "Being part of this portal helped me find mentors, business partners, and lifelong friends. It's more than networking—it's a family."
+              </blockquote>
+              <div>
+                <h4 className="font-semibold text-theme-primary">Priya Mehta</h4>
+                <p className="text-sm text-theme-secondary">Entrepreneur, Tech Startup • Class of 2015</p>
+              </div>
+            </div>
+            
+            <div className="card p-8 text-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-r from-red-500 to-yellow-600 flex items-center justify-center text-white text-2xl font-bold">
+                  AK
+                </div>
+              </div>
+              <blockquote className="text-theme-secondary mb-6 italic">
+                "The career services and job board are exceptional. I've hired 5 talented graduates through this platform for my company."
+              </blockquote>
+              <div>
+                <h4 className="font-semibold text-theme-primary">Amit Kumar</h4>
+                <p className="text-sm text-theme-secondary">VP Engineering, Microsoft • Class of 2012</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* News Section */}
       <section id="news" className="py-20 bg-theme-surface">
         <div className="max-w-7xl mx-auto px-6">
@@ -384,8 +513,14 @@ export default function LandingPage() {
         </div>
       </footer>
       
-      <QuickActions />
-      <LiveChat />
-    </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          <QuickActions />
+          <LiveChat />
+        </Suspense>
+        
+        <CookieConsent />
+        <Analytics />
+      </div>
+    </ErrorBoundary>
   );
 }

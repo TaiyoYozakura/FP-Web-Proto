@@ -79,6 +79,7 @@ export default function AnnouncementBar() {
                 className={`w-3 h-3 rounded-full transition-all border-2 border-white ${
                   currentIndex === index ? 'bg-white scale-125' : 'bg-transparent'
                 }`}
+                suppressHydrationWarning={true}
               />
             ))}
           </div>
@@ -87,6 +88,7 @@ export default function AnnouncementBar() {
             onClick={() => setIsVisible(false)}
             className="text-white/80 hover:text-white transition-colors p-1"
             title="Close announcements"
+            suppressHydrationWarning={true}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

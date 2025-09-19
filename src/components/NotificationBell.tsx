@@ -44,6 +44,7 @@ export default function NotificationBell() {
       <button
         onClick={() => setShowDropdown(!showDropdown)}
         className="relative p-2 text-theme-primary hover:text-theme-secondary transition-colors hover-border rounded-lg"
+        suppressHydrationWarning={true}
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM12.01 2.011a3.2 3.2 0 013.2 3.2c0 3.3-1.5 6.2-1.5 6.2s-1.5-2.9-1.5-6.2a3.2 3.2 0 011.8-3.2zM8 21.5A1.5 1.5 0 009.5 20h5a1.5 1.5 0 001.5 1.5 1.5 1.5 0 00-1.5 1.5h-5A1.5 1.5 0 008 21.5z" />
@@ -67,6 +68,7 @@ export default function NotificationBell() {
             <button
               onClick={markAllRead}
               className="text-sm text-theme-secondary hover:text-theme-primary font-medium transition-colors"
+              suppressHydrationWarning={true}
             >
               Mark all read
             </button>

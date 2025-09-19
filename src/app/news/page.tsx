@@ -36,7 +36,7 @@ export default function NewsPage() {
           {['all', 'college', 'alumni'].map((tab) => (
             <button key={tab} onClick={() => setActiveTab(tab)} className={`px-6 py-2 rounded-md font-semibold transition-colors ${
                 activeTab === tab ? 'bg-theme-primary text-white' : 'text-theme-secondary hover:text-theme-primary'
-              }`}>
+              }`} suppressHydrationWarning={true}>
               {tab === 'all' ? 'All News' : tab === 'college' ? 'College Updates' : 'Alumni Achievements'}
             </button>
           ))}
@@ -82,6 +82,7 @@ export default function NewsPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    suppressHydrationWarning={true}
                   />
                   <button 
                     type="submit"
@@ -90,6 +91,7 @@ export default function NewsPage() {
                         ? 'bg-green-600 text-white' 
                         : 'bg-theme-primary text-white hover:bg-theme-primary-hover'
                     }`}
+                    suppressHydrationWarning={true}
                   >
                     {subscribed ? 'Subscribed ✓' : 'Subscribe'}
                   </button>

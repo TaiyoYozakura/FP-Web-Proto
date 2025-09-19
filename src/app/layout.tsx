@@ -1,28 +1,81 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { AppProvider } from "@/contexts/AppContext";
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { AppProvider } from '@/contexts/AppContext';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
+});
 
 export const metadata: Metadata = {
-  title: "Satish Pradhan Dnyanasadhana College Alumni Portal",
-  description: "Connect with fellow alumni from Satish Pradhan Dnyanasadhana College Thane. Network, grow, and give back to your alma mater.",
-  keywords: "Satish Pradhan Dnyanasadhana College, Alumni, Thane, Maharashtra, Network, Education, Commerce, Arts, Science",
-  authors: [{ name: "Satish Pradhan Dnyanasadhana College" }],
-  robots: "index, follow",
+  title: {
+    default: 'Dnyanasadhana College Alumni Portal',
+    template: '%s | Dnyanasadhana College Alumni Portal'
+  },
+  description: 'Official alumni portal of Dnyanasadhana College. Connect with 15,000+ alumni worldwide, explore career opportunities, attend events, and contribute to your alma mater.',
+  keywords: ['Dnyanasadhana College', 'alumni', 'networking', 'career services', 'education', 'Thane', 'Maharashtra'],
+  authors: [{ name: 'Dnyanasadhana College' }],
+  creator: 'Dnyanasadhana College',
+  publisher: 'Dnyanasadhana College',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://alumni.dnyanasadhana.edu.in'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: "Satish Pradhan Dnyanasadhana College Alumni Portal",
-    description: "Connect with fellow alumni from Satish Pradhan Dnyanasadhana College Thane",
-    type: "website",
-    locale: "en_US",
-    siteName: "Satish Pradhan Dnyanasadhana Alumni Portal"
-  }
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://alumni.dnyanasadhana.edu.in',
+    siteName: 'Dnyanasadhana College Alumni Portal',
+    title: 'Dnyanasadhana College Alumni Portal - Connect, Network, Give Back',
+    description: 'Official alumni portal of Dnyanasadhana College. Connect with 15,000+ alumni worldwide.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Dnyanasadhana College Alumni Portal',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dnyanasadhana College Alumni Portal',
+    description: 'Connect with 15,000+ alumni worldwide. Explore career opportunities and give back to your alma mater.',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+  },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#1e3a8a' },
+    { media: '(prefers-color-scheme: dark)', color: '#1e3a8a' },
+  ],
 };
 
 export default function RootLayout({
@@ -31,17 +84,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
-        <link rel="icon" href="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.dnyanasadhanacollege.org" />
+        <link rel="dns-prefetch" href="https://www.dnyanasadhanacollege.org" />
       </head>
-      <body className={`${inter.className} antialiased`} suppressHydrationWarning={true}>
+      <body className="antialiased" suppressHydrationWarning={true}>
         <AppProvider>
-          <div id="root">
-            {children}
-          </div>
+          {children}
         </AppProvider>
       </body>
     </html>
