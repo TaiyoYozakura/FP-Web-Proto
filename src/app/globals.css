@@ -125,10 +125,113 @@ h6 { font-size: 1rem; font-weight: 500; }
 .animate-spin { animation: spin 1s linear infinite; }
 
 /* Mobile-first responsive utilities */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  
+  /* Mobile Typography */
+  h1, .text-4xl, .text-5xl, .text-6xl, .text-7xl {
+    font-size: 1.875rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2, .text-3xl {
+    font-size: 1.5rem !important;
+  }
+  
+  h3, .text-2xl {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem !important;
+  }
+  
+  .text-lg {
+    font-size: 1rem !important;
+  }
+  
+  /* Mobile Layout */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .lg\:grid-cols-2,
+  .lg\:grid-cols-3,
+  .lg\:grid-cols-4,
+  .md\:grid-cols-2,
+  .md\:grid-cols-3,
+  .sm\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .flex {
+    flex-direction: column !important;
+  }
+  
+  .lg\:flex-row,
+  .md\:flex-row,
+  .sm\:flex-row {
+    flex-direction: column !important;
+  }
+  
+  /* Mobile Spacing */
+  .gap-8, .gap-6 {
+    gap: 1rem !important;
+  }
+  
+  .p-8, .p-6 {
+    padding: 1rem !important;
+  }
+  
+  .py-8, .py-6 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  .px-6, .px-8 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .mb-8, .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .mt-8, .mt-6 {
+    margin-top: 1rem !important;
+  }
+  
+  /* Mobile Cards */
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  /* Mobile Buttons */
+  .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Mobile Tables */
+  .overflow-x-auto {
+    overflow-x: scroll;
+  }
+  
+  table {
+    min-width: 600px;
+  }
+  
+  /* Mobile Navigation */
+  .lg\:w-64 {
+    width: 100% !important;
+  }
+  
+  .lg\:col-span-2 {
+    grid-column: span 1 !important;
   }
 }
 
@@ -136,6 +239,15 @@ h6 { font-size: 1rem; font-weight: 500; }
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Mobile Image Optimization */
+@media (max-width: 768px) {
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 @layer utilities {
@@ -185,9 +297,16 @@ img {
   /* Enhanced Card System */
   .card {
     background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 12px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    border: 1px solid var(--primary);
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.15);
+    transform: translateY(-2px);
   }
   
   .card-hover:hover {
@@ -203,11 +322,13 @@ img {
   .btn {
     position: relative;
     overflow: hidden;
+    border: 1px solid transparent;
     transform: translateY(0);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .btn:hover {
+    border: 1px solid var(--primary);
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   }
@@ -286,6 +407,13 @@ img {
   
   .hero-overlay {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+  }
+  
+  /* Hover Border Effects */
+  .hover-border:hover {
+    border: 1px solid var(--primary) !important;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+    transform: translateY(-1px);
   }
   
   /* Micro-interactions */

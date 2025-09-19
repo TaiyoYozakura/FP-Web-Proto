@@ -20,39 +20,39 @@ export default function Navbar() {
   return (
     <>
       {/* Clean Top Bar */}
-      <div className="bg-theme-primary text-white py-3">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-sm">
-          <div className="flex items-center space-x-6">
-            <span>Email: alumni@dnyanasadhana.edu.in</span>
+      <div className="bg-theme-primary text-white py-2 sm:py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center text-xs sm:text-sm">
+          <div className="flex items-center space-x-2 sm:space-x-6">
+            <span className="hidden sm:inline">Email: alumni@dnyanasadhana.edu.in</span>
             <span>Phone: +91-22-2534-1191</span>
           </div>
-          <div className="flex space-x-4">
-            <Link href="/student-login" className="hover:text-white/80 transition-colors">Student Portal</Link>
-            <Link href="/faculty-login" className="hover:text-white/80 transition-colors">Faculty Portal</Link>
+          <div className="flex space-x-2 sm:space-x-4">
+            <Link href="/student-login" className="hover:text-white/80 transition-colors px-2 py-1 rounded hover-border">Student</Link>
+            <Link href="/faculty-login" className="hover:text-white/80 transition-colors px-2 py-1 rounded hover-border">Faculty</Link>
           </div>
         </div>
       </div>
       
       {/* Professional Navigation */}
       <nav className="bg-theme-surface shadow-sm">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center py-4 sm:py-6">
             {/* Clean Logo */}
-            <Link href="/" className="flex items-center space-x-4">
-              <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={50} height={50} />
+            <Link href="/" className="flex items-center space-x-2 sm:space-x-4 hover-border rounded-lg p-2">
+              <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={40} height={40} className="sm:w-12 sm:h-12" />
               <div>
-                <h1 className="text-2xl font-bold text-theme-primary">Dnyanasadhana College</h1>
-                <p className="text-sm text-theme-secondary font-medium">Alumni Portal</p>
+                <h1 className="text-lg sm:text-2xl font-bold text-theme-primary">Dnyanasadhana College</h1>
+                <p className="text-xs sm:text-sm text-theme-secondary font-medium">Alumni Portal</p>
               </div>
             </Link>
             
             {/* Clean Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/dashboard" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Dashboard</Link>
-              <Link href="/directory" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Directory</Link>
-              <Link href="/events" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Events</Link>
-              <Link href="/jobs" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Careers</Link>
-              <Link href="/news" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">News</Link>
+            <div className="hidden lg:flex items-center space-x-6">
+              <Link href="/dashboard" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-3 py-2 rounded-lg hover-border">Dashboard</Link>
+              <Link href="/directory" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-3 py-2 rounded-lg hover-border">Directory</Link>
+              <Link href="/events" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-3 py-2 rounded-lg hover-border">Events</Link>
+              <Link href="/jobs" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-3 py-2 rounded-lg hover-border">Careers</Link>
+              <Link href="/news" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-3 py-2 rounded-lg hover-border">News</Link>
               
               {state.user && (
                 <div className="relative">
@@ -85,7 +85,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-theme-primary hover:text-theme-secondary"
+              className="lg:hidden p-2 text-theme-primary hover:text-theme-secondary rounded-lg hover-border"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,13 +100,13 @@ export default function Navbar() {
           
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="lg:hidden border-t border-gray-200 py-4">
-              <div className="flex flex-col space-y-4">
-                <Link href="/dashboard" className="text-blue-900 hover:text-red-600 font-semibold transition-colors px-2 py-1" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
-                <Link href="/directory" className="text-blue-900 hover:text-red-600 font-semibold transition-colors px-2 py-1" onClick={() => setIsMenuOpen(false)}>Directory</Link>
-                <Link href="/events" className="text-blue-900 hover:text-red-600 font-semibold transition-colors px-2 py-1" onClick={() => setIsMenuOpen(false)}>Events</Link>
-                <Link href="/jobs" className="text-blue-900 hover:text-red-600 font-semibold transition-colors px-2 py-1" onClick={() => setIsMenuOpen(false)}>Jobs</Link>
-                <Link href="/news" className="text-blue-900 hover:text-red-600 font-semibold transition-colors px-2 py-1" onClick={() => setIsMenuOpen(false)}>News</Link>
+            <div className="lg:hidden border-t border-theme py-4">
+              <div className="flex flex-col space-y-2">
+                <Link href="/dashboard" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-4 py-3 rounded-lg hover-border" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
+                <Link href="/directory" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-4 py-3 rounded-lg hover-border" onClick={() => setIsMenuOpen(false)}>Directory</Link>
+                <Link href="/events" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-4 py-3 rounded-lg hover-border" onClick={() => setIsMenuOpen(false)}>Events</Link>
+                <Link href="/jobs" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-4 py-3 rounded-lg hover-border" onClick={() => setIsMenuOpen(false)}>Careers</Link>
+                <Link href="/news" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors px-4 py-3 rounded-lg hover-border" onClick={() => setIsMenuOpen(false)}>News</Link>
                 
                 {state.user && (
                   <>

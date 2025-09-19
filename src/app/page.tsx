@@ -10,11 +10,41 @@ import { useApp } from '@/contexts/AppContext';
 
 export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+  const [stats, setStats] = useState({ alumni: 0, years: 0, countries: 0, leaders: 0 });
   const { state } = useApp();
   const router = useRouter();
 
+  // Animated counter effect
   useEffect(() => {
     setIsVisible(true);
+    const targets = { alumni: 15, years: 60, countries: 50, leaders: 100 };
+    const duration = 2000;
+    const steps = 60;
+    const stepTime = duration / steps;
+    
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      const progress = step / steps;
+      setStats({
+        alumni: Math.floor(targets.alumni * progress),
+        years: Math.floor(targets.years * progress),
+        countries: Math.floor(targets.countries * progress),
+        leaders: Math.floor(targets.leaders * progress)
+      });
+      if (step >= steps) clearInterval(timer);
+    }, stepTime);
+    
+    return () => clearInterval(timer);
+  }, []);
+
+  // Auto-rotating news carousel
+  useEffect(() => {
+    const newsTimer = setInterval(() => {
+      setCurrentNewsIndex(prev => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(newsTimer);
   }, []);
 
   return (
@@ -79,20 +109,20 @@ export default function LandingPage() {
       <section className="py-16 bg-theme-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div className="p-6">
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">60+</h3>
+            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.years}+</h3>
               <p className="text-theme-secondary font-medium">Years of Excellence</p>
             </div>
-            <div className="p-6">
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">{state.alumni.length}K+</h3>
+            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.alumni}K+</h3>
               <p className="text-theme-secondary font-medium">Alumni Network</p>
             </div>
-            <div className="p-6">
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">50+</h3>
+            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.countries}+</h3>
               <p className="text-theme-secondary font-medium">Countries</p>
             </div>
-            <div className="p-6">
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">100+</h3>
+            <div className="p-6 hover:scale-105 transition-transform cursor-pointer">
+              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.leaders}+</h3>
               <p className="text-theme-secondary font-medium">Industry Leaders</p>
             </div>
           </div>
@@ -108,16 +138,23 @@ export default function LandingPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Alumni Directory', desc: 'Connect with fellow graduates across industries and locations', link: '/directory' },
-              { title: 'Career Services', desc: 'Job opportunities, career guidance, and professional development', link: '/jobs' },
-              { title: 'Networking Events', desc: 'Regular meetups, reunions, and professional networking sessions', link: '/events' },
-              { title: 'Mentorship', desc: 'Guide current students and connect with industry professionals', link: '/dashboard' },
-              { title: 'Giving Back', desc: 'Support scholarships and contribute to college development', link: '/donation' },
-              { title: 'Global Chapters', desc: 'Connect with alumni chapters in major cities worldwide', link: '/directory' }
+              { title: 'Alumni Directory', desc: 'Connect with fellow graduates across industries and locations', link: '/directory', icon: '👥', count: '15K+' },
+              { title: 'Career Services', desc: 'Job opportunities, career guidance, and professional development', link: '/jobs', icon: '💼', count: '500+' },
+              { title: 'Networking Events', desc: 'Regular meetups, reunions, and professional networking sessions', link: '/events', icon: '🎯', count: '50+' },
+              { title: 'Mentorship', desc: 'Guide current students and connect with industry professionals', link: '/dashboard', icon: '🎓', count: '200+' },
+              { title: 'Giving Back', desc: 'Support scholarships and contribute to college development', link: '/donation', icon: '❤️', count: '₹10L+' },
+              { title: 'Global Chapters', desc: 'Connect with alumni chapters in major cities worldwide', link: '/directory', icon: '🌍', count: '25+' }
             ].map((service, index) => (
-              <Link key={index} href={service.link} className="card p-8 hover:shadow-lg transition-all group">
-                <h3 className="text-xl font-semibold text-theme-primary mb-3">{service.title}</h3>
+              <Link key={index} href={service.link} className="card p-8 hover:shadow-lg transition-all group hover:scale-105">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-3xl">{service.icon}</span>
+                  <span className="bg-theme-primary/10 text-theme-primary px-3 py-1 rounded-full text-sm font-bold">{service.count}</span>
+                </div>
+                <h3 className="text-xl font-semibold text-theme-primary mb-3 group-hover:text-theme-secondary transition-colors">{service.title}</h3>
                 <p className="text-theme-secondary leading-relaxed">{service.desc}</p>
+                <div className="mt-4 text-theme-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  Explore →
+                </div>
               </Link>
             ))}
           </div>
@@ -131,24 +168,53 @@ export default function LandingPage() {
             <h2 className="text-4xl font-bold text-theme-primary mb-4">Latest News</h2>
             <p className="text-xl text-theme-secondary">Stay updated with college and alumni activities</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: 'Annual Alumni Meet 2024', date: 'Dec 15, 2024', preview: 'Join us for networking, keynote sessions, and celebrating achievements of our distinguished alumni.', category: 'Event' },
-              { title: 'Scholarship Program Launch', date: 'Nov 20, 2024', preview: 'New merit-based scholarships established through generous alumni contributions for deserving students.', category: 'News' },
-              { title: 'Alumni Achievement Awards', date: 'Oct 30, 2024', preview: 'Recognizing outstanding contributions of our alumni in business, social service, and innovation.', category: 'Awards' }
-            ].map((news, index) => (
-              <article key={index} className="card p-6 hover:shadow-lg transition-all">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="bg-theme-primary/10 text-theme-primary px-3 py-1 rounded-full text-sm font-medium">{news.category}</span>
-                  <span className="text-theme-secondary text-sm">{news.date}</span>
-                </div>
-                <h3 className="text-xl font-semibold text-theme-primary mb-3">{news.title}</h3>
-                <p className="text-theme-secondary mb-4 leading-relaxed">{news.preview}</p>
-                <Link href="/news" className="text-theme-primary font-medium hover:text-theme-secondary transition-colors">
-                  Read More →
-                </Link>
-              </article>
-            ))}
+          <div className="relative">
+            <div className="flex justify-between items-center mb-8">
+              <div className="flex space-x-2">
+                {[0, 1, 2].map((index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentNewsIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      currentNewsIndex === index ? 'bg-theme-primary' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+              <Link href="/news" className="text-theme-primary font-medium hover:text-theme-secondary transition-colors">
+                View All News →
+              </Link>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                { title: 'Annual Alumni Meet 2024', date: 'Dec 15, 2024', preview: 'Join us for networking, keynote sessions, and celebrating achievements of our distinguished alumni.', category: 'Event', image: '🎉', attendees: '500+' },
+                { title: 'Scholarship Program Launch', date: 'Nov 20, 2024', preview: 'New merit-based scholarships established through generous alumni contributions for deserving students.', category: 'News', image: '🎓', amount: '₹5L' },
+                { title: 'Alumni Achievement Awards', date: 'Oct 30, 2024', preview: 'Recognizing outstanding contributions of our alumni in business, social service, and innovation.', category: 'Awards', image: '🏆', winners: '25' }
+              ].map((news, index) => (
+                <article key={index} className={`card p-6 hover:shadow-lg transition-all cursor-pointer hover:scale-105 ${
+                  currentNewsIndex === index ? 'ring-2 ring-theme-primary' : ''
+                }`}>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-2xl">{news.image}</span>
+                      <span className="bg-theme-primary/10 text-theme-primary px-3 py-1 rounded-full text-sm font-medium">{news.category}</span>
+                    </div>
+                    <span className="text-theme-secondary text-sm">{news.date}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-theme-primary mb-3">{news.title}</h3>
+                  <p className="text-theme-secondary mb-4 leading-relaxed">{news.preview}</p>
+                  <div className="flex items-center justify-between">
+                    <Link href="/news" className="text-theme-primary font-medium hover:text-theme-secondary transition-colors">
+                      Read More →
+                    </Link>
+                    <span className="text-sm font-bold text-theme-secondary">
+                      {news.attendees || news.amount || `${news.winners} Winners`}
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
