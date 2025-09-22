@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const configs = dbManager.getConfigs();
     return NextResponse.json({ configs });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch database configs' }, { status: 500 });
   }
 }
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       default:
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Database operation failed' }, { status: 500 });
   }
 }

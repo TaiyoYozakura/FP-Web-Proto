@@ -27,8 +27,8 @@ export default function DatabaseManager() {
       const response = await fetch('/api/database');
       const data = await response.json();
       setConfigs(data.configs || []);
-    } catch (error) {
-      console.error('Failed to fetch database configs:', error);
+    } catch {
+      console.error('Failed to fetch database configs');
     }
   };
 
@@ -115,7 +115,7 @@ export default function DatabaseManager() {
               <label className="block text-sm font-medium text-theme-primary mb-2">Type</label>
               <select
                 value={newConfig.type}
-                onChange={(e) => setNewConfig({...newConfig, type: e.target.value as any})}
+                onChange={(e) => setNewConfig({...newConfig, type: e.target.value as 'sqlite' | 'mysql' | 'postgresql'})}
                 className="w-full px-3 py-2 border border-theme rounded-lg bg-theme-surface"
               >
                 <option value="sqlite">SQLite</option>

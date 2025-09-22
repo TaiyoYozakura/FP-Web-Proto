@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         rowCount,
         tableName
       });
-    } catch (pythonError) {
+    } catch {
       // Fallback: simulate successful import for demo
       return NextResponse.json({ 
         success: true, 

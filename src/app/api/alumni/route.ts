@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const alumni = await dbManager.getAlumni();
     return NextResponse.json({ alumni });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ alumni: [] }, { status: 200 });
   }
 }

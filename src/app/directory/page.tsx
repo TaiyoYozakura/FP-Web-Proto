@@ -38,7 +38,7 @@ export default function DirectoryPage() {
       } else {
         throw new Error('Failed to fetch alumni data');
       }
-    } catch (error) {
+    } catch {
       setError('Database unavailable - using sample data');
       setDbAlumni([]);
     } finally {

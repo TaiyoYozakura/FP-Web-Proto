@@ -84,7 +84,7 @@ class DatabaseManager {
     return false;
   }
 
-  async importFromExcel(filePath: string, tableName: string) {
+  async importFromExcel(_filePath: string, tableName: string) {
     return {
       success: true,
       rowCount: Math.floor(Math.random() * 100) + 10,
