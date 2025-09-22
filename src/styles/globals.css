@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Responsive utility classes */
+.responsive-cell {
+  @apply py-2 lg:py-3 px-2 lg:px-4 text-sm lg:text-base;
+}
+
+.responsive-header {
+  @apply text-xl lg:text-2xl;
+}
+
+.responsive-spacing {
+  @apply space-y-3 lg:space-y-4;
+}
+
+.mobile-touch {
+  @apply min-h-[44px] lg:min-h-0 py-2 lg:py-0;
+}

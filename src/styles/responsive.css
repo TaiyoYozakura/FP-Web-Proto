@@ -1,0 +1,24 @@
+/* Responsive utility classes to reduce code duplication */
+.responsive-padding {
+  @apply py-2 lg:py-3 px-2 lg:px-4;
+}
+
+.responsive-text {
+  @apply text-sm lg:text-base;
+}
+
+.responsive-header {
+  @apply text-xl lg:text-2xl;
+}
+
+.responsive-spacing {
+  @apply space-y-3 lg:space-y-4;
+}
+
+.mobile-touch-target {
+  @apply min-h-[44px] min-w-[44px];
+}
+
+.responsive-table-cell {
+  @apply responsive-padding responsive-text;
+}
