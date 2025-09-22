@@ -11,19 +11,6 @@ export default function ExcelImport() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
-      const validTypes = ['.xlsx', '.xls'];
-      const fileExtension = selectedFile.name.toLowerCase().substring(selectedFile.name.lastIndexOf('.'));
-      
-      if (!validTypes.includes(fileExtension)) {
-        setResult('✗ Error: Please select a valid Excel file (.xlsx or .xls)');
-        return;
-      }
-      
-      if (selectedFile.size > 10 * 1024 * 1024) { // 10MB limit
-        setResult('✗ Error: File size must be less than 10MB');
-        return;
-      }
-      
       setFile(selectedFile);
       setResult('');
     }
@@ -50,14 +37,13 @@ export default function ExcelImport() {
 
       const data = await response.json();
       
-      if (data.success) {
+      if (response.ok && data.success) {
         setResult(`✓ Successfully imported ${data.rowCount} rows to table "${data.tableName}"`);
         setFile(null);
-        // Reset file input
         const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
         if (fileInput) fileInput.value = '';
       } else {
-        setResult(`✗ Error: ${data.error}`);
+        setResult(`✗ Error: ${data.error || 'Upload failed'}`);
       }
     } catch (error) {
       setResult(`✗ Upload failed: ${error instanceof Error ? error.message : 'Network error'}`);
@@ -82,6 +68,11 @@ export default function ExcelImport() {
               onChange={handleFileChange}
               className="w-full px-3 py-2 border border-theme rounded-lg bg-theme-surface"
             />
+            {file && (
+              <p className="text-sm text-theme-secondary mt-1">
+                Selected: {file.name} ({(file.size / 1024).toFixed(1)} KB)
+              </p>
+            )}
           </div>
 
           <div>
@@ -100,10 +91,10 @@ export default function ExcelImport() {
 
           <button
             onClick={handleUpload}
-            disabled={!file || isUploading}
+            disabled={!file || isUploading || !tableName.trim()}
             className="bg-theme-primary text-white px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isUploading ? 'Uploading...' : 'Import to Database'}
+            {isUploading ? 'Processing...' : 'Import to Database'}
           </button>
         </div>
 
