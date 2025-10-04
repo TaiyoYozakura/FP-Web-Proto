@@ -16,9 +16,18 @@ export default function DashboardPage() {
   const [profileCompletion, setProfileCompletion] = useState(25);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Get user info from session or localStorage
-  const user = session?.user || JSON.parse(localStorage.getItem('user') || '{}');
+  // Get user info from session or localStorage (client-side only)
+  const [user, setUser] = useState(session?.user || {});
   const userName = user?.name || 'Alumni';
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser && !session?.user) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  }, [session]);
   
   useEffect(() => {
     // Simulate loading real data
@@ -50,7 +59,10 @@ export default function DashboardPage() {
       const completedFields = fields.filter(field => {
         if (field === 'name') return user?.name;
         if (field === 'email') return user?.email;
-        return localStorage.getItem(`profile_${field}`);
+        if (typeof window !== 'undefined') {
+          return localStorage.getItem(`profile_${field}`);
+        }
+        return false;
       }).length;
       
       setProfileCompletion(Math.round((completedFields / fields.length) * 100));

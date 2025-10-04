@@ -51,6 +51,7 @@ export default function DonationPage() {
         {/* Legacy donation form below */}
         <div className="mt-12 bg-white rounded-xl p-6 shadow-lg">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">💳 Quick Donation (Legacy)</h2>
+        
         {/* Success Notification */}
         {showSuccess && (
           <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-fadeInUp">
@@ -277,6 +278,7 @@ export default function DonationPage() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
