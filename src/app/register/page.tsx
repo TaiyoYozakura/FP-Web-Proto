@@ -54,29 +54,37 @@ export default function RegisterPage() {
     setIsLoading(true);
     setError('');
     
-    // Check if email already exists
-    const existingUser = state.alumni.find(a => a.email === formData.email);
-    if (existingUser) {
-      setError('Email already registered');
-      setIsLoading(false);
-      return;
-    }
-    
-    setTimeout(() => {
-      dispatch({ 
-        type: 'REGISTER', 
-        payload: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
+    try {
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
-          phone: formData.phone,
+          password: formData.password,
           graduationYear: formData.graduationYear,
-          isLoggedIn: true,
-          id: ''
-        }
+          phone: formData.phone
+        }),
       });
-      router.push('/dashboard');
-    }, 1000);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        dispatch({ type: 'LOGIN', payload: data.user });
+        router.push('/dashboard');
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setError('Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -84,14 +92,16 @@ export default function RegisterPage() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-6 lg:mb-8">
           <Link href="/" className="inline-flex items-center space-x-3 mb-6">
-            <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={60} height={60} />
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+              DC
+            </div>
             <div className="text-left">
-              <span className="text-xl font-bold text-theme-primary block">Dnyanasadhana College</span>
-              <span className="text-sm text-theme-secondary">Alumni Portal</span>
+              <span className="text-xl font-bold text-blue-600 block">Dnyanasadhana College</span>
+              <span className="text-sm text-purple-600">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-3xl font-bold text-theme-primary mb-3">Join Our Alumni Network</h1>
-          <p className="text-theme-secondary text-lg">Create your account and connect with fellow alumni</p>
+          <h1 className="text-3xl font-bold text-blue-600 mb-3">Join Our Alumni Network</h1>
+          <p className="text-gray-600 text-lg">Create your account and connect with fellow alumni</p>
         </div>
 
         <div className="card p-8 shadow-lg">
@@ -100,11 +110,11 @@ export default function RegisterPage() {
             {[1, 2, 3].map((num) => (
               <div key={num} className="flex items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                  step >= num ? 'bg-theme-primary text-white' : 'bg-gray-200 text-gray-600'
+                  step >= num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                 } transition-colors`}>
                   {num}
                 </div>
-                {num < 3 && <div className={`w-20 h-1 mx-2 ${step > num ? 'bg-theme-primary' : 'bg-gray-200'} transition-colors`}></div>}
+                {num < 3 && <div className={`w-20 h-1 mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
               </div>
             ))}
           </div>
@@ -118,25 +128,25 @@ export default function RegisterPage() {
           {/* Step 1: Basic Info */}
           {step === 1 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-theme-primary mb-6">Basic Information</h2>
+              <h2 className="text-xl font-bold text-blue-600 mb-6">Basic Information</h2>
               <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
                 <div>
-                  <label className="block text-sm font-semibold text-theme-primary mb-2">First Name *</label>
+                  <label className="block text-sm font-semibold text-blue-600 mb-2">First Name *</label>
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter first name"
                     value={formData.firstName}
                     onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-theme-primary mb-2">Last Name *</label>
+                  <label className="block text-sm font-semibold text-blue-600 mb-2">Last Name *</label>
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter last name"
                     value={formData.lastName}
                     onChange={(e) => setFormData({...formData, lastName: e.target.value})}
@@ -144,21 +154,21 @@ export default function RegisterPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-theme-primary mb-2">Email Address *</label>
+                <label className="block text-sm font-semibold text-blue-600 mb-2">Email Address *</label>
                 <input
                   type="email"
                   required
-                  className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   placeholder="your.email@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-theme-primary mb-2">Phone Number</label>
+                <label className="block text-sm font-semibold text-blue-600 mb-2">Phone Number</label>
                 <input
                   type="tel"
-                  className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   placeholder="+91 XXXXX XXXXX"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -166,7 +176,7 @@ export default function RegisterPage() {
               </div>
               <button
                 onClick={handleNext}
-                className="btn w-full bg-theme-primary text-white py-4 rounded-lg font-semibold hover:bg-theme-primary-hover text-lg"
+                className="btn w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 text-lg transition-all duration-200"
               >
                 Next Step →
               </button>
@@ -176,12 +186,12 @@ export default function RegisterPage() {
           {/* Step 2: Academic Info */}
           {step === 2 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-theme-primary mb-6">Academic Information</h2>
+              <h2 className="text-xl font-bold text-blue-600 mb-6">Academic Information</h2>
               <div>
-                <label className="block text-sm font-semibold text-theme-primary mb-2">Graduation Year *</label>
+                <label className="block text-sm font-semibold text-blue-600 mb-2">Graduation Year *</label>
                 <select
                   required
-                  className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   value={formData.graduationYear}
                   onChange={(e) => setFormData({...formData, graduationYear: e.target.value})}
                 >
@@ -200,7 +210,7 @@ export default function RegisterPage() {
                 </button>
                 <button
                   onClick={handleNext}
-                  className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all"
                 >
                   Next Step →
                 </button>
@@ -211,7 +221,7 @@ export default function RegisterPage() {
           {/* Step 3: Password */}
           {step === 3 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-theme-primary mb-6">Create Password</h2>
+              <h2 className="text-xl font-bold text-blue-600 mb-6">Create Password</h2>
               <div>
                 <label className="block text-sm font-semibold text-blue-900 mb-2">Password *</label>
                 <input
@@ -246,7 +256,7 @@ export default function RegisterPage() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isLoading}
-                  className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all disabled:opacity-50"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all disabled:opacity-50"
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center">
@@ -261,9 +271,9 @@ export default function RegisterPage() {
         </div>
 
         <div className="text-center mt-4 lg:mt-6">
-          <p className="text-theme-secondary text-lg">
+          <p className="text-gray-600 text-lg">
             Already have an account?{' '}
-            <Link href="/login" className="text-theme-primary hover:text-theme-secondary font-semibold">Sign in here</Link>
+            <Link href="/login" className="text-blue-600 hover:text-purple-600 font-semibold transition-colors">Sign in here</Link>
           </p>
         </div>
       </div>

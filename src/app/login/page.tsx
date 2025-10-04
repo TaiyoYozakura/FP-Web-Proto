@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useApp } from '@/contexts/AppContext';
+import { signIn } from 'next-auth/react';
+import { Card, CardBody, Input, Button, Checkbox } from '@heroui/react';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,6 @@ export default function LoginPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { state, dispatch } = useApp();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,18 +20,24 @@ export default function LoginPage() {
     setIsLoading(true);
     setError('');
     
-    // Simulate login - find user in alumni list
-    const user = state.alumni.find(a => a.email === formData.email);
-    
-    setTimeout(() => {
-      if (user) {
-        dispatch({ type: 'LOGIN', payload: user });
+    try {
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false
+      });
+
+      if (result?.ok) {
         router.push('/dashboard');
       } else {
         setError('Invalid email or password');
       }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Network error. Please try again.');
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -40,41 +45,48 @@ export default function LoginPage() {
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-3 mb-6">
-            <Image src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" width={60} height={60} />
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+              DC
+            </div>
             <div className="text-left">
-              <span className="text-xl font-bold text-theme-primary block">Dnyanasadhana College</span>
-              <span className="text-sm text-theme-secondary">Alumni Portal</span>
+              <span className="text-xl font-bold text-blue-600 block">Dnyanasadhana College</span>
+              <span className="text-sm text-purple-600">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-3xl font-bold text-theme-primary mb-3">Welcome Back</h1>
-          <p className="text-theme-secondary text-lg">Sign in to your alumni account</p>
+          <h1 className="text-3xl font-bold text-blue-600 mb-3">Alumni Login</h1>
+          <p className="text-gray-600 text-lg">Sign in to your alumni account</p>
         </div>
 
-        <div className="card p-8 shadow-lg">
+        <Card className="shadow-lg">
+          <CardBody className="p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-theme-primary mb-2">Email Address</label>
-              <input
-                type="email"
-                required
-                className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
-                placeholder="your.email@example.com"
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-              />
-            </div>
+            <Input
+              type="email"
+              label="Email Address"
+              placeholder="your.email@example.com"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              isRequired
+              color="primary"
+              variant="bordered"
+              classNames={{
+                label: "text-blue-600 font-semibold"
+              }}
+            />
 
-            <div>
-              <label className="block text-sm font-semibold text-theme-primary mb-2">Password</label>
-              <input
-                type="password"
-                required
-                className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-theme-primary focus:border-theme-primary transition-colors bg-theme-surface text-theme-primary"
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-              />
-            </div>
+            <Input
+              type="password"
+              label="Password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              isRequired
+              color="primary"
+              variant="bordered"
+              classNames={{
+                label: "text-blue-600 font-semibold"
+              }}
+            />
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
@@ -83,39 +95,36 @@ export default function LoginPage() {
             )}
 
             <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="rounded border-theme text-theme-primary focus:ring-theme-primary" />
-                <span className="ml-2 text-sm text-theme-secondary">Remember me</span>
-              </label>
-              <Link href="/forgot-password" className="text-sm text-theme-primary hover:text-theme-secondary font-semibold">
+              <Checkbox size="sm" color="primary">
+                <span className="text-gray-600">Remember me</span>
+              </Checkbox>
+              <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-purple-600 font-semibold">
                 Forgot password?
               </Link>
             </div>
 
-            <button
+            <Button
               type="submit"
-              disabled={isLoading}
-              className="btn w-full bg-theme-primary text-white py-4 rounded-lg font-semibold hover:bg-theme-primary-hover disabled:opacity-50 text-lg"
+              isLoading={isLoading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+              size="lg"
+              color="primary"
             >
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-4 w-4 lg:h-5 lg:w-5 border-b-2 border-white mr-2"></div>
-                  <span className="text-sm lg:text-base">Signing In...</span>
-                </div>
-              ) : 'Sign In'}
-            </button>
+              {isLoading ? 'Signing In...' : 'Sign In'}
+            </Button>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-theme-secondary text-lg">
-              Don't have an account?{' '}
-              <Link href="/register" className="text-theme-primary hover:text-theme-secondary font-semibold">Register here</Link>
-            </p>
-          </div>
-        </div>
+            <div className="mt-8 text-center">
+              <p className="text-gray-600 text-lg">
+                Don't have an account?{' '}
+                <Link href="/register" className="text-blue-600 hover:text-purple-600 font-semibold transition-colors">Register here</Link>
+              </p>
+            </div>
+          </CardBody>
+        </Card>
 
         <div className="text-center mt-6">
-          <Link href="/" className="text-theme-secondary hover:text-theme-primary transition-colors text-lg">← Back to Home</Link>
+          <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors text-lg">← Back to Home</Link>
         </div>
       </div>
     </div>

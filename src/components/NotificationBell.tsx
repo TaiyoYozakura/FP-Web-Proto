@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Bell, Check } from 'lucide-react';
+// No HeroUI imports needed
 
 export default function NotificationBell() {
   const [notifications, setNotifications] = useState([
@@ -40,39 +42,32 @@ export default function NotificationBell() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-50">
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="relative p-2 text-theme-primary hover:text-theme-secondary transition-colors hover-border rounded-lg"
-        suppressHydrationWarning={true}
+        className="relative p-2 text-blue-600 hover:text-purple-600 transition-colors rounded-lg hover:bg-gray-100"
+        suppressHydrationWarning
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM12.01 2.011a3.2 3.2 0 013.2 3.2c0 3.3-1.5 6.2-1.5 6.2s-1.5-2.9-1.5-6.2a3.2 3.2 0 011.8-3.2zM8 21.5A1.5 1.5 0 009.5 20h5a1.5 1.5 0 001.5 1.5 1.5 1.5 0 00-1.5 1.5h-5A1.5 1.5 0 008 21.5z" />
-        </svg>
+        <Bell className="w-6 h-6" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-            {unreadCount}
-          </span>
+          <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-purple-600 rounded-full"></span>
         )}
       </button>
 
       {showDropdown && (
-        <div className="absolute right-0 mt-2 w-96 bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden">
-          <div className="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-            <div className="flex items-center space-x-2">
-              <svg className="w-5 h-5 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM12.01 2.011a3.2 3.2 0 013.2 3.2c0 3.3-1.5 6.2-1.5 6.2s-1.5-2.9-1.5-6.2a3.2 3.2 0 011.8-3.2z" />
-              </svg>
-              <h3 className="font-semibold text-theme-primary text-lg">Notifications</h3>
+        <div className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 z-[9999]">
+            <div className="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+              <div className="flex items-center space-x-2">
+                <Bell className="w-5 h-5 text-blue-600" />
+                <h3 className="font-semibold text-blue-600 text-lg">Notifications</h3>
+              </div>
+              <button
+                onClick={markAllRead}
+                className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                Mark all read
+              </button>
             </div>
-            <button
-              onClick={markAllRead}
-              className="text-sm text-theme-secondary hover:text-theme-primary font-medium transition-colors"
-              suppressHydrationWarning={true}
-            >
-              Mark all read
-            </button>
-          </div>
           <div className="max-h-80 overflow-y-auto">
             {notifications.map((notif) => (
               <div
@@ -91,11 +86,11 @@ export default function NotificationBell() {
               </div>
             ))}
           </div>
-          <div className="p-4 text-center bg-gray-50 border-t border-gray-200">
-            <button className="text-sm text-theme-primary hover:text-theme-secondary font-medium transition-colors">
-              View all notifications
-            </button>
-          </div>
+            <div className="p-4 text-center bg-gray-50 border-t border-gray-200">
+              <button className="text-sm text-blue-600 hover:text-purple-600 font-medium transition-colors">
+                View all notifications
+              </button>
+            </div>
         </div>
       )}
     </div>

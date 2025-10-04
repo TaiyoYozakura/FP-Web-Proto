@@ -4,15 +4,16 @@ import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
+import { Card, CardBody, Button, Chip, Divider } from '@heroui/react';
+import { GraduationCap, Users, Globe, Award, Calendar, Briefcase, Heart, MessageCircle } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import SearchBar from '@/components/SearchBar';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import CookieConsent from '@/components/CookieConsent';
 import Analytics from '@/components/Analytics';
-import { useApp } from '@/contexts/AppContext';
 
 // Lazy load heavy components
 const QuickActions = dynamic(() => import('@/components/QuickActions'), {
@@ -26,7 +27,7 @@ export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
   const [stats, setStats] = useState({ alumni: 0, years: 0, countries: 0, leaders: 0 });
-  const { state } = useApp();
+  const { data: session } = useSession();
   const router = useRouter();
 
   // Animated counter effect
@@ -68,23 +69,7 @@ export default function LandingPage() {
       
       <AnnouncementBar />
       
-      {/* Clean Navigation Bar */}
-      <div className="sticky-nav bg-theme-surface shadow-sm">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-8">
-              <Link href="#about" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">About</Link>
-              <Link href="#programs" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Programs</Link>
-              <Link href="#alumni" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">Alumni</Link>
-              <Link href="#news" className="text-theme-primary hover:text-theme-secondary font-medium transition-colors">News</Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <SearchBar placeholder="Search..." className="w-64" />
-              <Link href="/login" className="btn bg-theme-primary text-white px-6 py-2 rounded-lg font-medium">Portal Login</Link>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       {/* Interactive Hero Section */}
       <section 
@@ -108,7 +93,7 @@ export default function LandingPage() {
           <div className="animate-fadeInUp">
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight text-shadow">
               Dnyanasadhana College
-              <span className="block text-3xl lg:text-4xl font-medium mt-4 text-yellow-300 animate-pulse">Alumni Portal</span>
+              <span className="block text-3xl lg:text-4xl font-medium mt-4 text-blue-300 animate-pulse">Alumni Portal</span>
             </h1>
             <p className="text-xl lg:text-2xl mb-8 leading-relaxed max-w-3xl mx-auto text-shadow">
               Empowering minds, shaping futures since 1964. Join our distinguished community of alumni 
@@ -118,33 +103,49 @@ export default function LandingPage() {
             {/* Interactive stats preview */}
             <div className="flex justify-center space-x-8 mb-8 text-center">
               <div className="hover:scale-110 transition-transform cursor-pointer">
-                <div className="text-2xl font-bold text-yellow-300">{stats.alumni}K+</div>
+                <div className="text-2xl font-bold text-blue-300">{stats.alumni}K+</div>
                 <div className="text-sm opacity-80">Alumni</div>
               </div>
               <div className="hover:scale-110 transition-transform cursor-pointer">
-                <div className="text-2xl font-bold text-yellow-300">{stats.countries}+</div>
+                <div className="text-2xl font-bold text-purple-300">{stats.countries}+</div>
                 <div className="text-sm opacity-80">Countries</div>
               </div>
               <div className="hover:scale-110 transition-transform cursor-pointer">
-                <div className="text-2xl font-bold text-yellow-300">{stats.leaders}+</div>
+                <div className="text-2xl font-bold text-blue-300">{stats.leaders}+</div>
                 <div className="text-sm opacity-80">Leaders</div>
               </div>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {!state.user ? (
+              {!session?.user ? (
                 <>
-                  <Link href="/register" className="btn bg-theme-primary text-white px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-all shadow-lg hover:shadow-xl">
+                  <Button
+                    as={Link}
+                    href="/register"
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                  >
                     Join Alumni Network
-                  </Link>
-                  <Link href="/login" className="inline-block border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg bg-transparent hover:bg-white/10 hover:border-white hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm">
+                  </Button>
+                  <Button
+                    as={Link}
+                    href="/login"
+                    variant="bordered"
+                    size="lg"
+                    className="border-2 border-white text-white hover:bg-purple-600/20 hover:border-purple-300 font-semibold px-8 py-4 shadow-lg hover:shadow-xl backdrop-blur-sm transform hover:scale-105 transition-all"
+                  >
                     Alumni Login
-                  </Link>
+                  </Button>
                 </>
               ) : (
-                <Link href="/dashboard" className="btn bg-theme-primary text-white px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-all shadow-lg">
+                <Button
+                  as={Link}
+                  href="/dashboard"
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 shadow-lg transform hover:scale-105 transition-all"
+                >
                   Go to Dashboard
-                </Link>
+                </Button>
               )}
             </div>
           </div>
@@ -162,51 +163,51 @@ export default function LandingPage() {
       <section className="py-20 bg-theme-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-theme-primary mb-4">Trusted by Thousands of Alumni Worldwide</h2>
-            <p className="text-xl text-theme-secondary">Join a network that spans industries, continents, and generations</p>
+            <h2 className="text-3xl font-bold text-blue-600 mb-4">Trusted by Thousands of Alumni Worldwide</h2>
+            <p className="text-xl text-gray-600">Join a network that spans industries, continents, and generations</p>
           </div>
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
-            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
-              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.years}+</h3>
-              <p className="text-theme-secondary font-medium">Years of Excellence</p>
-              <p className="text-sm text-theme-secondary mt-2">Since 1964</p>
-            </div>
-            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
-              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.alumni}K+</h3>
-              <p className="text-theme-secondary font-medium">Active Alumni</p>
-              <p className="text-sm text-theme-secondary mt-2">Verified profiles</p>
-            </div>
-            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
-              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.countries}+</h3>
-              <p className="text-theme-secondary font-medium">Countries</p>
-              <p className="text-sm text-theme-secondary mt-2">Global presence</p>
-            </div>
-            <div className="p-8 card hover:scale-105 transition-transform cursor-pointer">
-              <div className="w-16 h-16 mx-auto mb-4 bg-theme-primary/10 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
-              </div>
-              <h3 className="text-4xl font-bold text-theme-primary mb-2">{stats.leaders}+</h3>
-              <p className="text-theme-secondary font-medium">Industry Leaders</p>
-              <p className="text-sm text-theme-secondary mt-2">C-level executives</p>
-            </div>
+            <Card className="hover:scale-105 transition-transform cursor-pointer shadow-lg hover:shadow-xl">
+              <CardBody className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                  <GraduationCap className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-4xl font-bold text-blue-600 mb-2">{stats.years}+</h3>
+                <p className="text-gray-600 font-medium">Years of Excellence</p>
+                <Chip size="sm" variant="flat" color="primary" className="mt-2">Since 1964</Chip>
+              </CardBody>
+            </Card>
+            <Card className="hover:scale-105 transition-transform cursor-pointer shadow-lg hover:shadow-xl">
+              <CardBody className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                  <Users className="w-8 h-8 text-purple-600" />
+                </div>
+                <h3 className="text-4xl font-bold text-purple-600 mb-2">{stats.alumni}K+</h3>
+                <p className="text-gray-600 font-medium">Active Alumni</p>
+                <Chip size="sm" variant="flat" color="secondary" className="mt-2">Verified profiles</Chip>
+              </CardBody>
+            </Card>
+            <Card className="hover:scale-105 transition-transform cursor-pointer shadow-lg hover:shadow-xl">
+              <CardBody className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                  <Globe className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-4xl font-bold text-green-600 mb-2">{stats.countries}+</h3>
+                <p className="text-gray-600 font-medium">Countries</p>
+                <Chip size="sm" variant="flat" color="success" className="mt-2">Global presence</Chip>
+              </CardBody>
+            </Card>
+            <Card className="hover:scale-105 transition-transform cursor-pointer shadow-lg hover:shadow-xl">
+              <CardBody className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
+                  <Award className="w-8 h-8 text-orange-600" />
+                </div>
+                <h3 className="text-4xl font-bold text-orange-600 mb-2">{stats.leaders}+</h3>
+                <p className="text-gray-600 font-medium">Industry Leaders</p>
+                <Chip size="sm" variant="flat" color="warning" className="mt-2">C-level executives</Chip>
+              </CardBody>
+            </Card>
           </div>
           
           {/* Trust Indicators */}

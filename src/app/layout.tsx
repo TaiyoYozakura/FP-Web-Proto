@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AppProvider } from '@/contexts/AppContext';
+import { Providers } from './providers';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -90,9 +91,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.dnyanasadhanacollege.org" />
       </head>
       <body className="antialiased" suppressHydrationWarning={true}>
-        <AppProvider>
-          {children}
-        </AppProvider>
+        <Providers>
+          <AppProvider>
+            {children}
+          </AppProvider>
+        </Providers>
       </body>
     </html>
   );

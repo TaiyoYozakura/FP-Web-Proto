@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import Navbar from '@/components/Navbar';
 import { useApp } from '@/contexts/AppContext';
 
 export default function DonationPage() {
@@ -42,22 +41,8 @@ export default function DonationPage() {
   const quickAmounts = [1000, 5000, 10000, 25000];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Image src="/SAC-LOGO.webp" alt="St Andrews College" width={40} height={40} className="rounded-full" />
-              <h1 className="text-xl font-bold text-black">St Andrews Alumni Portal</h1>
-            </div>
-            <div className="flex items-center space-x-6">
-              <Link href="/dashboard" className="text-gray-600 hover:text-black">Dashboard</Link>
-              <Link href="/directory" className="text-gray-600 hover:text-black">Directory</Link>
-              <Link href="/events" className="text-gray-600 hover:text-black">Events</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-theme-background">
+      <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Success Notification */}
@@ -74,7 +59,7 @@ export default function DonationPage() {
         )}
         
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg p-12 text-center mb-8">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-12 text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Support Your Alma Mater</h1>
           <p className="text-xl mb-6">Your contribution makes a difference in shaping future leaders</p>
           <div className="bg-white bg-opacity-20 rounded-lg p-6 max-w-md mx-auto">
@@ -86,13 +71,13 @@ export default function DonationPage() {
           </div>
         </div>
 
-        <div className="flex space-x-1 mb-8 bg-white rounded-lg p-1 shadow-sm w-fit">
+        <div className="flex space-x-1 mb-8 bg-theme-surface rounded-lg p-1 shadow-sm w-fit">
           {['donate', 'history'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-6 py-2 rounded-md font-semibold transition-colors ${
-                activeTab === tab ? 'bg-red-600 text-white' : 'text-gray-600 hover:text-black'
+                activeTab === tab ? 'bg-blue-600 text-white' : 'text-theme-secondary hover:text-theme-primary'
               }`}
             >
               {tab === 'donate' ? 'Make a Donation' : 'My Donations'}
@@ -112,9 +97,9 @@ export default function DonationPage() {
                     { title: 'Research Programs', desc: 'Fund cutting-edge research initiatives', icon: '🔬' },
                     { title: 'Sports & Activities', desc: 'Support extracurricular programs', icon: '⚽' }
                   ].map((category, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                    <div key={index} className="card p-6 hover:shadow-md transition-shadow">
                       <div className="text-3xl mb-4">{category.icon}</div>
-                      <h3 className="text-xl font-bold text-black mb-2">{category.title}</h3>
+                      <h3 className="text-xl font-bold text-theme-primary mb-2">{category.title}</h3>
                       <p className="text-gray-600 mb-4">{category.desc}</p>
                       <button 
                         onClick={() => {
@@ -125,7 +110,7 @@ export default function DonationPage() {
                             alert('Please enter an amount first');
                           }
                         }}
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                       >
                         Donate Now
                       </button>
@@ -134,8 +119,8 @@ export default function DonationPage() {
                 </div>
 
                 {/* Quick Donation */}
-                <div className="bg-white rounded-lg shadow-sm p-8">
-                  <h2 className="text-2xl font-bold text-black mb-6">Quick Donation</h2>
+                <div className="card p-8">
+                  <h2 className="text-2xl font-bold text-theme-primary mb-6">Quick Donation</h2>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     {quickAmounts.map((amt) => (
                       <button
@@ -143,8 +128,8 @@ export default function DonationPage() {
                         onClick={() => setAmount(amt.toString())}
                         className={`p-4 rounded-lg border-2 font-semibold transition-colors ${
                           amount === amt.toString()
-                            ? 'border-red-600 bg-red-50 text-red-600'
-                            : 'border-gray-300 hover:border-red-300'
+                            ? 'border-blue-600 bg-blue-50 text-blue-600'
+                            : 'border-theme hover:border-blue-300'
                         }`}
                       >
                         ₹{amt.toLocaleString()}
@@ -152,11 +137,11 @@ export default function DonationPage() {
                     ))}
                   </div>
                   <div className="mb-6">
-                    <label className="block text-sm font-semibold text-black mb-2">Custom Amount</label>
+                    <label className="block text-sm font-semibold text-theme-primary mb-2">Custom Amount</label>
                     <input
                       type="number"
                       placeholder="Enter amount in ₹"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      className="w-full px-4 py-3 border border-theme rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-theme-surface text-theme-primary"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                     />
@@ -164,7 +149,7 @@ export default function DonationPage() {
                   <button 
                     onClick={() => handleDonate('General Fund', amount)}
                     disabled={!amount || isProcessing}
-                    className="w-full bg-red-600 text-white py-4 rounded-lg text-lg font-bold hover:bg-red-700 transition-colors disabled:opacity-50"
+                    className="w-full bg-blue-600 text-white py-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition-colors disabled:opacity-50"
                   >
                     {isProcessing ? (
                       <div className="flex items-center justify-center">
@@ -178,18 +163,18 @@ export default function DonationPage() {
             )}
 
             {activeTab === 'history' && (
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <h2 className="text-2xl font-bold text-black mb-6">Donation History</h2>
+              <div className="card p-8">
+                <h2 className="text-2xl font-bold text-theme-primary mb-6">Donation History</h2>
                 <div className="space-y-4">
                   {state.donations.length > 0 ? (
                     state.donations.map((donation, index) => (
                       <div key={index} className="flex justify-between items-center p-4 border border-gray-200 rounded-lg">
                         <div>
-                          <p className="font-semibold text-black">{donation.category}</p>
+                          <p className="font-semibold text-theme-primary">{donation.category}</p>
                           <p className="text-sm text-gray-600">{donation.date}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-bold text-black">₹{donation.amount.toLocaleString()}</p>
+                          <p className="font-bold text-theme-primary">₹{donation.amount.toLocaleString()}</p>
                           <p className="text-sm text-green-600">{donation.status}</p>
                         </div>
                       </div>
@@ -203,18 +188,18 @@ export default function DonationPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="font-bold text-black mb-4">Impact Stories</h3>
+            <div className="card p-6">
+              <h3 className="font-bold text-theme-primary mb-4">Impact Stories</h3>
               <div className="space-y-4">
-                <div className="border-l-4 border-red-600 pl-4">
+                <div className="border-l-4 border-blue-600 pl-4">
                   <p className="text-sm text-gray-600">"Thanks to alumni donations, I could complete my engineering degree."</p>
                   <p className="text-xs text-gray-500 mt-1">- Scholarship Recipient 2024</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="font-bold text-black mb-4">Tax Benefits</h3>
+            <div className="card p-6">
+              <h3 className="font-bold text-theme-primary mb-4">Tax Benefits</h3>
               <p className="text-sm text-gray-600 mb-2">Your donations are eligible for tax deduction under Section 80G.</p>
               <p className="text-sm text-gray-600">You will receive a tax certificate via email.</p>
             </div>
