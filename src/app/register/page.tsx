@@ -12,7 +12,6 @@ export default function RegisterPage() {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
     graduationYear: '',
     password: '',
     confirmPassword: ''
@@ -23,12 +22,8 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const handleNext = () => {
-    if (step === 1 && (!formData.firstName || !formData.lastName || !formData.email)) {
+    if (step === 1 && (!formData.firstName || !formData.lastName || !formData.email || !formData.graduationYear)) {
       setError('Please fill in all required fields');
-      return;
-    }
-    if (step === 2 && !formData.graduationYear) {
-      setError('Please select your graduation year');
       return;
     }
     setError('');
@@ -64,8 +59,7 @@ export default function RegisterPage() {
           name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
           password: formData.password,
-          graduationYear: formData.graduationYear,
-          phone: formData.phone
+          graduationYear: formData.graduationYear
         }),
       });
 
@@ -106,15 +100,15 @@ export default function RegisterPage() {
 
         <div className="card p-8 shadow-lg">
           {/* Progress Steps */}
-          <div className="flex justify-between mb-6 lg:mb-8">
-            {[1, 2, 3].map((num) => (
+          <div className="flex justify-center mb-6 lg:mb-8">
+            {[1, 2].map((num) => (
               <div key={num} className="flex items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                   step >= num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                 } transition-colors`}>
                   {num}
                 </div>
-                {num < 3 && <div className={`w-20 h-1 mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
+                {num < 2 && <div className={`w-20 h-1 mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
               </div>
             ))}
           </div>
@@ -165,29 +159,6 @@ export default function RegisterPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-blue-600 mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="+91 XXXXX XXXXX"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                />
-              </div>
-              <button
-                onClick={handleNext}
-                className="btn w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 text-lg transition-all duration-200"
-              >
-                Next Step →
-              </button>
-            </div>
-          )}
-
-          {/* Step 2: Academic Info */}
-          {step === 2 && (
-            <div className="space-y-6">
-              <h2 className="text-xl font-bold text-blue-600 mb-6">Academic Information</h2>
-              <div>
                 <label className="block text-sm font-semibold text-blue-600 mb-2">Graduation Year *</label>
                 <select
                   required
@@ -201,29 +172,21 @@ export default function RegisterPage() {
                   ))}
                 </select>
               </div>
-              <div className="flex space-x-4">
-                <button
-                  onClick={handlePrev}
-                  className="flex-1 border border-gray-300 text-blue-900 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-                >
-                  ← Previous
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all"
-                >
-                  Next Step →
-                </button>
-              </div>
+              <button
+                onClick={handleNext}
+                className="btn w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 text-lg transition-all duration-200"
+              >
+                Next Step →
+              </button>
             </div>
           )}
 
-          {/* Step 3: Password */}
-          {step === 3 && (
+          {/* Step 2: Password */}
+          {step === 2 && (
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-blue-600 mb-6">Create Password</h2>
               <div>
-                <label className="block text-sm font-semibold text-blue-900 mb-2">Password *</label>
+                <label className="block text-sm font-semibold text-blue-600 mb-2">Password *</label>
                 <input
                   type="password"
                   required
@@ -232,9 +195,10 @@ export default function RegisterPage() {
                   value={formData.password}
                   onChange={(e) => setFormData({...formData, password: e.target.value})}
                 />
+                <p className="text-xs text-gray-500 mt-1">Minimum 6 characters</p>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-blue-900 mb-2">Confirm Password *</label>
+                <label className="block text-sm font-semibold text-blue-600 mb-2">Confirm Password *</label>
                 <input
                   type="password"
                   required
@@ -244,6 +208,17 @@ export default function RegisterPage() {
                   onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
                 />
               </div>
+              
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 className="font-semibold text-blue-800 mb-2">After Registration:</h4>
+                <ul className="text-sm text-blue-700 space-y-1">
+                  <li>✅ Complete your detailed profile</li>
+                  <li>✅ Add professional information</li>
+                  <li>✅ Connect with fellow alumni</li>
+                  <li>✅ Explore opportunities</li>
+                </ul>
+              </div>
+              
               <div className="flex space-x-4">
                 <button
                   type="button"
@@ -256,18 +231,20 @@ export default function RegisterPage() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isLoading}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all disabled:opacity-50"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all disabled:opacity-50"
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center">
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                       Creating...
                     </div>
-                  ) : 'Create Account'}
+                  ) : '🎉 Create Account'}
                 </button>
               </div>
             </div>
           )}
+
+
         </div>
 
         <div className="text-center mt-4 lg:mt-6">

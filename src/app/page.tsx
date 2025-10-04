@@ -71,22 +71,34 @@ export default function LandingPage() {
       
 
 
-      {/* Interactive Hero Section */}
+      {/* Enhanced Hero Section */}
       <section 
         className="relative min-h-screen bg-cover bg-center flex items-center overflow-hidden"
         style={{ 
           backgroundImage: 'url(https://www.dnyanasadhanacollege.org/Gallery/images/folder1/1a.jpg)'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         
-        {/* Static decorative elements */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse" style={{ left: '10%', top: '20%', animationDelay: '0s' }} />
-          <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse" style={{ left: '80%', top: '30%', animationDelay: '1s' }} />
-          <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse" style={{ left: '60%', top: '70%', animationDelay: '2s' }} />
-          <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse" style={{ left: '30%', top: '80%', animationDelay: '0.5s' }} />
-          <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse" style={{ left: '90%', top: '10%', animationDelay: '1.5s' }} />
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full -top-48 -left-48 animate-pulse"></div>
+          <div className="absolute w-64 h-64 bg-purple-500/10 rounded-full top-1/4 right-0 animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute w-80 h-80 bg-blue-400/10 rounded-full bottom-0 left-1/3 animate-pulse" style={{animationDelay: '2s'}}></div>
+        </div>
+        
+        {/* Enhanced decorative elements */}
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-bounce" style={{ left: '10%', top: '20%', animationDelay: '0s' }} />
+          <div className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce" style={{ left: '80%', top: '30%', animationDelay: '1s' }} />
+          <div className="absolute w-4 h-4 bg-gradient-to-r from-blue-300 to-cyan-300 rounded-full animate-bounce" style={{ left: '60%', top: '70%', animationDelay: '2s' }} />
+          <div className="absolute w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-bounce" style={{ left: '30%', top: '80%', animationDelay: '0.5s' }} />
+          <div className="absolute w-3 h-3 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-bounce" style={{ left: '90%', top: '10%', animationDelay: '1.5s' }} />
+          
+          {/* Floating Icons */}
+          <div className="absolute text-white/20 text-2xl animate-float" style={{ left: '15%', top: '40%', animationDelay: '0s' }}>🎓</div>
+          <div className="absolute text-white/20 text-xl animate-float" style={{ left: '85%', top: '60%', animationDelay: '2s' }}>📚</div>
+          <div className="absolute text-white/20 text-lg animate-float" style={{ left: '70%', top: '25%', animationDelay: '1s' }}>🌟</div>
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center text-white">
@@ -102,17 +114,17 @@ export default function LandingPage() {
             
             {/* Interactive stats preview */}
             <div className="flex justify-center space-x-8 mb-8 text-center">
-              <div className="hover:scale-110 transition-transform cursor-pointer">
-                <div className="text-2xl font-bold text-blue-300">{stats.alumni}K+</div>
-                <div className="text-sm opacity-80">Alumni</div>
+              <div className="group hover:scale-110 transition-all duration-300 cursor-pointer bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div className="text-3xl font-bold text-blue-300 group-hover:text-blue-200 transition-colors">{stats.alumni}K+</div>
+                <div className="text-sm opacity-80 group-hover:opacity-100 transition-opacity">Alumni Network</div>
               </div>
-              <div className="hover:scale-110 transition-transform cursor-pointer">
-                <div className="text-2xl font-bold text-purple-300">{stats.countries}+</div>
-                <div className="text-sm opacity-80">Countries</div>
+              <div className="group hover:scale-110 transition-all duration-300 cursor-pointer bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div className="text-3xl font-bold text-purple-300 group-hover:text-purple-200 transition-colors">{stats.countries}+</div>
+                <div className="text-sm opacity-80 group-hover:opacity-100 transition-opacity">Countries</div>
               </div>
-              <div className="hover:scale-110 transition-transform cursor-pointer">
-                <div className="text-2xl font-bold text-blue-300">{stats.leaders}+</div>
-                <div className="text-sm opacity-80">Leaders</div>
+              <div className="group hover:scale-110 transition-all duration-300 cursor-pointer bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div className="text-3xl font-bold text-green-300 group-hover:text-green-200 transition-colors">{stats.leaders}+</div>
+                <div className="text-sm opacity-80 group-hover:opacity-100 transition-opacity">Industry Leaders</div>
               </div>
             </div>
             
@@ -123,18 +135,22 @@ export default function LandingPage() {
                     as={Link}
                     href="/register"
                     size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-10 py-5 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 rounded-xl border border-white/20 backdrop-blur-sm"
                   >
-                    Join Alumni Network
+                    <span className="flex items-center">
+                      🚀 Join Alumni Network
+                    </span>
                   </Button>
                   <Button
                     as={Link}
                     href="/login"
                     variant="bordered"
                     size="lg"
-                    className="border-2 border-white text-white hover:bg-purple-600/20 hover:border-purple-300 font-semibold px-8 py-4 shadow-lg hover:shadow-xl backdrop-blur-sm transform hover:scale-105 transition-all"
+                    className="border-2 border-white text-white hover:bg-white/10 hover:border-blue-300 font-bold px-10 py-5 shadow-2xl hover:shadow-3xl backdrop-blur-sm transform hover:scale-105 transition-all duration-300 rounded-xl"
                   >
-                    Alumni Login
+                    <span className="flex items-center">
+                      🎓 Alumni Login
+                    </span>
                   </Button>
                 </>
               ) : (
@@ -142,9 +158,11 @@ export default function LandingPage() {
                   as={Link}
                   href="/dashboard"
                   size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 shadow-lg transform hover:scale-105 transition-all"
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-10 py-5 shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
                 >
-                  Go to Dashboard
+                  <span className="flex items-center">
+                    📊 Go to Dashboard
+                  </span>
                 </Button>
               )}
             </div>

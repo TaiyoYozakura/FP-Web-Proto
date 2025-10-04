@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
+import SmartDonationTracker from '@/components/SmartDonationTracker';
 import { useApp } from '@/contexts/AppContext';
 
 export default function DonationPage() {
@@ -41,10 +42,15 @@ export default function DonationPage() {
   const quickAmounts = [1000, 5000, 10000, 25000];
 
   return (
-    <div className="min-h-screen bg-theme-background">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
+        <SmartDonationTracker />
+        
+        {/* Legacy donation form below */}
+        <div className="mt-12 bg-white rounded-xl p-6 shadow-lg">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">💳 Quick Donation (Legacy)</h2>
         {/* Success Notification */}
         {showSuccess && (
           <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-fadeInUp">
@@ -58,16 +64,29 @@ export default function DonationPage() {
           </div>
         )}
         
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-12 text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Support Your Alma Mater</h1>
-          <p className="text-xl mb-6">Your contribution makes a difference in shaping future leaders</p>
-          <div className="bg-white bg-opacity-20 rounded-lg p-6 max-w-md mx-auto">
-            <p className="text-2xl font-bold mb-2">Total Raised: ₹2.5 Crores</p>
-            <div className="bg-white bg-opacity-30 rounded-full h-4 mb-2">
-              <div className="bg-white rounded-full h-4 w-2/3"></div>
+        {/* Hero Section - Dnyanasadhana Design */}
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-12 text-center mb-8 overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute w-32 h-32 bg-white rounded-full -top-16 -left-16"></div>
+            <div className="absolute w-24 h-24 bg-white rounded-full top-20 right-10"></div>
+            <div className="absolute w-16 h-16 bg-white rounded-full bottom-10 left-1/4"></div>
+          </div>
+          <div className="relative z-10">
+            <div className="flex items-center justify-center mb-6">
+              <img src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Dnyanasadhana College" className="w-16 h-16 mr-4" />
+              <div className="text-left">
+                <h1 className="text-4xl font-bold">Support Dnyanasadhana College</h1>
+                <p className="text-lg opacity-90">Building Tomorrow's Leaders Since 1964</p>
+              </div>
             </div>
-            <p>65% of Annual Goal</p>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">Your generous contribution helps us continue our mission of academic excellence in Commerce, Arts, and Sciences</p>
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 max-w-md mx-auto border border-white/30">
+              <p className="text-2xl font-bold mb-2">Total Alumni Contributions: ₹10.2 Crores</p>
+              <div className="bg-white/30 rounded-full h-4 mb-2">
+                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full h-4 w-3/4 shadow-sm"></div>
+              </div>
+              <p className="text-sm opacity-90">75% of Annual Development Goal Achieved</p>
+            </div>
           </div>
         </div>
 
@@ -89,18 +108,47 @@ export default function DonationPage() {
           <div className="lg:col-span-2">
             {activeTab === 'donate' && (
               <div className="space-y-8">
-                {/* Donation Categories */}
+                {/* Donation Categories - Dnyanasadhana Focus */}
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
-                    { title: 'Scholarship Fund', desc: 'Support deserving students with financial aid', icon: '🎓' },
-                    { title: 'Infrastructure Development', desc: 'Build better facilities and labs', icon: '🏗️' },
-                    { title: 'Research Programs', desc: 'Fund cutting-edge research initiatives', icon: '🔬' },
-                    { title: 'Sports & Activities', desc: 'Support extracurricular programs', icon: '⚽' }
+                    { 
+                      title: 'Merit Scholarships', 
+                      desc: 'Support bright students from economically weaker sections', 
+                      icon: '🎓',
+                      impact: '₹2.5L raised',
+                      color: 'from-blue-500 to-blue-600'
+                    },
+                    { 
+                      title: 'Digital Library & Labs', 
+                      desc: 'Modern computer labs and digital learning resources', 
+                      icon: '💻',
+                      impact: '₹5.2L raised',
+                      color: 'from-purple-500 to-purple-600'
+                    },
+                    { 
+                      title: 'Commerce Research Center', 
+                      desc: 'Advanced research in commerce and management studies', 
+                      icon: '📊',
+                      impact: '₹1.8L raised',
+                      color: 'from-green-500 to-green-600'
+                    },
+                    { 
+                      title: 'Cultural & Sports Complex', 
+                      desc: 'Enhanced facilities for arts, sports and cultural activities', 
+                      icon: '🏆',
+                      impact: '₹3.1L raised',
+                      color: 'from-orange-500 to-orange-600'
+                    }
                   ].map((category, index) => (
-                    <div key={index} className="card p-6 hover:shadow-md transition-shadow">
-                      <div className="text-3xl mb-4">{category.icon}</div>
-                      <h3 className="text-xl font-bold text-theme-primary mb-2">{category.title}</h3>
-                      <p className="text-gray-600 mb-4">{category.desc}</p>
+                    <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-105 border border-gray-100">
+                      <div className={`w-16 h-16 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center text-2xl text-white mb-4 shadow-lg`}>
+                        {category.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-blue-600 mb-2">{category.title}</h3>
+                      <p className="text-gray-600 mb-3 leading-relaxed">{category.desc}</p>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-sm font-semibold text-green-600 bg-green-50 px-3 py-1 rounded-full">{category.impact}</span>
+                      </div>
                       <button 
                         onClick={() => {
                           setSelectedCategory(category.title);
@@ -110,9 +158,9 @@ export default function DonationPage() {
                             alert('Please enter an amount first');
                           }
                         }}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                        className={`w-full bg-gradient-to-r ${category.color} text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-105`}
                       >
-                        Donate Now
+                        Contribute Now
                       </button>
                     </div>
                   ))}
@@ -188,20 +236,45 @@ export default function DonationPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="card p-6">
-              <h3 className="font-bold text-theme-primary mb-4">Impact Stories</h3>
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+              <h3 className="font-bold text-blue-600 mb-4 flex items-center">
+                <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                Success Stories
+              </h3>
               <div className="space-y-4">
-                <div className="border-l-4 border-blue-600 pl-4">
-                  <p className="text-sm text-gray-600">"Thanks to alumni donations, I could complete my engineering degree."</p>
-                  <p className="text-xs text-gray-500 mt-1">- Scholarship Recipient 2024</p>
+                <div className="border-l-4 border-blue-600 pl-4 bg-blue-50 p-3 rounded-r-lg">
+                  <p className="text-sm text-gray-700 italic">"Alumni scholarship helped me pursue B.Com and now I'm a CA. Forever grateful to Dnyanasadhana family!"</p>
+                  <p className="text-xs text-blue-600 mt-2 font-semibold">- Priya Mehta, CA • Class of 2020</p>
+                </div>
+                <div className="border-l-4 border-purple-600 pl-4 bg-purple-50 p-3 rounded-r-lg">
+                  <p className="text-sm text-gray-700 italic">"New computer lab funded by alumni made my IT dreams possible. Now working at TCS!"</p>
+                  <p className="text-xs text-purple-600 mt-2 font-semibold">- Rahul Sharma, Software Engineer • Class of 2022</p>
                 </div>
               </div>
             </div>
 
-            <div className="card p-6">
-              <h3 className="font-bold text-theme-primary mb-4">Tax Benefits</h3>
-              <p className="text-sm text-gray-600 mb-2">Your donations are eligible for tax deduction under Section 80G.</p>
-              <p className="text-sm text-gray-600">You will receive a tax certificate via email.</p>
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
+              <h3 className="font-bold text-green-700 mb-4 flex items-center">
+                <span className="text-green-600 mr-2">💰</span>
+                Tax Benefits
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <p className="text-sm text-gray-700">100% tax deduction under Section 80G of Income Tax Act</p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <p className="text-sm text-gray-700">Instant tax certificate via email</p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <p className="text-sm text-gray-700">Recognized by Government of Maharashtra</p>
+                </div>
+              </div>
+              <div className="mt-4 p-3 bg-white rounded-lg border border-green-200">
+                <p className="text-xs text-green-600 font-semibold">Registration No: 80G/2024/DNYANA/001</p>
+              </div>
             </div>
           </div>
         </div>
