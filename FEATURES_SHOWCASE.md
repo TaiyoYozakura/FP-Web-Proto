@@ -75,6 +75,17 @@
 - **Mobile Responsive**: Works perfectly on all devices
 - **Professional Design**: College-branded with smooth animations
 
+## 🔐 Demo Credentials
+
+### **Admin Panel Access** (`/admin`)
+- **Password**: `admin123` or `dnyanasadhana2024`
+- **Features**: Complete admin control panel with all working features
+
+### **Alumni Login** (`/login`)
+- **Email**: Any valid email format
+- **Password**: Any password (demo mode)
+- **Features**: Full alumni dashboard and profile management
+
 ## 📱 Pages to Show
 
 1. **Home** (`/`) - Landing page with college branding
