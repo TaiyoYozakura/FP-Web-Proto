@@ -82,11 +82,11 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-theme-background">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="lg:w-64 space-y-6">
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              <h3 className="font-bold text-blue-600 mb-4 text-lg flex items-center">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8">
+          <div className="lg:w-64 space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-xl p-4 sm:p-5 md:p-6 shadow-lg">
+              <h3 className="font-bold text-blue-600 mb-3 sm:mb-4 text-base sm:text-lg flex items-center">
                 <span className="mr-2">⚡</span>
                 Quick Access
               </h3>
@@ -102,11 +102,11 @@ export default function DashboardPage() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all group"
+                    className="flex items-center justify-between p-2 sm:p-3 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all group"
                   >
                     <div className="flex items-center">
-                      <span className="mr-3 text-lg">{link.icon}</span>
-                      <span className="font-medium">{link.name}</span>
+                      <span className="mr-2 sm:mr-3 text-base sm:text-lg">{link.icon}</span>
+                      <span className="font-medium text-sm sm:text-base">{link.name}</span>
                     </div>
                     {link.count && (
                       <span className={`px-2 py-1 rounded-full text-xs font-bold ${
@@ -135,8 +135,8 @@ export default function DashboardPage() {
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h1 className="text-3xl lg:text-4xl font-bold text-blue-600 mb-2">Welcome back, {userName}! 👋</h1>
-                  <p className="text-gray-600 text-lg">Here's your alumni network activity</p>
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-600 mb-2">Welcome back, {userName}! 👋</h1>
+                  <p className="text-gray-600 text-sm sm:text-base md:text-lg">Here's your alumni network activity</p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-500">{new Date().toLocaleDateString('en-IN', { 
@@ -149,16 +149,16 @@ export default function DashboardPage() {
               </div>
               
               {profileCompletion < 80 && (
-                <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-4 mb-6">
+                <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <span className="text-2xl mr-3">⚡</span>
+                      <span className="text-xl sm:text-2xl mr-2 sm:mr-3">⚡</span>
                       <div>
-                        <h3 className="font-semibold text-orange-800">Complete Your Profile</h3>
-                        <p className="text-sm text-orange-700">Unlock networking features and job recommendations</p>
+                        <h3 className="font-semibold text-orange-800 text-sm sm:text-base">Complete Your Profile</h3>
+                        <p className="text-xs sm:text-sm text-orange-700">Unlock networking features and job recommendations</p>
                       </div>
                     </div>
-                    <Link href="/profile" className="bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors">
+                    <Link href="/profile" className="bg-orange-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm sm:text-base font-semibold hover:bg-orange-600 transition-colors">
                       Complete Now
                     </Link>
                   </div>

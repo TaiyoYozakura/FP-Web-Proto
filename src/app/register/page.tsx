@@ -82,33 +82,33 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-background py-12 px-6">
+    <div className="min-h-screen bg-theme-background py-6 sm:py-8 md:py-12 px-3 sm:px-4 md:px-6">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-6 lg:mb-8">
-          <Link href="/" className="inline-flex items-center space-x-3 mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+        <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+          <Link href="/" className="inline-flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg md:text-xl">
               DC
             </div>
             <div className="text-left">
-              <span className="text-xl font-bold text-blue-600 block">Dnyanasadhana College</span>
-              <span className="text-sm text-purple-600">Alumni Portal</span>
+              <span className="text-base sm:text-lg md:text-xl font-bold text-blue-600 block">Dnyanasadhana College</span>
+              <span className="text-xs sm:text-sm text-purple-600">Alumni Portal</span>
             </div>
           </Link>
-          <h1 className="text-3xl font-bold text-blue-600 mb-3">Join Our Alumni Network</h1>
-          <p className="text-gray-600 text-lg">Create your account and connect with fellow alumni</p>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 mb-2 sm:mb-3">Join Our Alumni Network</h1>
+          <p className="text-gray-600 text-sm sm:text-base md:text-lg">Create your account and connect with fellow alumni</p>
         </div>
 
-        <div className="card p-8 shadow-lg">
+        <div className="card p-4 sm:p-6 md:p-8 shadow-lg">
           {/* Progress Steps */}
-          <div className="flex justify-center mb-6 lg:mb-8">
+          <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8">
             {[1, 2].map((num) => (
               <div key={num} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold ${
                   step >= num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                 } transition-colors`}>
                   {num}
                 </div>
-                {num < 2 && <div className={`w-20 h-1 mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
+                {num < 2 && <div className={`w-12 sm:w-16 md:w-20 h-1 mx-1 sm:mx-2 ${step > num ? 'bg-blue-600' : 'bg-gray-200'} transition-colors`}></div>}
               </div>
             ))}
           </div>
@@ -121,15 +121,15 @@ export default function RegisterPage() {
 
           {/* Step 1: Basic Info */}
           {step === 1 && (
-            <div className="space-y-6">
-              <h2 className="text-xl font-bold text-blue-600 mb-6">Basic Information</h2>
-              <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
+            <div className="space-y-4 sm:space-y-5 md:space-y-6">
+              <h2 className="text-lg sm:text-xl font-bold text-blue-600 mb-4 sm:mb-6">Basic Information</h2>
+              <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
                 <div>
-                  <label className="block text-sm font-semibold text-blue-600 mb-2">First Name *</label>
+                  <label className="block text-xs sm:text-sm font-semibold text-blue-600 mb-1.5 sm:mb-2">First Name *</label>
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     placeholder="Enter first name"
                     value={formData.firstName}
                     onChange={(e) => setFormData({...formData, firstName: e.target.value})}
@@ -174,7 +174,7 @@ export default function RegisterPage() {
               </div>
               <button
                 onClick={handleNext}
-                className="btn w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 text-lg transition-all duration-200"
+                className="btn w-full bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold hover:bg-blue-700 text-base sm:text-lg transition-all duration-200"
               >
                 Next Step →
               </button>
@@ -183,8 +183,8 @@ export default function RegisterPage() {
 
           {/* Step 2: Password */}
           {step === 2 && (
-            <div className="space-y-6">
-              <h2 className="text-xl font-bold text-blue-600 mb-6">Create Password</h2>
+            <div className="space-y-4 sm:space-y-5 md:space-y-6">
+              <h2 className="text-lg sm:text-xl font-bold text-blue-600 mb-4 sm:mb-6">Create Password</h2>
               <div>
                 <label className="block text-sm font-semibold text-blue-600 mb-2">Password *</label>
                 <input
@@ -219,11 +219,11 @@ export default function RegisterPage() {
                 </ul>
               </div>
               
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="flex-1 border border-gray-300 text-blue-900 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                  className="flex-1 border border-gray-300 text-blue-900 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-50 transition-colors"
                 >
                   ← Previous
                 </button>
@@ -231,7 +231,7 @@ export default function RegisterPage() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isLoading}
-                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all disabled:opacity-50"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:shadow-lg transform hover:scale-105 transition-all disabled:opacity-50"
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center">

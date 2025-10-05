@@ -334,8 +334,8 @@ export default function AdminPage() {
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex flex-wrap gap-2 mb-8 bg-white rounded-xl p-2 shadow-sm">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+        <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6 md:mb-8 bg-white rounded-xl p-1 sm:p-2 shadow-sm overflow-x-auto">
           {[
             { key: 'overview', label: 'Overview', icon: '📊' },
             { key: 'users', label: 'User Management', icon: '👥' },
@@ -348,7 +348,7 @@ export default function AdminPage() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center space-x-2 ${
+              className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center space-x-1 sm:space-x-2 whitespace-nowrap ${
                 activeTab === tab.key 
                   ? 'bg-red-600 text-white shadow-lg' 
                   : 'text-gray-600 hover:text-red-600 hover:bg-red-50'
@@ -361,13 +361,13 @@ export default function AdminPage() {
         </div>
         
         {activeTab === 'overview' && (
-          <div className="space-y-8">
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4">🔴 Live System Status</h3>
-              <div className="grid grid-cols-3 gap-4">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8">
+            <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl p-4 sm:p-5 md:p-6">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4">🔴 Live System Status</h3>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold">{realTimeStats.online}</div>
-                  <div className="text-sm opacity-90">Users Online</div>
+                  <div className="text-lg sm:text-xl md:text-2xl font-bold">{realTimeStats.online}</div>
+                  <div className="text-xs sm:text-sm opacity-90">Users Online</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold">{realTimeStats.newToday}</div>
@@ -514,26 +514,26 @@ export default function AdminPage() {
                 </div>
               </div>
             
-              <div className="p-6">
-                <div className="overflow-x-auto">
-                  <table className="w-full">
+              <div className="p-3 sm:p-4 md:p-6">
+                <div className="overflow-x-auto -mx-3 sm:-mx-4 md:-mx-6">
+                  <table className="w-full min-w-[640px]">
                     <thead>
                       <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Name</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Email</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Company</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
+                        <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm">Name</th>
+                        <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm">Email</th>
+                        <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm">Company</th>
+                        <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm">Status</th>
+                        <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-semibold text-gray-700 text-xs sm:text-sm">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {users.map((user) => (
                         <tr key={user.id} className="border-b border-gray-100 hover:bg-gray-50">
-                          <td className="py-3 px-4 font-semibold text-gray-800">{user.name}</td>
-                          <td className="py-3 px-4 text-gray-600">{user.email}</td>
-                          <td className="py-3 px-4 text-gray-600">{user.company}</td>
-                          <td className="py-3 px-4">
-                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          <td className="py-2 sm:py-3 px-2 sm:px-4 font-semibold text-gray-800 text-xs sm:text-sm">{user.name}</td>
+                          <td className="py-2 sm:py-3 px-2 sm:px-4 text-gray-600 text-xs sm:text-sm">{user.email}</td>
+                          <td className="py-2 sm:py-3 px-2 sm:px-4 text-gray-600 text-xs sm:text-sm">{user.company}</td>
+                          <td className="py-2 sm:py-3 px-2 sm:px-4">
+                            <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold ${
                               user.status === 'Active' ? 'bg-green-100 text-green-700' : 
                               user.status === 'Verified' ? 'bg-blue-100 text-blue-700' :
                               user.status === 'Suspended' ? 'bg-red-100 text-red-700' :

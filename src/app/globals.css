@@ -682,4 +682,14 @@ img {
     border-color: #3b82f6;
     color: #1e40af;
   }
+  
+  /* Hide scrollbar for mobile horizontal scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
