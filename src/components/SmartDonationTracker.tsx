@@ -259,64 +259,64 @@ export default function SmartDonationTracker() {
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
+    <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 sm:mb-6">
         <div className="flex items-center">
-          <span className="text-2xl mr-3">💰</span>
+          <span className="text-xl sm:text-2xl mr-2 sm:mr-3">💰</span>
           <div>
-            <h3 className="text-2xl font-bold text-green-800">Smart Donation Tracker</h3>
-            <p className="text-gray-600">Real-time impact • ₹{totalRaised.toLocaleString()} raised</p>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-green-800">Smart Donation Tracker</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Real-time impact • ₹{totalRaised.toLocaleString()} raised</p>
           </div>
         </div>
         <button
           onClick={() => setShowDonationForm(true)}
-          className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg transition-all transform hover:scale-105"
+          className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold hover:shadow-lg transition-all transform hover:scale-105 text-sm sm:text-base"
         >
           💝 Donate Now
         </button>
       </div>
 
       {/* Impact Overview */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-2xl">🎓</span>
-            <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-bold">Education</span>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-blue-200">
+          <div className="flex items-center justify-between mb-1 sm:mb-2">
+            <span className="text-lg sm:text-2xl">🎓</span>
+            <span className="bg-blue-100 text-blue-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">Education</span>
           </div>
-          <h4 className="font-bold text-blue-800">Scholarships</h4>
-          <p className="text-xl font-bold text-blue-600">₹{(impactStats.scholarships / 100000).toFixed(1)}L</p>
-          <p className="text-xs text-blue-600">50+ students supported</p>
+          <h4 className="font-bold text-blue-800 text-xs sm:text-sm">Scholarships</h4>
+          <p className="text-lg sm:text-xl font-bold text-blue-600">₹{(impactStats.scholarships / 100000).toFixed(1)}L</p>
+          <p className="text-[10px] sm:text-xs text-blue-600">50+ students supported</p>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-2xl">🏗️</span>
-            <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-xs font-bold">Infrastructure</span>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-purple-200">
+          <div className="flex items-center justify-between mb-1 sm:mb-2">
+            <span className="text-lg sm:text-2xl">🏗️</span>
+            <span className="bg-purple-100 text-purple-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">Infrastructure</span>
           </div>
-          <h4 className="font-bold text-purple-800">Infrastructure</h4>
-          <p className="text-xl font-bold text-purple-600">₹{(impactStats.infrastructure / 100000).toFixed(1)}L</p>
-          <p className="text-xs text-purple-600">Digital upgrades</p>
+          <h4 className="font-bold text-purple-800 text-xs sm:text-sm">Infrastructure</h4>
+          <p className="text-lg sm:text-xl font-bold text-purple-600">₹{(impactStats.infrastructure / 100000).toFixed(1)}L</p>
+          <p className="text-[10px] sm:text-xs text-purple-600">Digital upgrades</p>
         </div>
 
-        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border border-green-200">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-2xl">🎉</span>
-            <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-bold">Events</span>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-green-200">
+          <div className="flex items-center justify-between mb-1 sm:mb-2">
+            <span className="text-lg sm:text-2xl">🎉</span>
+            <span className="bg-green-100 text-green-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">Events</span>
           </div>
-          <h4 className="font-bold text-green-800">Events</h4>
-          <p className="text-xl font-bold text-green-600">₹{(impactStats.events / 100000).toFixed(1)}L</p>
-          <p className="text-xs text-green-600">Alumni networking</p>
+          <h4 className="font-bold text-green-800 text-xs sm:text-sm">Events</h4>
+          <p className="text-lg sm:text-xl font-bold text-green-600">₹{(impactStats.events / 100000).toFixed(1)}L</p>
+          <p className="text-[10px] sm:text-xs text-green-600">Alumni networking</p>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-2xl">🔬</span>
-            <span className="bg-orange-100 text-orange-700 px-2 py-1 rounded-full text-xs font-bold">Research</span>
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-orange-200">
+          <div className="flex items-center justify-between mb-1 sm:mb-2">
+            <span className="text-lg sm:text-2xl">🔬</span>
+            <span className="bg-orange-100 text-orange-700 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">Research</span>
           </div>
-          <h4 className="font-bold text-orange-800">Research</h4>
-          <p className="text-xl font-bold text-orange-600">₹{(impactStats.research / 100000).toFixed(1)}L</p>
-          <p className="text-xs text-orange-600">Innovation lab</p>
+          <h4 className="font-bold text-orange-800 text-xs sm:text-sm">Research</h4>
+          <p className="text-lg sm:text-xl font-bold text-orange-600">₹{(impactStats.research / 100000).toFixed(1)}L</p>
+          <p className="text-[10px] sm:text-xs text-orange-600">Innovation lab</p>
         </div>
       </div>
 

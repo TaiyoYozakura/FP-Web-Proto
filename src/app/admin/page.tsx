@@ -274,10 +274,10 @@ export default function AdminPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center px-6">
         <div className="bg-white rounded-xl p-8 shadow-2xl border border-gray-100 max-w-md w-full">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🔒</span>
             </div>
-            <h1 className="text-2xl font-bold text-red-600 mb-2">Admin Access Required</h1>
+            <h1 className="text-2xl font-bold text-blue-600 mb-2">Admin Access Required</h1>
             <p className="text-gray-600">Enter admin password to access the control panel</p>
           </div>
           
@@ -292,7 +292,7 @@ export default function AdminPage() {
               <label className="block text-sm font-semibold text-gray-700 mb-2">Admin Password</label>
               <input
                 type="password"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter admin password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -303,7 +303,7 @@ export default function AdminPage() {
             
             <button
               onClick={handleLogin}
-              className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-105"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
               suppressHydrationWarning
             >
               🔓 Access Admin Panel
@@ -321,13 +321,13 @@ export default function AdminPage() {
           <div className="flex items-center space-x-4">
             <img src="https://www.dnyanasadhanacollege.org/images/logo/logo-final.png" alt="Logo" className="w-10 h-10" />
             <div>
-              <h1 className="text-xl font-bold text-red-600">Admin Control Panel</h1>
-              <p className="text-sm text-gray-600">Dnyanasadhana College Alumni Portal</p>
+              <h1 className="text-xl font-bold text-blue-600">Admin Control Panel</h1>
+              <p className="text-sm text-gray-600">Satish Pradhan Dnyanasadhana College Alumni Portal</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
           >
             🚪 Logout
           </button>
@@ -348,10 +348,10 @@ export default function AdminPage() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center space-x-1 sm:space-x-2 whitespace-nowrap ${
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap ${
                 activeTab === tab.key 
-                  ? 'bg-red-600 text-white shadow-lg' 
-                  : 'text-gray-600 hover:text-red-600 hover:bg-red-50'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' 
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
               }`}
             >
               <span>{tab.icon}</span>

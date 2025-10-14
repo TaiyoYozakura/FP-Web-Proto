@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AppProvider } from '@/contexts/AppContext';
 import { Providers } from './providers';
+import ClientLayout from './ClientLayout';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -12,14 +13,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Dnyanasadhana College Alumni Portal',
-    template: '%s | Dnyanasadhana College Alumni Portal'
+    default: 'Satish Pradhan Dnyanasadhana College Alumni Portal',
+    template: '%s | Satish Pradhan Dnyanasadhana College'
   },
-  description: 'Official alumni portal of Dnyanasadhana College. Connect with 15,000+ alumni worldwide, explore career opportunities, attend events, and contribute to your alma mater.',
-  keywords: ['Dnyanasadhana College', 'alumni', 'networking', 'career services', 'education', 'Thane', 'Maharashtra'],
-  authors: [{ name: 'Dnyanasadhana College' }],
-  creator: 'Dnyanasadhana College',
-  publisher: 'Dnyanasadhana College',
+  description: 'Official alumni portal of Satish Pradhan Dnyanasadhana College. Connect with 15,000+ alumni worldwide, explore career opportunities, attend events, and contribute to your alma mater.',
+  keywords: ['Satish Pradhan Dnyanasadhana College', 'Dnyanasadhana College', 'alumni', 'networking', 'career services', 'education', 'Thane', 'Maharashtra'],
+  authors: [{ name: 'Satish Pradhan Dnyanasadhana College' }],
+  creator: 'Satish Pradhan Dnyanasadhana College',
+  publisher: 'Satish Pradhan Dnyanasadhana College',
   formatDetection: {
     email: false,
     address: false,
@@ -33,21 +34,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://alumni.dnyanasadhana.edu.in',
-    siteName: 'Dnyanasadhana College Alumni Portal',
-    title: 'Dnyanasadhana College Alumni Portal - Connect, Network, Give Back',
-    description: 'Official alumni portal of Dnyanasadhana College. Connect with 15,000+ alumni worldwide.',
+    siteName: 'Satish Pradhan Dnyanasadhana College Alumni Portal',
+    title: 'Satish Pradhan Dnyanasadhana College Alumni Portal - Connect, Network, Give Back',
+    description: 'Official alumni portal of Satish Pradhan Dnyanasadhana College. Connect with 15,000+ alumni worldwide.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Dnyanasadhana College Alumni Portal',
+        alt: 'Satish Pradhan Dnyanasadhana College Alumni Portal',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dnyanasadhana College Alumni Portal',
+    title: 'Satish Pradhan Dnyanasadhana College Alumni Portal',
     description: 'Connect with 15,000+ alumni worldwide. Explore career opportunities and give back to your alma mater.',
     images: ['/og-image.jpg'],
   },
@@ -87,13 +88,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="preconnect" href="https://www.dnyanasadhanacollege.org" />
         <link rel="dns-prefetch" href="https://www.dnyanasadhanacollege.org" />
       </head>
       <body className="antialiased" suppressHydrationWarning={true}>
         <Providers>
           <AppProvider>
-            {children}
+            <ClientLayout>{children}</ClientLayout>
           </AppProvider>
         </Providers>
       </body>

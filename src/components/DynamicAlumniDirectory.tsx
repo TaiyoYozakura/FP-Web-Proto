@@ -205,20 +205,20 @@ export default function DynamicAlumniDirectory() {
   }
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
+    <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 sm:mb-6">
         <div className="flex items-center">
-          <span className="text-2xl mr-3">📊</span>
+          <span className="text-xl sm:text-2xl mr-2 sm:mr-3">📊</span>
           <div>
-            <h3 className="text-2xl font-bold text-blue-800">Dynamic Alumni Directory</h3>
-            <p className="text-gray-600">Real-time search • {filteredAlumni.length} of {alumni.length} alumni</p>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-blue-800">Dynamic Alumni Directory</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Real-time search • {filteredAlumni.length} of {alumni.length} alumni</p>
           </div>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 w-full sm:w-auto">
           <button
             onClick={() => setViewMode('grid')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+            className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all text-sm ${
               viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-gray-100 hover:bg-gray-200'
             }`}
           >
@@ -226,7 +226,7 @@ export default function DynamicAlumniDirectory() {
           </button>
           <button
             onClick={() => setViewMode('list')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+            className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-lg font-semibold transition-all text-sm ${
               viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-gray-100 hover:bg-gray-200'
             }`}
           >
@@ -236,19 +236,19 @@ export default function DynamicAlumniDirectory() {
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-gray-50 rounded-xl p-4 mb-6">
-        <div className="grid lg:grid-cols-4 gap-4 mb-4">
-          <div className="lg:col-span-2">
+      <div className="bg-gray-50 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <div className="sm:col-span-2">
             <input
               type="text"
               placeholder="🔍 Search by name, company, position, or skills..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <select
-            className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
           >
@@ -260,13 +260,13 @@ export default function DynamicAlumniDirectory() {
           </select>
           <button
             onClick={clearFilters}
-            className="bg-red-100 text-red-700 px-4 py-3 rounded-lg font-semibold hover:bg-red-200 transition-colors"
+            className="bg-red-100 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-semibold hover:bg-red-200 transition-colors text-sm"
           >
             🗑️ Clear All
           </button>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
           <select
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
             value={filters.batch}
