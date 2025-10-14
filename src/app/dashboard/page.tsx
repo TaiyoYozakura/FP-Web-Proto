@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import Navbar from '@/components/Navbar';
+
 import { useApp } from '@/contexts/AppContext';
 
 export default function DashboardPage() {
@@ -80,7 +80,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-theme-background">
-      <Navbar />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8">

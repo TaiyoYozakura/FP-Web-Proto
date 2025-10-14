@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AppProvider } from '@/contexts/AppContext';
 import { Providers } from './providers';
-import ClientLayout from './ClientLayout';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -72,8 +71,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
+  maximumScale: 1,
+  userScalable: false,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#1e3a8a' },
     { media: '(prefers-color-scheme: dark)', color: '#1e3a8a' },
@@ -88,14 +87,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="preconnect" href="https://www.dnyanasadhanacollege.org" />
         <link rel="dns-prefetch" href="https://www.dnyanasadhanacollege.org" />
       </head>
       <body className="antialiased" suppressHydrationWarning={true}>
         <Providers>
           <AppProvider>
-            <ClientLayout>{children}</ClientLayout>
+            {children}
           </AppProvider>
         </Providers>
       </body>

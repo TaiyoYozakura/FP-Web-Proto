@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
+
 import AlumniSuccessMap from '@/components/AlumniSuccessMap';
 import DynamicAlumniDirectory from '@/components/DynamicAlumniDirectory';
 import { useApp } from '@/contexts/AppContext';
@@ -12,7 +12,7 @@ export default function DirectoryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 md:mb-8 gap-3 sm:gap-4">
           <div>

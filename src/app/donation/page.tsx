@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
+
 import SmartDonationTracker from '@/components/SmartDonationTracker';
 import { useApp } from '@/contexts/AppContext';
 
@@ -43,7 +43,7 @@ export default function DonationPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
         <SmartDonationTracker />
