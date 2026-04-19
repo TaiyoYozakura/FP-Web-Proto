@@ -253,7 +253,7 @@ CREATE TABLE donations (
 ## 🎯 Demo Credentials
 
 ### **Admin Access**
-- Password: `admin123` or `dnyanasadhana2024`
+- Password: `admin123456789` or `dnyanasadhana202448188`
 
 ### **Test Payment**
 - Use Razorpay test mode credentials
